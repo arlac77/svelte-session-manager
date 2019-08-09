@@ -1,5 +1,5 @@
 <script>
-  import {Login} from '../src/index.svelte';
+  import {Login} from '../../src/index.svelte';
 
 
   let context = {};

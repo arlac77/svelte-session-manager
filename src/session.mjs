@@ -1,5 +1,12 @@
 import { writable } from "svelte/store";
 
+
+export class Session {
+  
+}
+
+
+
 export const session = writable(makeSession(window.localStorage));
 
 function makeSession(data) {
