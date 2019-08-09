@@ -1,3 +1,40 @@
 {
-    "name" : "svelte-sesion-maanger"
+  "name": "svelte-sesion-maanger",
+  "version": "0.0.0-semantic-release",
+  "module": "src/index.svelte",
+  "keywords": [
+    "svelte"
+  ],
+  "scripts": {
+    "pretest": "(cd example && rollup -c)",
+    "start": "npx serve -u -s -n -l 5000 example/public",
+    "test": "nightwatch -e ci"
+  },
+  "devDependencies": {
+    "chromedriver": "^76.0.0",
+    "nightwatch": "^1.1.13",
+    "rollup": "^1.19.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svelte": "^5.1.0",
+    "semantic-release": "^15.13.19",
+    "serve": "^11.1.0",
+    "svelte": "^3.7.1"
+  },
+  "engines": {
+    "node": ">=10.16.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arlac77/svelte-session-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arlac77/svelte-session-manager/issues"
+  },
+  "homepage": "https://github.com/arlac77/svelte-session-manager#readme",
+  "template": {
+    "repository": {
+      "url": "https://github.com/arlac77/npm-package-template-svelte.git"
+    }
+  },
+  "svelte": "src/index.svelte"
 }
