@@ -43,9 +43,7 @@
       bind:value={password} />
   </fieldset>
 
-  <div>
-    <button type="submit" class:active disabled={!username || !password}>
-      Login
-    </button>
-  </div>
+  <button type="submit" class:active disabled={!username || !password}>
+    Login
+  </button>
 </form>
