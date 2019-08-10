@@ -25,6 +25,8 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
+  <slot />
+
   <fieldset>
     <label>Username</label>
     <input
