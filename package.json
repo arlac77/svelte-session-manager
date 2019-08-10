@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "pretest": "(cd example && rollup -c)",
-    "start": "npx serve -u -s -n -l 5000 example/public",
+    "start": "serve -u -s -n -l 5000 example/public",
     "test": "nightwatch -e ci"
   },
   "devDependencies": {
