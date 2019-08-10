@@ -1,10 +1,3 @@
-const webdriver = {
-  start_process: true,
-  server_path: "node_modules/.bin/chromedriver",
-  port: 9515,
-  log_path: false
-};
-
 module.exports = {
   src_folders: ["tests"],
 
@@ -19,20 +12,28 @@ module.exports = {
   },
 
   test_settings: {
-    default: {
-      webdriver: { ...webdriver, server_path: "/usr/bin/safaridriver" },
-
+    safari: {
+      webdriver: {
+        start_process: true,
+        server_path: "/usr/bin/safaridriver",
+        port: 4445
+      },
       desiredCapabilities: {
         browserName: "safari"
       }
     },
-    ci: {
-      webdriver,
+    chrome: {
+      webdriver: {
+        start_process: true,
+        server_path: "node_modules/.bin/chromedriver",
+        port: 9515,
+        log_path: false
+      },
 
       desiredCapabilities: {
         browserName: "chrome",
         chromeOptions: {
-          args: [ "--headless", "--no-sandbox", "--disable-gpu"]
+          args: ["--headless", "--no-sandbox", "--disable-gpu"]
         }
       },
 

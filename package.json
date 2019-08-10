@@ -9,7 +9,7 @@
   "scripts": {
     "pretest": "(cd example && rollup -c)",
     "start": "serve -u -s -n -l 5000 example/public",
-    "test": "nightwatch -e ci"
+    "test": "nightwatch -e chrome"
   },
   "devDependencies": {
     "chromedriver": "^76.0.0",

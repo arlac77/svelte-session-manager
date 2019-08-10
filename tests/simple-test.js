@@ -17,7 +17,6 @@ describe("session",  function() {
       .to.be.present.before(1000);
 
     browser
-      .waitForElementVisible("h1")
       .assert.containsText(
         "h1",
         "Example"
