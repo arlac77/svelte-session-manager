@@ -6,7 +6,7 @@ const sg = (t, name = "xxx") =>
   `test-results/${t.test.fullTitle().replace(/\s+/, "-", "g")}-${name}.png`;
 
 
-describe("session",  function() {
+describe("example", function() {
   this.slow(2000);
   this.timeout(3000);
 
