@@ -2,6 +2,7 @@
   "name": "svelte-sesion-maanger",
   "version": "0.0.0-semantic-release",
   "module": "src/index.svelte",
+  "svelte": "src/index.svelte",
   "keywords": [
     "svelte"
   ],
@@ -35,6 +36,5 @@
     "repository": {
       "url": "https://github.com/arlac77/npm-package-template-svelte.git"
     }
-  },
-  "svelte": "src/index.svelte"
+  }
 }
