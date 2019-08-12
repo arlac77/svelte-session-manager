@@ -8,13 +8,12 @@
   ],
   "scripts": {
     "pretest": "(cd example && rollup -c)",
-    "start": "serve -u -s -n -l 5000 example/public",
-    "test": "nightwatch -e ci",
-    "watch": "(cd example && rollup -c -w)"
+    "start": "(cd example && rollup -c -w) && serve -u -s -n -l 5000 example/public",
+    "test": "nightwatch -e ci"
   },
   "devDependencies": {
     "chromedriver": "^76.0.0",
-    "nightwatch": "^1.1.13",
+    "nightwatch": "^1.2.1",
     "rollup": "^1.19.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
