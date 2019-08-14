@@ -17,7 +17,7 @@
     "rollup": "^1.19.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
-    "semantic-release": "^15.13.19",
+    "semantic-release": "^15.13.21",
     "serve": "^11.1.0",
     "svelte": "^3.8.0"
   },
