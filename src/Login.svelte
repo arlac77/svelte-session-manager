@@ -1,5 +1,4 @@
 <script>
-  import { onDestroy } from "svelte";
   import { login, session } from "./session.mjs";
 
   export let context;
@@ -25,27 +24,29 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <slot />
+  <slot name="inputs">
+    <fieldset>
+      <label>Username</label>
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        bind:value={username} />
+    </fieldset>
 
-  <fieldset>
-    <label>Username</label>
-    <input
-      type="text"
-      placeholder="Username"
-      name="username"
-      bind:value={username} />
-  </fieldset>
+    <fieldset>
+      <label>Password</label>
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        bind:value={password} />
+    </fieldset>
+  </slot>
 
-  <fieldset>
-    <label>Password</label>
-    <input
-      type="password"
-      placeholder="Password"
-      name="password"
-      bind:value={password} />
-  </fieldset>
-
-  <button type="submit" class:active disabled={!username || !password}>
-    Login
-  </button>
+  <slot name="submit">
+    <button type="submit" class:active disabled={!username || !password}>
+      Login
+    </button>
+  </slot>
 </form>

@@ -1,3 +1,30 @@
+
+
+function chrome(argOptions=["--no-sandbox", "--disable-gpu"]) {
+  return {
+    webdriver: {
+      start_process: true,
+      server_path: "node_modules/.bin/chromedriver",
+      port: 9515,
+      log_path: false
+    },
+
+    desiredCapabilities: {
+      browserName: "chrome",
+      chromeOptions: {
+        args: argOptions
+      }
+    },
+
+    screenshots: {
+      enabled: true,
+      path: "./",
+      on_failure: true,
+      on_error: true
+    }
+  };
+}
+
 module.exports = {
   src_folders: ["tests"],
 
@@ -22,27 +49,8 @@ module.exports = {
         browserName: "safari"
       }
     },
-    chrome: {
-      webdriver: {
-        start_process: true,
-        server_path: "node_modules/.bin/chromedriver",
-        port: 9515,
-        log_path: false
-      },
-
-      desiredCapabilities: {
-        browserName: "chrome",
-        chromeOptions: {
-          args: ["--headless", "--no-sandbox", "--disable-gpu"]
-        }
-      },
-
-      screenshots: {
-        enabled: true,
-        path: "./",
-        on_failure: true,
-        on_error: true
-      }
-    }
+    default: chrome(["--no-sandbox", "--disable-gpu"]),
+    chrome: chrome(["--no-sandbox", "--disable-gpu"]),
+    ci: chrome(["--headless","--no-sandbox", "--disable-gpu"])
   }
 };

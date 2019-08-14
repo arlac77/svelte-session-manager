@@ -8,7 +8,5 @@
 <div>
   <h1>Example</h1>
 
-  <Login context={context} endpint="somewhere">
-    some text
-  </Login>
+  <Login context={context} endpint="somewhere"/>
 </div>
