@@ -4,7 +4,7 @@
   export let context;
   export let endpoint;
 
-  let username;
+  let username = "";
   let password = "";
 
   let active = false;
@@ -13,14 +13,14 @@
     try {
       active = true;
       await login(endpoint, username, password);
-      context.router.push("/");
+     // context.router.push("/");
     } finally {
       active = false;
       password = "";
     }
   }
 
-  $: username = $session.username;
+//  $: username = $session.username;
 </script>
 
 <form on:submit|preventDefault={submit}>

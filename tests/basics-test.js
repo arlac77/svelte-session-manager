@@ -1,16 +1,8 @@
-const assert = require("assert");
 
 const base = "http://localhost:5000";
 
-const sg = (t, name = "xxx") =>
-  `test-results/${t.test.fullTitle().replace(/\s+/, "-", "g")}-${name}.png`;
-
-
 describe("example", function() {
-  this.slow(2000);
-  this.timeout(3000);
-
-  it("renders-on-the-page", async browser => {
+  it("renders-on-the-page", browser => {
     browser
       .url(base)
       .expect.element("body")
