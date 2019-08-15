@@ -1,9 +1,6 @@
 const base = "http://localhost:5000";
 
 describe("example", function() {
-  //this.slow(2000);
-  //this.timeout(3000);
-
   it("login", browser => {
     browser
       .url(base)

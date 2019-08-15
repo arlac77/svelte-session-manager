@@ -1,7 +1,6 @@
 <script>
   import {Login, session} from '../../src/index.svelte';
 
-  let context = {};
   
   $: username = $session.username;
 
@@ -10,8 +9,7 @@
 <div>
   <h1>Example</h1>
 
-  <Login context={context} endpint="somewhere"/>
-
+  <Login endpoint="somewhere"/>
 
 
   <h3>Session</h3>
