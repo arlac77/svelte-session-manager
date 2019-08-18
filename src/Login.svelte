@@ -28,6 +28,7 @@
     <fieldset>
       <label>Username</label>
       <input
+        id="username"
         type="text"
         placeholder="Username"
         name="username"
@@ -37,6 +38,7 @@
     <fieldset>
       <label>Password</label>
       <input
+        id="password"
         type="password"
         placeholder="Password"
         name="password"
@@ -45,7 +47,7 @@
   </slot>
 
   <slot name="submit">
-    <button type="submit" class:active disabled={!username || !password}>
+    <button id="submit" type="submit" class:active disabled={!username || !password}>
       Login
     </button>
   </slot>
