@@ -7,10 +7,7 @@ jobs:
   include:
     - stage: test
       script:
-        - npx serve -n -l 5000 example/public &
-        - SERVER_PID=$!
         - npm run test
-        - kill $SERVER_PID
     - stage: release
       node_js: lts/*
       script: skip
