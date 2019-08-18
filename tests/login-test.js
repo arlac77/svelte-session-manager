@@ -6,11 +6,8 @@ fixture`Getting Started`.page`${base}/index.html`;
 
 test("login", async t => {
   await t
-    .typeText("#useranme", "user1")
+    .typeText("#username", "user1")
     .typeText("#password", "secret")
     .click("#submit");
-  await t
-    .click(a)
-    .expect(Selector("#session_username").innerText)
-    .eql("user1");
+  await t.expect(Selector("#session_username").innerText).eql("user1");
 });
