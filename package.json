@@ -9,17 +9,16 @@
   "scripts": {
     "pretest": "(cd example && rollup -c)",
     "start": "(cd example && rollup -c -w)",
-    "test": "nightwatch -e ci"
+    "test": "testcafe chrome:headless tests/plain-navigation-test.js -s test-results --app-init-delay 1000 --app \"rollup -c example/rollup.config.js -w\""
   },
   "devDependencies": {
-    "chromedriver": "^76.0.0",
-    "nightwatch": "^1.2.1",
     "rollup": "^1.19.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
     "semantic-release": "^15.13.21",
     "serve": "^11.1.0",
-    "svelte": "^3.8.1"
+    "svelte": "^3.8.1",
+    "testcafe": "^1.4.1"
   },
   "engines": {
     "node": ">=10.16.3"
