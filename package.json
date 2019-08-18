@@ -1,5 +1,5 @@
 {
-  "name": "svelte-sesion-maanger",
+  "name": "svelte-sesion-manager",
   "version": "0.0.0-semantic-release",
   "module": "src/index.svelte",
   "svelte": "src/index.svelte",
