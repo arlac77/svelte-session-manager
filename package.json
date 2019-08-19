@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "rollup": "^1.19.4",
+    "rollup-plugin-livereload": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
     "semantic-release": "^15.13.21",
