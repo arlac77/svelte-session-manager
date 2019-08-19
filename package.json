@@ -7,7 +7,7 @@
     "svelte"
   ],
   "scripts": {
-    "test": "testcafe chrome:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
+    "test": "testcafe chrome:headless tests/*-test.js -s test-results --app-init-delay 1000 --app \"rollup -c example/rollup.config.js -w\""
   },
   "devDependencies": {
     "rollup": "^1.19.4",
