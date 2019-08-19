@@ -8,33 +8,30 @@
 
   let active = false;
   let message;
-  
+
   async function submit() {
     try {
       message = undefined;
       active = true;
       await login(endpoint, username, password);
-    } catch(e) {
+    } catch (e) {
       message = e;
-    }
-    finally {
+    } finally {
       active = false;
       password = "";
     }
   }
 
-//  $: username = $session.username;
+  //  $: username = $session.username;
 </script>
 
 <form on:submit|preventDefault={submit}>
   {#if message}
     <slot name="message">
-    <div>
-      {message}
-    </div>
+      <div id="message">{message}</div>
     </slot>
   {/if}
-  
+
   <slot name="inputs">
     <fieldset>
       <label>Username</label>
@@ -58,7 +55,11 @@
   </slot>
 
   <slot name="submit">
-    <button id="submit" type="submit" class:active disabled={!username || !password}>
+    <button
+      id="submit"
+      type="submit"
+      class:active
+      disabled={!username || !password}>
       Login
     </button>
   </slot>

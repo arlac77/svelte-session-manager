@@ -2,6 +2,8 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
 import livereload from "rollup-plugin-livereload";
 import http from "http";
+import { readFileSync } from "fs";
+import jsonwebtoken from "jsonwebtoken";
 import handler from "serve-handler";
 import pkg from "../package.json";
 
@@ -20,11 +22,27 @@ if (development) {
         }
         const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
         const ok =
-          content.username === "user1" && content.password === "secret1";
+          content.username.startsWith("user") && content.password === "secret1";
 
-        response.setHeader("Content-Type", "text/html");
-        response.writeHead(ok ? 200 : 401, { "Content-Type": "text/plain" });
-        response.end("ok");
+        if (ok) {
+          response.writeHead(200, { "Content-Type": "application/json" });
+          const access_token = jsonwebtoken.sign(
+            { entitlements: ["a", "b", "c"].join(",") },
+            readFileSync("example/demo.rsa"),
+            {
+              algorithm: "RS256",
+              expiresIn: "30s"
+            }
+          );
+
+          setTimeout(
+            () => response.end(JSON.stringify({ access_token })),
+            content.username === "userSlowLogin" ? 2000 : 100
+          );
+        } else {
+          response.writeHead(401, { "Content-Type": "text/plain" });
+          response.end("ok");
+        }
       } else {
         response.setHeader("Content-Type", "text/html");
         response.writeHead(404, { "Content-Type": "text/plain" });

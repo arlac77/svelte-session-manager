@@ -10,6 +10,18 @@ test("correct credentials", async t => {
     .typeText("#password", "secret1")
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("user1");
+  await t.expect(Selector("#session_validity").innerText).eql("valid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("a,b,c");
+});
+
+test("correct credentials delayed response", async t => {
+  await t
+    .typeText("#username", "userSlowLogin")
+    .typeText("#password", "secret1")
+    .click("#submit");
+  await t.expect(Selector("#session_username").innerText).eql("userSlowLogin");
+  await t.expect(Selector("#session_validity").innerText).eql("valid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("a,b,c");
 });
 
 
@@ -20,6 +32,8 @@ test("wrong credentials", async t => {
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("user1");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
+
+  await t.expect(Selector("#message").innerText).contains("Unauthorized");
 });
 
 test("unknown user", async t => {
@@ -29,4 +43,6 @@ test("unknown user", async t => {
     .click("#submit");
     await t.expect(Selector("#session_username").innerText).eql("user");
     await t.expect(Selector("#session_validity").innerText).eql("invalid");
+
+    await t.expect(Selector("#message").innerText).contains("Unauthorized");
 });

@@ -68,11 +68,16 @@ export async function login(endpoint, username, password) {
         password
       })
     });
-
-    const data = await response.json();
-    const s = new Session({ username, access_token: data.access_token });
-    s.save();
-    session.set(s);
+    if(response.ok) {
+      const data = await response.json();
+      const s = new Session({ username, access_token: data.access_token });
+      s.save();
+      session.set(s);  
+    }
+    else {
+      session.set(new Session({ username }));
+      throw new Error(response.statusText);
+    }
   } catch (e) {
     session.set(new Session({ username }));
     throw e;

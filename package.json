@@ -10,6 +10,7 @@
     "test": "testcafe chrome:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
   "devDependencies": {
+    "jsonwebtoken": "^8.5.1",
     "rollup": "^1.19.4",
     "rollup-plugin-livereload": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
