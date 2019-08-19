@@ -8,13 +8,18 @@
   let password = "";
 
   let active = false;
-
+  let message;
+  
   async function submit() {
     try {
+      message = undefined;
       active = true;
       await login(endpoint, username, password);
      // context.router.push("/");
-    } finally {
+    } catch(e) {
+      message = e;
+    }
+    finally {
       active = false;
       password = "";
     }
@@ -24,6 +29,14 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
+  {#if message}
+    <slot name="message">
+    <div>
+      {message}
+    </div>
+    </slot>
+  {/if}
+  
   <slot name="inputs">
     <fieldset>
       <label>Username</label>

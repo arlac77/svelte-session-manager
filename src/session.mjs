@@ -74,8 +74,8 @@ export async function login(endpoint, username, password) {
     s.save();
     session.set(s);
   } catch (e) {
-    const s = new Session({ username });
-    session.set(s);
+    session.set(new Session({ username }));
+    throw e;
   }
 }
 
