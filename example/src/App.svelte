@@ -6,7 +6,7 @@
 <div>
   <h1>Example</h1>
 
-  <Login endpoint="somewhere"/>
+  <Login endpoint="login"/>
 
   <h3>Session</h3>
   <div id="session_username">{$session.username}</div>

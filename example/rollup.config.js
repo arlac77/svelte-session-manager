@@ -10,7 +10,30 @@ const port = pkg.config.port || 5000;
 const development = process.env.ROLLUP_WATCH;
 
 if (development) {
-  const server = http.createServer((request, response) => {
+  const server = http.createServer(async (request, response) => {
+    if (request.method === "POST") {
+      if (request.url === "/login") {
+        const buffers = [];
+
+        for await (const chunk of request) {
+          buffers.push(chunk);
+        }
+        const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
+        const ok =
+          content.username === "user1" && content.password === "secret1";
+
+        response.setHeader("Content-Type", "text/html");
+        response.writeHead(ok ? 200 : 401, { "Content-Type": "text/plain" });
+        response.end("ok");
+      } else {
+        response.setHeader("Content-Type", "text/html");
+        response.writeHead(404, { "Content-Type": "text/plain" });
+        response.end("ok");
+      }
+
+      return;
+    }
+
     return handler(request, response, {
       public: "example/public",
       rewrites: [{ source: "**", destination: "/index.html" }]
