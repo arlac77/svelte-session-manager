@@ -2,9 +2,9 @@ import { Selector } from "testcafe";
 
 const base = "http://localhost:5000";
 
-fixture`Getting Started`.page`${base}/index.html`;
+fixture`login`.page`${base}/index.html`;
 
-test("login", async t => {
+test("correct credentials", async t => {
   await t
     .typeText("#username", "user1")
     .typeText("#password", "secret")

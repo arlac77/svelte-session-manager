@@ -30,7 +30,7 @@ export class Session {
         value: username
       },
       expirationDate: {
-        value: data.expirationDate
+        value: expirationDate
       }
     });
   }

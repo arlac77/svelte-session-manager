@@ -1,9 +1,6 @@
 <script>
   import {Login, session} from '../../src/index.svelte';
 
-  
-  $: username = $session.username;
-
 </script>
 
 <div>
@@ -11,7 +8,7 @@
 
   <Login endpoint="somewhere"/>
 
-
   <h3>Session</h3>
-  <div id="session_username">{username}</div>
+  <div id="session_username">{$session.username}</div>
+  <div id="session_validity">{$session.isValid ? 'valid' : 'invalid'}</div>
 </div>

@@ -1,7 +1,6 @@
 <script>
   import { login, session } from "./session.mjs";
 
-  export let context;
   export let endpoint;
 
   let username = "";
@@ -15,7 +14,6 @@
       message = undefined;
       active = true;
       await login(endpoint, username, password);
-     // context.router.push("/");
     } catch(e) {
       message = e;
     }
