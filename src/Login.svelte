@@ -21,8 +21,6 @@
       password = "";
     }
   }
-
-  //  $: username = $session.username;
 </script>
 
 <form on:submit|preventDefault={submit}>

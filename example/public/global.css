@@ -1,0 +1,55 @@
+  :root {
+    --buttons: #9555af;
+    --primary-buttons-text-color: white;
+    --buttons-hover-color: #303ca649;
+    --primary-buttons-hover-color: var(--buttons);
+    --table-border-color: #e6dee3;
+  }
+
+  table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+
+  .bordered {
+    border: 1px solid var(--table-border-color);
+  }
+
+  td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid var(--table-border-color);
+  }
+
+  button {
+    text-align: center;
+    text-decoration: none;
+
+    margin: 2px 0;
+
+    border: solid 1px transparent;
+    border-radius: 4px;
+
+    padding: 0.5em 1em;
+
+    color: var(--primary-buttons-text-color);
+    background-color: var(--buttons);
+  }
+
+  button:hover {
+    outline: 2px;
+  }
+
+  button:active {
+    transform: translateY(1px);
+    filter: saturate(150%);
+    outline: none;
+  }
+
+  fieldset {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+  }
