@@ -31,25 +31,24 @@
   {/if}
 
   <slot name="inputs">
-    <fieldset>
-      <label>Username</label>
+    <label for="username">
+      Username
       <input
         id="username"
         type="text"
         placeholder="Username"
         name="username"
         bind:value={username} />
-    </fieldset>
-
-    <fieldset>
-      <label>Password</label>
+    </label>
+    <label for="password">
+      Password
       <input
         id="password"
         type="password"
         placeholder="Password"
         name="password"
         bind:value={password} />
-    </fieldset>
+    </label>
   </slot>
 
   <slot name="submit">
