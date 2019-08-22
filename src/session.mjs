@@ -45,6 +45,11 @@ export class Session {
     }
   }
 
+  get authorizationHeader()
+  {
+    return { Authorization: "Bearer " + this.access_token };
+  }
+
   get isValid() {
     return this.expirationDate.valueOf() >= new Date().valueOf();
   }
