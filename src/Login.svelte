@@ -38,6 +38,7 @@
         type="text"
         placeholder="Username"
         name="username"
+        required
         bind:value={username} />
     </label>
     <label for="password">
@@ -47,6 +48,7 @@
         type="password"
         placeholder="Password"
         name="password"
+        required
         bind:value={password} />
     </label>
   </slot>
