@@ -15,7 +15,13 @@ export class Session {
 
         const expiresInMilliSeconds = expirationDate.valueOf() - new Date().valueOf();
         
-        setTimeout( () => {
+        if(sessionTimeoutId) {
+          clearTimeout(sessionTimeoutId);
+          sessionTimeoutId = undefined;
+        }
+
+        sessionTimeoutId = setTimeout( () => {
+          sessionTimeoutId = undefined;
           session.set(this);
         }, expiresInMilliSeconds);
       }
@@ -64,6 +70,8 @@ export class Session {
     return this.entitlements.has(name);
   }
 }
+
+let sessionTimeoutId;
 
 export const session = writable(new Session(localStorage));
 
