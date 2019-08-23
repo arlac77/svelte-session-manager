@@ -80,9 +80,6 @@
 
   input {
     margin-bottom: 0.5rem;
-
-    /*margin-top: 0;
-    */
     display: block;
     height: calc(1.25em + .75rem + 2px);
     padding: .375rem .75rem;

@@ -12,6 +12,12 @@ export class Session {
       if (decoded) {
         entitlements = new Set(decoded.entitlements.split(/,/));
         expirationDate.setUTCSeconds(decoded.exp);
+
+        const expiresInMilliSeconds = expirationDate.valueOf() - new Date().valueOf();
+        
+        setTimeout( () => {
+          session.set(this);
+        }, expiresInMilliSeconds);
       }
 
       if (data.username !== undefined && data.username !== "undefined") {

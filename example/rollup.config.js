@@ -31,7 +31,7 @@ if (development) {
             readFileSync("example/demo.rsa"),
             {
               algorithm: "RS256",
-              expiresIn: "30s"
+              expiresIn: "15s"
             }
           );
 
