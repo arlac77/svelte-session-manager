@@ -21,7 +21,6 @@ test("correct credentials expiring", async t => {
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("user1");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
-
   await t.wait(17 * 1000);
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
 });
