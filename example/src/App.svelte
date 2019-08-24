@@ -5,7 +5,9 @@
 <div>
   <h1>Example</h1>
 
-  <Login endpoint="login" />
+  <div class="center">
+    <Login endpoint="login" />
+  </div>
 
   <h3>Session Details</h3>
   <table class="bordered">
