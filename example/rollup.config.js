@@ -37,7 +37,7 @@ if (development) {
 
           setTimeout(
             () => response.end(JSON.stringify({ access_token })),
-            content.username === "userSlowLogin" ? 2000 : 100
+            content.username === "userSlowLogin" ? 2000 : 500
           );
         } else {
           response.writeHead(401, { "Content-Type": "text/plain" });

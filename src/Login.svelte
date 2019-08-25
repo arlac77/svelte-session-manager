@@ -39,6 +39,7 @@
         placeholder="Username"
         name="username"
         required
+        disabled={active}
         bind:value={username} />
     </label>
     <label for="password">
@@ -49,17 +50,21 @@
         placeholder="Password"
         name="password"
         required
+        disabled={active}
         bind:value={password} />
     </label>
   </slot>
 
   <slot name="submit">
-    <button
-      id="submit"
-      type="submit"
-      class:active
-      disabled={!username || !password}>
+    <button id="submit" type="submit" disabled={!username || !password}>
       Login
+      {#if active}
+        <div class="spinner" />
+      {/if}
     </button>
   </slot>
 </form>
+
+<!--
+
+-->
