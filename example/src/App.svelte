@@ -1,5 +1,9 @@
 <script>
   import { Login, session } from "../../src/index.svelte";
+
+  async function logoff() {
+    $session.invalidate();
+  }
 </script>
 
 <div>
@@ -8,6 +12,10 @@
   <div class="center">
     <Login endpoint="login" />
   </div>
+
+  <form on:submit|preventDefault={logoff}>
+    <button id="logoff" type="submit" disabled={!$session.isValid}>Logoff</button>
+  </form>
 
   <h3>Session Details</h3>
   <table class="bordered">

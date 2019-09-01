@@ -1,34 +1,33 @@
 import { writable } from "svelte/store";
 
 export class Session {
-  constructor(data) {
+  constructor(data = {}) {
     let username = "";
     let entitlements = new Set();
     let expirationDate = new Date(0);
 
-    if (data) {
-      const decoded = decode(data.access_token);
+    const decoded = decode(data.access_token);
 
-      if (decoded) {
-        entitlements = new Set(decoded.entitlements.split(/,/));
-        expirationDate.setUTCSeconds(decoded.exp);
+    if (decoded) {
+      entitlements = new Set(decoded.entitlements.split(/,/));
+      expirationDate.setUTCSeconds(decoded.exp);
 
-        const expiresInMilliSeconds = expirationDate.valueOf() - new Date().valueOf();
-        
-        if(sessionTimeoutId) {
-          clearTimeout(sessionTimeoutId);
-          sessionTimeoutId = undefined;
-        }
+      const expiresInMilliSeconds =
+        expirationDate.valueOf() - new Date().valueOf();
 
-        sessionTimeoutId = setTimeout( () => {
-          sessionTimeoutId = undefined;
-          session.set(this);
-        }, expiresInMilliSeconds);
+      if (sessionTimeoutId) {
+        clearTimeout(sessionTimeoutId);
+        sessionTimeoutId = undefined;
       }
 
-      if (data.username !== undefined && data.username !== "undefined") {
-        username = data.username;
-      }
+      sessionTimeoutId = setTimeout(() => {
+        sessionTimeoutId = undefined;
+        session.set(this);
+      }, expiresInMilliSeconds);
+    }
+
+    if (data.username !== undefined && data.username !== "undefined") {
+      username = data.username;
     }
 
     Object.defineProperties(this, {
@@ -57,13 +56,16 @@ export class Session {
     }
   }
 
-  get authorizationHeader()
-  {
+  get authorizationHeader() {
     return { Authorization: "Bearer " + this.access_token };
   }
 
   get isValid() {
     return this.expirationDate.valueOf() >= new Date().valueOf();
+  }
+
+  invalidate() {
+    session.set(new Session());
   }
 
   hasEntitlement(name) {
@@ -87,13 +89,12 @@ export async function login(endpoint, username, password) {
         password
       })
     });
-    if(response.ok) {
+    if (response.ok) {
       const data = await response.json();
       const s = new Session({ username, access_token: data.access_token });
       s.save();
-      session.set(s);  
-    }
-    else {
+      session.set(s);
+    } else {
       session.set(new Session({ username }));
       throw new Error(response.statusText);
     }
