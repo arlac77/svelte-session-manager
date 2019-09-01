@@ -96,6 +96,7 @@ export async function login(endpoint, username, password) {
       session.set(s);
     } else {
       session.set(new Session({ username }));
+      console.log(await response.text());
       throw new Error(response.statusText);
     }
   } catch (e) {
