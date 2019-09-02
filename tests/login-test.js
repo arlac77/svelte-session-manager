@@ -68,3 +68,12 @@ test("unknown user", async t => {
 
   await t.expect(Selector("#message").innerText).contains("Unauthorized");
 });
+
+test("server error 502", async t => {
+  await t
+    .typeText("#username", "error_502")
+    .typeText("#password", "something")
+    .click("#submit");
+  await t.expect(Selector("#session_validity").innerText).eql("invalid");
+  await t.expect(Selector("#message").innerText).contains("Bad Gateway");
+});

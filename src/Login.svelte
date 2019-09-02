@@ -26,7 +26,7 @@
 <form on:submit|preventDefault={submit}>
   {#if message}
     <slot name="message">
-      <div id="message">{message}</div>
+      <div class="error" id="message">{message}</div>
     </slot>
   {/if}
 

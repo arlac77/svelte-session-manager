@@ -40,8 +40,13 @@ if (development) {
             content.username === "userSlowLogin" ? 2000 : 500
           );
         } else {
-          response.writeHead(401, { "Content-Type": "text/plain" });
-          response.end("ok");
+          if (content.username.startsWith("error")) {
+            response.writeHead(502, { "Content-Type": "text/html" });
+            response.end("<html>bad gateway</html>");
+          } else {
+            response.writeHead(401, { "Content-Type": "text/plain" });
+            response.end("ok");
+          }
         }
       } else {
         response.setHeader("Content-Type", "text/html");
