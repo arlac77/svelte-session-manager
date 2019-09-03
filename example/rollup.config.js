@@ -42,7 +42,7 @@ if (development) {
         } else {
           if (content.username.startsWith("error")) {
             response.writeHead(502, { "Content-Type": "text/html" });
-            response.end("<html>bad gateway</html>");
+            response.end("<html>Bad Gateway</html>");
           } else {
             response.writeHead(401, { "Content-Type": "text/plain" });
             response.end("ok");

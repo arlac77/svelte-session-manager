@@ -96,8 +96,21 @@ export async function login(endpoint, username, password) {
       session.set(s);
     } else {
       session.set(new Session({ username }));
-      console.log(await response.text());
-      throw new Error(response.statusText);
+
+      let message = response.statusText;
+
+      const ct = response.headers.get("Content-Type");
+
+      switch (ct) {
+        /*
+        case 'text/html':
+          break; */
+
+        case "text/plain":
+          message += "\n" + (await response.text());
+      }
+
+      throw new Error(message);
     }
   } catch (e) {
     session.set(new Session({ username }));
