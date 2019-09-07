@@ -1,49 +1,58 @@
-import { writable } from "svelte/store";
-
 export class Session {
-  constructor(data = {}) {
+  constructor(data) {
+    let sessionTimeoutId;
+
+    Object.defineProperties(this, {
+      subscriptions: {
+        value: new Set()
+      },
+      expirationDate: {
+        value: new Date(0)
+      },
+      sessionTimeoutId: {
+        get: () => sessionTimeoutId,
+        set: v => (sessionTimeoutId = v)
+      }
+    });
+
+    this.update(data);
+  }
+
+  update(data = {}) {
     let username = "";
     let entitlements = new Set();
-    let expirationDate = new Date(0);
 
     const decoded = decode(data.access_token);
 
     if (decoded) {
       entitlements = new Set(decoded.entitlements.split(/,/));
-      expirationDate.setUTCSeconds(decoded.exp);
+      this.expirationDate.setUTCSeconds(decoded.exp);
 
       const expiresInMilliSeconds =
-        expirationDate.valueOf() - new Date().valueOf();
+        this.expirationDate.valueOf() - new Date().valueOf();
 
-      if (sessionTimeoutId) {
-        clearTimeout(sessionTimeoutId);
-        sessionTimeoutId = undefined;
+      if (this.sessionTimeoutId) {
+        clearTimeout(this.sessionTimeoutId);
+        this.sessionTimeoutId = undefined;
       }
 
-      sessionTimeoutId = setTimeout(() => {
-        sessionTimeoutId = undefined;
-        session.set(this);
+      this.sessionTimeoutId = setTimeout(() => {
+        this.sessionTimeoutId = undefined;
+        this.fire();
       }, expiresInMilliSeconds);
+    } else {
+      this.expirationDate.setTime(0);
     }
 
     if (data.username !== undefined && data.username !== "undefined") {
       username = data.username;
     }
 
-    Object.defineProperties(this, {
-      access_token: {
-        value: data.access_token
-      },
-      entitlements: {
-        value: entitlements
-      },
-      username: {
-        value: username
-      },
-      expirationDate: {
-        value: expirationDate
-      }
-    });
+    this.access_token = data.access_token;
+    this.entitlements = entitlements;
+    this.username = username;
+
+    this.fire();
   }
 
   save() {
@@ -65,17 +74,29 @@ export class Session {
   }
 
   invalidate() {
-    session.set(new Session());
+    this.update();
   }
 
   hasEntitlement(name) {
     return this.entitlements.has(name);
   }
+
+  fire() {
+    this.subscriptions.forEach(subscription => subscription(this));
+  }
+
+  /**
+   * Fired when the session changes
+   * @param {Function} subscription
+   */
+  subscribe(subscription) {
+    subscription(this);
+    this.subscriptions.add(subscription);
+    return () => this.subscriptions.delete(subscription);
+  }
 }
 
-let sessionTimeoutId;
-
-export const session = writable(new Session(localStorage));
+export const session = new Session(localStorage);
 
 export async function login(endpoint, username, password) {
   try {
@@ -91,11 +112,10 @@ export async function login(endpoint, username, password) {
     });
     if (response.ok) {
       const data = await response.json();
-      const s = new Session({ username, access_token: data.access_token });
-      s.save();
-      session.set(s);
+      session.update({ username, access_token: data.access_token });
+      session.save();
     } else {
-      session.set(new Session({ username }));
+      session.update({ username });
 
       let message = response.statusText;
 
@@ -113,7 +133,7 @@ export async function login(endpoint, username, password) {
       throw new Error(message);
     }
   } catch (e) {
-    session.set(new Session({ username }));
+    session.update({ username });
     throw e;
   }
 }
