@@ -13,7 +13,7 @@
     try {
       message = undefined;
       active = true;
-      await login(endpoint, username, password);
+      await login(session, endpoint, username, password);
     } catch (e) {
       message = e;
     } finally {

@@ -1,6 +1,6 @@
 export class Session {
   constructor(data) {
-    let timeout;
+    let expirationTimer;
 
     Object.defineProperties(this, {
       store: {
@@ -15,9 +15,9 @@ export class Session {
       expirationDate: {
         value: new Date(0)
       },
-      timeout: {
-        get: () => timeout,
-        set: v => (timeout = v)
+      expirationTimer: {
+        get: () => expirationTimer,
+        set: v => (expirationTimer = v)
       }
     });
 
@@ -30,13 +30,13 @@ export class Session {
     this.username = undefined;
     this.access_token = undefined;
 
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-      this.timeout = undefined;
+    if (this.expirationTimer) {
+      clearTimeout(this.expirationTimer);
+      this.expirationTimer = undefined;
     }
 
     if (data !== undefined) {
-      this.username = data.username !== undefined && data.username !== "undefined" ? data.username : undefined;
+      this.username = data.username !== "undefined" ? data.username : undefined;
       this.access_token = data.access_token;
 
       const decoded = decode(data.access_token);
@@ -49,11 +49,12 @@ export class Session {
         const expiresInMilliSeconds =
           this.expirationDate.valueOf() - new Date().valueOf();
 
-
-        this.timeout = setTimeout(() => {
-          this.timeout = undefined;
-          this.fire();
-        }, expiresInMilliSeconds);
+        if(expiresInMilliSeconds > 0) {
+          this.expirationTimer = setTimeout(() => {
+            this.expirationTimer = undefined;
+            this.fire();
+          }, expiresInMilliSeconds);
+        }
       }
     }
 
@@ -74,10 +75,16 @@ export class Session {
     return { Authorization: "Bearer " + this.access_token };
   }
 
+  /**
+   * As long as the expirationTimer is running we must be valid
+   */
   get isValid() {
-    return this.expirationDate.valueOf() >= new Date().valueOf();
+    return this.expirationTimer !== undefined;
   }
 
+  /**
+   * remove all tokens from the session and the backing store
+   */
   invalidate() {
     this.update();
     this.save();
@@ -103,42 +110,6 @@ export class Session {
 }
 
 export const session = new Session(localStorage);
-
-export async function login(endpoint, username, password) {
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username,
-        password
-      })
-    });
-    if (response.ok) {
-      const data = await response.json();
-      session.update({ username, access_token: data.access_token });
-      session.save();
-    } else {
-      session.update({ username });
-
-      let message = response.statusText;
-
-      const ct = response.headers.get("Content-Type");
-
-      switch (ct) {
-        case "text/plain":
-          message += "\n" + (await response.text());
-      }
-
-      throw new Error(message);
-    }
-  } catch (e) {
-    session.update({ username });
-    throw e;
-  }
-}
 
 function decode(token) {
   return token === undefined || token === "undefined"

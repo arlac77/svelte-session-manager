@@ -2,7 +2,7 @@
   import { Login, session } from "../../src/index.svelte";
 
   async function logoff() {
-    $session.invalidate();
+    session.invalidate();
   }
 </script>
 
