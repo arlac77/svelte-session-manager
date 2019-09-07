@@ -1,67 +1,72 @@
 export class Session {
   constructor(data) {
-    let sessionTimeoutId;
+    let timeout;
 
     Object.defineProperties(this, {
+      store: {
+        value: data
+      },
       subscriptions: {
+        value: new Set()
+      },
+      entitlements: {
         value: new Set()
       },
       expirationDate: {
         value: new Date(0)
       },
-      sessionTimeoutId: {
-        get: () => sessionTimeoutId,
-        set: v => (sessionTimeoutId = v)
+      timeout: {
+        get: () => timeout,
+        set: v => (timeout = v)
       }
     });
 
     this.update(data);
   }
 
-  update(data = {}) {
-    let username = "";
-    let entitlements = new Set();
+  update(data) {
+    this.entitlements.clear();
+    this.expirationDate.setTime(0);
+    this.username = undefined;
+    this.access_token = undefined;
 
-    const decoded = decode(data.access_token);
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = undefined;
+    }
 
-    if (decoded) {
-      entitlements = new Set(decoded.entitlements.split(/,/));
-      this.expirationDate.setUTCSeconds(decoded.exp);
+    if (data !== undefined) {
+      this.username = data.username !== undefined && data.username !== "undefined" ? data.username : undefined;
+      this.access_token = data.access_token;
 
-      const expiresInMilliSeconds =
-        this.expirationDate.valueOf() - new Date().valueOf();
+      const decoded = decode(data.access_token);
 
-      if (this.sessionTimeoutId) {
-        clearTimeout(this.sessionTimeoutId);
-        this.sessionTimeoutId = undefined;
+      if (decoded) {
+        decoded.entitlements.split(/,/).forEach(e => this.entitlements.add(e));
+
+        this.expirationDate.setUTCSeconds(decoded.exp);
+
+        const expiresInMilliSeconds =
+          this.expirationDate.valueOf() - new Date().valueOf();
+
+
+        this.timeout = setTimeout(() => {
+          this.timeout = undefined;
+          this.fire();
+        }, expiresInMilliSeconds);
       }
-
-      this.sessionTimeoutId = setTimeout(() => {
-        this.sessionTimeoutId = undefined;
-        this.fire();
-      }, expiresInMilliSeconds);
-    } else {
-      this.expirationDate.setTime(0);
     }
-
-    if (data.username !== undefined && data.username !== "undefined") {
-      username = data.username;
-    }
-
-    this.access_token = data.access_token;
-    this.entitlements = entitlements;
-    this.username = username;
 
     this.fire();
   }
 
   save() {
     if (this.username === undefined) {
-      delete localStorage.access_token;
-      delete localStorage.username;
+      delete this.store.access_token;
+      delete this.store.username;
     } else {
-      localStorage.access_token = this.access_token;
-      localStorage.username = this.username;
+      this.store.access_token = this.access_token;
+      this.store.username = this.username;
     }
   }
 
@@ -75,6 +80,7 @@ export class Session {
 
   invalidate() {
     this.update();
+    this.save();
   }
 
   hasEntitlement(name) {
@@ -122,10 +128,6 @@ export async function login(endpoint, username, password) {
       const ct = response.headers.get("Content-Type");
 
       switch (ct) {
-        /*
-        case 'text/html':
-          break; */
-
         case "text/plain":
           message += "\n" + (await response.text());
       }
