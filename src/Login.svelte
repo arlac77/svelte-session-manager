@@ -1,7 +1,8 @@
 <script>
-  import { login, session } from "./session.mjs";
+  import { login } from "./login.mjs";
 
   export let endpoint;
+  export let session;
 
   let username = "";
   let password = "";

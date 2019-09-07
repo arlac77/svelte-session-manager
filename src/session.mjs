@@ -1,3 +1,8 @@
+
+/**
+ * @property {Set<string>} entitlements
+ * @property {Date} expirationDate
+ */
 export class Session {
   constructor(data) {
     let expirationTimer;
@@ -52,6 +57,7 @@ export class Session {
         if(expiresInMilliSeconds > 0) {
           this.expirationTimer = setTimeout(() => {
             this.expirationTimer = undefined;
+            this.entitlements.clear();
             this.fire();
           }, expiresInMilliSeconds);
         }
@@ -108,8 +114,6 @@ export class Session {
     return () => this.subscriptions.delete(subscription);
   }
 }
-
-export const session = new Session(localStorage);
 
 function decode(token) {
   return token === undefined || token === "undefined"

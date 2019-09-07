@@ -1,5 +1,7 @@
 <script>
-  import { Login, session } from "../../src/index.svelte";
+  import { Login, Session } from "../../src/index.svelte";
+
+  export const session = new Session(localStorage);
 
   async function logoff() {
     session.invalidate();
@@ -10,7 +12,7 @@
   <h1>Example</h1>
 
   <div class="center">
-    <Login endpoint="login" />
+    <Login session={session} endpoint="login" />
   </div>
 
   <form on:submit|preventDefault={logoff}>
@@ -20,6 +22,11 @@
   <h3>Session Details</h3>
   <table class="bordered">
     <tbody>
+      <tr>
+        <td>Subscriptions</td>
+        <td id="subscriptions">{$session.subscriptions.size}</td>
+      </tr>
+
       <tr>
         <td>Username</td>
         <td id="session_username">{$session.username}</td>
