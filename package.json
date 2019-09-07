@@ -17,7 +17,7 @@
     "rollup-plugin-svelte": "^5.1.0",
     "semantic-release": "^15.13.24",
     "serve": "^11.1.0",
-    "svelte": "^3.9.2",
+    "svelte": "^3.10.0",
     "testcafe": "^1.4.3"
   },
   "engines": {
