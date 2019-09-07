@@ -47,14 +47,14 @@ export class Session {
       const decoded = decode(data.access_token);
 
       if (decoded) {
-        decoded.entitlements.split(/,/).forEach(e => this.entitlements.add(e));
-
         this.expirationDate.setUTCSeconds(decoded.exp);
 
         const expiresInMilliSeconds =
           this.expirationDate.valueOf() - new Date().valueOf();
 
         if(expiresInMilliSeconds > 0) {
+          decoded.entitlements.split(/,/).forEach(e => this.entitlements.add(e));
+
           this.expirationTimer = setTimeout(() => {
             this.expirationTimer = undefined;
             this.entitlements.clear();
