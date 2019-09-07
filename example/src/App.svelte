@@ -24,7 +24,7 @@
     <tbody>
       <tr>
         <td>Subscriptions</td>
-        <td id="subscriptions">{$session.subscriptions.size}</td>
+        <td id="session_subscriptions">{$session.subscriptions.size}</td>
       </tr>
 
       <tr>

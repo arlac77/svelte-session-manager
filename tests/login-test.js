@@ -12,6 +12,7 @@ test("correct credentials", async t => {
   await t.expect(Selector("#session_username").innerText).eql("user1");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
   await t.expect(Selector("#session_entitlements").innerText).eql("a,b,c");
+  await t.expect(Selector("#session_subscriptions").innerText).eql("1");
 });
 
 test("correct credentials + invalidate", async t => {
@@ -24,6 +25,7 @@ test("correct credentials + invalidate", async t => {
   await t.expect(Selector("#session_entitlements").innerText).eql("a,b,c");
   await t.click("#logoff");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
 });
 
 test("correct credentials expiring", async t => {
@@ -35,6 +37,7 @@ test("correct credentials expiring", async t => {
   await t.expect(Selector("#session_validity").innerText).eql("valid");
   await t.wait(17 * 1000);
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
 });
 
 test("correct credentials delayed response", async t => {
@@ -54,7 +57,7 @@ test("wrong credentials", async t => {
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("user1");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
-
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("Unauthorized");
 });
 
@@ -65,7 +68,7 @@ test("unknown user", async t => {
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
-
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("Unauthorized");
 });
 
@@ -75,5 +78,6 @@ test("server error 502", async t => {
     .typeText("#password", "something")
     .click("#submit");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("Bad Gateway");
 });
