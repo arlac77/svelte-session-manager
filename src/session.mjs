@@ -58,6 +58,8 @@ export class Session {
           this.expirationTimer = setTimeout(() => {
             this.expirationTimer = undefined;
             this.entitlements.clear();
+            this.access_token = undefined;
+            this.expirationDate.setTime(0);
             this.fire();
           }, expiresInMilliSeconds);
         }
