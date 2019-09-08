@@ -12,7 +12,7 @@
   <h1>Example</h1>
 
   <div class="center">
-    <Login session={session} endpoint="login" />
+    <Login session={session} endpoint="/api/login" />
   </div>
 
   <form on:submit|preventDefault={logoff}>
