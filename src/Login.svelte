@@ -3,6 +3,7 @@
 
   export let endpoint;
   export let session;
+  export let result;
 
   let username = "";
   let password = "";
@@ -18,6 +19,9 @@
     } catch (e) {
       message = e;
     } finally {
+      if(result !== undefined) {
+        await result();
+      }
       active = false;
       password = "";
     }

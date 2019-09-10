@@ -6,18 +6,28 @@
   async function logoff() {
     session.invalidate();
   }
+
+  let resultCalled = false;
+
+  function result() {
+    resultCalled = true;
+  }
+
 </script>
 
 <div>
   <h1>Example</h1>
 
   <div class="center">
-    <Login session={session} endpoint="/api/login" />
+    <Login session={session} endpoint="/api/login" result={result}/>
   </div>
 
   <form on:submit|preventDefault={logoff}>
     <button id="logoff" type="submit" disabled={!$session.isValid}>Logoff</button>
   </form>
+
+
+  {resultCalled ? 'RESULT CALLED' :  'NOT CALLED'}
 
   <h3>Session Details</h3>
   <table class="bordered">
@@ -26,7 +36,6 @@
         <td>Subscriptions</td>
         <td id="session_subscriptions">{$session.subscriptions.size}</td>
       </tr>
-
       <tr>
         <td>Username</td>
         <td id="session_username">{$session.username}</td>
