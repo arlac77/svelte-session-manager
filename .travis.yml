@@ -20,3 +20,5 @@ branches:
   only:
     - master
     - /^greenkeeper/.*$/
+    - /^mkpr/.*$/
+    - /^npm-template-sync/.*$/
