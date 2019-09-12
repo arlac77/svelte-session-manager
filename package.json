@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "start": "rollup -c example/rollup.config.js -w",
-    "test": "testcafe chrome:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
+    "test": "testcafe chromium:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
   "devDependencies": {
     "jsonwebtoken": "^8.5.1",
