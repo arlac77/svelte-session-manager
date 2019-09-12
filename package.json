@@ -1,10 +1,13 @@
 {
   "name": "svelte-session-manager",
+  "description": "Session store for svelte (currently only for JWT)",
   "version": "0.0.0-semantic-release",
   "module": "src/index.svelte",
   "svelte": "src/index.svelte",
   "keywords": [
-    "svelte"
+    "svelte",
+    "session",
+    "JWT"
   ],
   "scripts": {
     "start": "rollup -c example/rollup.config.js -w",
