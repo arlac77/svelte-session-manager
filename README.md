@@ -57,15 +57,21 @@ export const values = derived(
 
 ### Table of Contents
 
--   [Session](#session)
-    -   [Parameters](#parameters)
-    -   [Properties](#properties)
-    -   [save](#save)
-    -   [authorizationHeader](#authorizationheader)
-    -   [isValid](#isvalid)
-    -   [invalidate](#invalidate)
-    -   [subscribe](#subscribe)
-        -   [Parameters](#parameters-1)
+- [svelte-session-manager](#svelte-session-manager)
+- [usage](#usage)
+- [API](#api)
+    - [Table of Contents](#table-of-contents)
+  - [Session](#session)
+    - [Parameters](#parameters)
+    - [Properties](#properties)
+    - [save](#save)
+    - [authorizationHeader](#authorizationheader)
+    - [isValid](#isvalid)
+    - [invalidate](#invalidate)
+    - [subscribe](#subscribe)
+      - [Parameters](#parameters-1)
+- [install](#install)
+- [license](#license)
 
 ## Session
 
@@ -110,7 +116,7 @@ Fired when the session changes
 With [npm](http://npmjs.org) do:
 
 ```shell
-npm install {{name}}
+npm install svelte-session-manager
 ```
 
 # license
