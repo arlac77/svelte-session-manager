@@ -10,10 +10,13 @@
     "JWT"
   ],
   "scripts": {
+    "docs": "documentation readme src/session.mjs --section=API",
+    "lint": "documentation lint src/session.mjs",
     "start": "rollup -c example/rollup.config.js -w",
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
   "devDependencies": {
+    "documentation": "^12.1.2",
     "jsonwebtoken": "^8.5.1",
     "rollup": "^1.21.2",
     "rollup-plugin-dev": "1.0.0",

@@ -1,7 +1,10 @@
 
 /**
+ * 
+ * @param {Object} data
  * @property {Set<string>} entitlements
  * @property {Date} expirationDate
+ * @property {Object} store backing store to use for save same as data param
  */
 export class Session {
   constructor(data) {
@@ -69,6 +72,9 @@ export class Session {
     this.fire();
   }
 
+  /**
+   * persist into the packing store
+   */
   save() {
     if (this.username === undefined) {
       delete this.store.access_token;
@@ -79,12 +85,16 @@ export class Session {
     }
   }
 
+  /**
+   * http header suitable for fetch
+   */
   get authorizationHeader() {
     return { Authorization: "Bearer " + this.access_token };
   }
 
   /**
    * As long as the expirationTimer is running we must be valid
+   * @return {boolean} true if session is valid (not expired)
    */
   get isValid() {
     return this.expirationTimer !== undefined;

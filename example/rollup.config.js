@@ -32,7 +32,7 @@ export default {
             const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
             if (
               content.username.startsWith("user") &&
-              content.password === "secret1"
+              content.password === "secret"
             ) {
               const access_token = jsonwebtoken.sign(
                 { entitlements: ["a", "b", "c"].join(",") },

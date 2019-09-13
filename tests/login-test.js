@@ -6,10 +6,10 @@ fixture`login`.page`${base}/index.html`;
 
 test("correct credentials", async t => {
   await t
-    .typeText("#username", "user1")
-    .typeText("#password", "secret1")
+    .typeText("#username", "user")
+    .typeText("#password", "secret")
     .click("#submit");
-  await t.expect(Selector("#session_username").innerText).eql("user1");
+  await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
   await t.expect(Selector("#session_entitlements").innerText).eql("a,b,c");
   await t.expect(Selector("#session_subscriptions").innerText).eql("1");
@@ -17,10 +17,10 @@ test("correct credentials", async t => {
 
 test("correct credentials + invalidate", async t => {
   await t
-    .typeText("#username", "user1")
-    .typeText("#password", "secret1")
+    .typeText("#username", "user")
+    .typeText("#password", "secret")
     .click("#submit");
-  await t.expect(Selector("#session_username").innerText).eql("user1");
+  await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
   await t.expect(Selector("#session_entitlements").innerText).eql("a,b,c");
   await t.click("#logoff");
@@ -30,10 +30,10 @@ test("correct credentials + invalidate", async t => {
 
 test("correct credentials expiring", async t => {
   await t
-    .typeText("#username", "user1")
-    .typeText("#password", "secret1")
+    .typeText("#username", "user")
+    .typeText("#password", "secret")
     .click("#submit");
-  await t.expect(Selector("#session_username").innerText).eql("user1");
+  await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
   await t.wait(17 * 1000);
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
@@ -43,7 +43,7 @@ test("correct credentials expiring", async t => {
 test("correct credentials delayed response", async t => {
   await t
     .typeText("#username", "userSlowLogin")
-    .typeText("#password", "secret1")
+    .typeText("#password", "secret")
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("userSlowLogin");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
@@ -52,10 +52,10 @@ test("correct credentials delayed response", async t => {
 
 test("wrong credentials", async t => {
   await t
-    .typeText("#username", "user1")
+    .typeText("#username", "user")
     .typeText("#password", "something")
     .click("#submit");
-  await t.expect(Selector("#session_username").innerText).eql("user1");
+  await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("Unauthorized");

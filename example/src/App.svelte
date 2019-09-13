@@ -18,6 +18,9 @@
 <div>
   <h1>Example</h1>
 
+  Username is user
+  Password is secret
+ 
   <div class="center">
     <Login session={session} endpoint="/api/login" result={result}/>
   </div>
@@ -57,6 +60,10 @@
         <td id="session_entitlements">
           {[...$session.entitlements].join(',')}
         </td>
+      </tr>
+      <tr>
+        <td>Authorization Header</td>
+        <td id="session_authorization_header">{JSON.stringify($session.authorizationHeader)}</td>
       </tr>
     </tbody>
   </table>
