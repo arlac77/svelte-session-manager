@@ -22,3 +22,5 @@ branches:
     - /^greenkeeper/.*$/
     - /^mkpr/.*$/
     - /^npm-template-sync/.*$/
+env:
+  - BROSER=chrome
