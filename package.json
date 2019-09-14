@@ -10,8 +10,8 @@
     "JWT"
   ],
   "scripts": {
-    "docs": "documentation readme src/session.mjs --section=API",
-    "lint": "documentation lint src/session.mjs",
+    "docs": "documentation readme src/index.svelte --section=API",
+    "lint": "documentation lint src/index.svelte",
     "start": "rollup -c example/rollup.config.js -w",
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
