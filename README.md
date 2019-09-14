@@ -57,21 +57,17 @@ export const values = derived(
 
 ### Table of Contents
 
-- [svelte-session-manager](#svelte-session-manager)
-- [usage](#usage)
-- [API](#api)
-    - [Table of Contents](#table-of-contents)
-  - [Session](#session)
-    - [Parameters](#parameters)
-    - [Properties](#properties)
-    - [save](#save)
-    - [authorizationHeader](#authorizationheader)
-    - [isValid](#isvalid)
-    - [invalidate](#invalidate)
-    - [subscribe](#subscribe)
-      - [Parameters](#parameters-1)
-- [install](#install)
-- [license](#license)
+-   [Session](#session)
+    -   [Parameters](#parameters)
+    -   [Properties](#properties)
+    -   [save](#save)
+    -   [authorizationHeader](#authorizationheader)
+    -   [isValid](#isvalid)
+    -   [invalidate](#invalidate)
+    -   [subscribe](#subscribe)
+        -   [Parameters](#parameters-1)
+-   [login](#login)
+    -   [Parameters](#parameters-2)
 
 ## Session
 
@@ -110,6 +106,15 @@ Fired when the session changes
 #### Parameters
 
 -   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+
+## login
+
+### Parameters
+
+-   `session` **[Session](#session)** 
+-   `endpoint`  
+-   `username`  
+-   `password`  
 
 # install
 

@@ -1,7 +1,7 @@
 {
   "name": "svelte-session-manager",
   "version": "0.0.0-semantic-release",
-  "module": "src/index.svelte",
+  "module": "src/index.index",
   "svelte": "src/index.svelte",
   "description": "Session store for svelte (currently only for JWT)",
   "keywords": [
@@ -10,8 +10,8 @@
     "JWT"
   ],
   "scripts": {
-    "docs": "documentation readme src/session.mjs --section=API",
-    "lint": "documentation lint src/session.mjs",
+    "docs": "documentation readme src/index.mjs --section=API",
+    "lint": "documentation lint src/index.mjs",
     "start": "rollup -c example/rollup.config.js -w",
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
