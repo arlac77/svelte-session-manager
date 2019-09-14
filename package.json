@@ -10,8 +10,8 @@
     "JWT"
   ],
   "scripts": {
-    "docs": "documentation readme src/index.mjs --section=API",
-    "lint": "documentation lint src/index.mjs",
+    "docs": "documentation readme src/index.index --section=API",
+    "lint": "documentation lint src/index.index",
     "start": "rollup -c example/rollup.config.js -w",
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
