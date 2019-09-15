@@ -1,7 +1,7 @@
 {
   "name": "svelte-session-manager",
   "version": "0.0.0-semantic-release",
-  "module": "src/index.index",
+  "module": "src/index.mjs",
   "svelte": "src/index.svelte",
   "description": "Session store for svelte (currently only for JWT)",
   "keywords": [
