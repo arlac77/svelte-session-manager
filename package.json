@@ -18,7 +18,7 @@
   "devDependencies": {
     "documentation": "^12.1.2",
     "jsonwebtoken": "^8.5.1",
-    "rollup": "^1.21.2",
+    "rollup": "^1.21.3",
     "rollup-plugin-dev": "1.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
