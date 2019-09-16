@@ -26,8 +26,10 @@ import { Session, login } from 'svelte-session-manager';
 // use localStorage as backng store
 let session = new Session(localStorage);
 
-
-await login(session, 'https://mydomain/authenticate', 'a user', 'a secret');
+// session may still be valid
+if(!session.isValid) {
+  await login(session, 'https://mydomain/authenticate', 'a user', 'a secret');
+}
 
 session.isValid; // true when auth was ok
 
