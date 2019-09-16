@@ -28,7 +28,7 @@ let session = new Session(localStorage);
 
 // session may still be valid
 if(!session.isValid) {
-  await login(session, 'https://mydomain/authenticate', 'a user', 'a secret');
+  await login(session, 'https://mydomain.com/authenticate', 'a user', 'a secret');
 }
 
 session.isValid; // true when auth was ok
