@@ -22,12 +22,12 @@
     "rollup-plugin-dev": "1.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
-    "semantic-release": "^15.13.24",
+    "semantic-release": "^15.13.25",
     "svelte": "^3.12.1",
     "testcafe": "^1.5.0"
   },
   "engines": {
-    "node": ">=12.11.0"
+    "node": ">=12.10.0"
   },
   "repository": {
     "type": "git",
