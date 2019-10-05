@@ -28,11 +28,18 @@ export async function login(session, endpoint, username, password) {
 
       let message = response.statusText;
 
-      const ct = response.headers.get("Content-Type");
-
+      const ct = response.headers.get("Content-Type").replace(/;.*/,'');
+    
       switch (ct) {
         case "text/plain":
           message += "\n" + (await response.text());
+        break;
+        case "text/html":
+          const el = document.createElement( 'html' );
+          el.innerHTML = await response.text();;
+          const titles = el.getElementsByTagName( 'title' );
+          message = titles.item(0).text;
+        break;
       }
 
       throw new Error(message);

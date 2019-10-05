@@ -79,5 +79,5 @@ test("server error 502", async t => {
     .click("#submit");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
-  await t.expect(Selector("#message").innerText).contains("Bad Gateway");
+  await t.expect(Selector("#message").innerText).contains("Bad Gateway 502");
 });
