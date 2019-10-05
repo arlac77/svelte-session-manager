@@ -39,7 +39,7 @@ export const values = derived(
   session,
   ($session, set) => {
     if (!session.isValid) {
-      set([]);
+      set([]); // session has expired no more data
     } else {
       fetch('https://mydomain.com/values', {
         headers: {
@@ -55,6 +55,7 @@ export const values = derived(
 ```
 
 ## run tests
+
 ```sh
 export BROWSER=safari|chrome|...
 npm|yarn test
@@ -66,9 +67,11 @@ npm|yarn test
 
 ### Table of Contents
 
+-   [SessionData](#sessiondata)
+    -   [Properties](#properties)
 -   [Session](#session)
     -   [Parameters](#parameters)
-    -   [Properties](#properties)
+    -   [Properties](#properties-1)
     -   [save](#save)
     -   [authorizationHeader](#authorizationheader)
     -   [isValid](#isvalid)
@@ -78,17 +81,36 @@ npm|yarn test
 -   [login](#login)
     -   [Parameters](#parameters-2)
 
+## SessionData
+
+Data as preserved in the backing store
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+### Properties
+
+-   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user name (id)
+-   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** JWT token
+
 ## Session
+
+User session
+To create as session backed by browser local storage
+
+```js
+let session = new Session(localStorage);
+``
+```
 
 ### Parameters
 
--   `data` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `data` **[SessionData](#sessiondata)** 
 
 ### Properties
 
 -   `entitlements` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
 -   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
--   `store` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** backing store to use for save same as data param
+-   `store` **[SessionData](#sessiondata)** backing store to use for save same as data param
 
 ### save
 
@@ -118,12 +140,15 @@ Fired when the session changes
 
 ## login
 
+Bring session into the valid state by callinf the authorization endpoint
+and asking for a access_token
+
 ### Parameters
 
--   `session` **[Session](#session)** 
--   `endpoint`  
--   `username`  
--   `password`  
+-   `session` **[Session](#session)** to be opened
+-   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** authorization url
+-   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id of the user
+-   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user credentials
 
 # install
 

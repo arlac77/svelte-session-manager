@@ -1,6 +1,11 @@
 
 /**
- * @param {Session} session
+ * Bring session into the valid state by callinf the authorization endpoint
+ * and asking for a access_token
+ * @param {Session} session to be opened
+ * @param {string} endpoint authorization url
+ * @param {string} username id of the user
+ * @param {string} password user credentials
  */
 export async function login(session, endpoint, username, password) {
   try {

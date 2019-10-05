@@ -1,10 +1,21 @@
 
 /**
- * 
- * @param {Object} data
+ * Data as preserved in the backing store
+ * @typedef {Object} SessionData
+ * @property {string} username user name (id)
+ * @property {string} access_token JWT token
+ */
+
+/**
+ * User session
+ * To create as session backed by browser local storage
+ * ```js
+ * let session = new Session(localStorage);
+ * ```
+ * @param {SessionData} data
  * @property {Set<string>} entitlements
  * @property {Date} expirationDate
- * @property {Object} store backing store to use for save same as data param
+ * @property {SessionData} store backing store to use for save same as data param
  */
 export class Session {
   constructor(data) {
