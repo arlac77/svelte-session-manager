@@ -101,6 +101,12 @@ To create as session backed by browser local storage
 let session = new Session(localStorage);
 ```
 
+or session storage
+
+```js
+let session = new Session(sessionStorage);
+```
+
 ### Parameters
 
 -   `data` **[SessionData](#sessiondata)** 
@@ -108,6 +114,7 @@ let session = new Session(localStorage);
 ### Properties
 
 -   `entitlements` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+-   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** store subscriptions
 -   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
 -   `store` **[SessionData](#sessiondata)** backing store to use for save same as data param
 
@@ -118,6 +125,10 @@ persist into the packing store
 ### authorizationHeader
 
 http header suitable for fetch
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** header The http header.
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** header.Authorization The Bearer access token.
 
 ### isValid
 

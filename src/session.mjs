@@ -12,8 +12,13 @@
  * ```js
  * let session = new Session(localStorage);
  * ```
+ * or session storage
+ * ```js
+ * let session = new Session(sessionStorage);
+ * ```
  * @param {SessionData} data
  * @property {Set<string>} entitlements
+ * @property {Set<Object>} subscriptions store subscriptions
  * @property {Date} expirationDate
  * @property {SessionData} store backing store to use for save same as data param
  */
@@ -98,6 +103,8 @@ export class Session {
 
   /**
    * http header suitable for fetch
+   * @return {Object} header The http header.
+   * @return {string} header.Authorization The Bearer access token.
    */
   get authorizationHeader() {
     return { Authorization: "Bearer " + this.access_token };
