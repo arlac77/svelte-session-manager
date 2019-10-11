@@ -55,7 +55,7 @@ export default {
               if (content.username.startsWith("error")) {
                 ctx.status = 502;
                 ctx.type = 'text/html';
-                ctx.body = "<html><head><title>Bad Gateway 502</title></head><body>Communication Error</body></html>";
+                ctx.body = '<html><head><title>502 Bad Gateway</title></head><body><center><h1>502 Bad Gateway</h1></center><hr><center>nginx/1.17.4</center></body></html>';
                 ctx.throw(502, "Bad Gateway");
               } else {
                 ctx.status = 401;
