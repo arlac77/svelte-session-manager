@@ -1,6 +1,6 @@
 
 /**
- * Bring session into the valid state by callinf the authorization endpoint
+ * Bring session into the valid state by calling the authorization endpoint
  * and asking for a access_token
  * @param {Session} session to be opened
  * @param {string} endpoint authorization url
