@@ -24,7 +24,7 @@
     "rollup-plugin-svelte": "^5.1.0",
     "semantic-release": "^15.13.26",
     "svelte": "^3.12.1",
-    "testcafe": "^1.5.0"
+    "testcafe": "^1.6.0"
   },
   "engines": {
     "node": ">=12.12.0"
