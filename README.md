@@ -24,7 +24,7 @@ Session store for svelte (currently only for JWT)
 import { derived } from 'svelte';
 import { Session, login } from 'svelte-session-manager';
 
-// use localStorage as backng store
+// use localStorage as backing store
 let session = new Session(localStorage);
 
 // session may still be valid
@@ -32,7 +32,7 @@ if(!session.isValid) {
   await login(session, 'https://mydomain.com/authenticate', 'a user', 'a secret');
 }
 
-session.isValid; // true when auth was ok
+session.isValid; // true when auth was ok or localStorage token is still valid
 
 
 export const values = derived(
@@ -49,7 +49,7 @@ export const values = derived(
     }
     return () => {};
   }
-);
+,[]);
 
 // $values contains fetch result as long as session has not expired
 ```
@@ -150,8 +150,9 @@ Fired when the session changes
 
 ## login
 
-Bring session into the valid state by callinf the authorization endpoint
-and asking for a access_token
+Bring session into the valid state by calling the authorization endpoint
+and asking for a access_token.
+Executess a POST on the endpoint url providing username, and password as json
 
 ### Parameters
 

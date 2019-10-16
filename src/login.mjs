@@ -1,7 +1,8 @@
 
 /**
  * Bring session into the valid state by calling the authorization endpoint
- * and asking for a access_token
+ * and asking for a access_token.
+ * Executess a POST on the endpoint url providing username, and password as json
  * @param {Session} session to be opened
  * @param {string} endpoint authorization url
  * @param {string} username id of the user
@@ -36,7 +37,7 @@ export async function login(session, endpoint, username, password) {
         break;
         case "text/html":
           const el = document.createElement( 'html' );
-          el.innerHTML = await response.text();;
+          el.innerHTML = await response.text();
           const titles = el.getElementsByTagName( 'title' );
           message = titles.item(0).text;
         break;
