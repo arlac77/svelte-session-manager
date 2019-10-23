@@ -18,11 +18,11 @@
   "devDependencies": {
     "documentation": "^12.1.2",
     "jsonwebtoken": "^8.5.1",
-    "rollup": "^1.24.0",
-    "rollup-plugin-dev": "1.0.0",
+    "rollup": "^1.25.2",
+    "rollup-plugin-dev": "^1.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
-    "semantic-release": "^15.13.26",
+    "semantic-release": "^15.13.27",
     "svelte": "^3.12.1",
     "testcafe": "^1.6.0"
   },
@@ -37,9 +37,6 @@
     "url": "https://github.com/arlac77/svelte-session-manager/issues"
   },
   "homepage": "https://github.com/arlac77/svelte-session-manager#readme",
-  "config": {
-    "port": 5000
-  },
   "template": {
     "repository": {
       "url": "https://github.com/arlac77/npm-package-template-svelte.git"
