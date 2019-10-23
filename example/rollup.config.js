@@ -3,9 +3,8 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
 import { readFileSync } from "fs";
 import jsonwebtoken from "jsonwebtoken";
-import pkg from "../package.json";
 
-const port = pkg.config.port || 5000;
+const port = 5000;
 
 export default {
   input: "example/src/index.mjs",

@@ -12,14 +12,13 @@
   function result() {
     resultCalled = true;
   }
-
 </script>
 
 <div>
   <h1>Example</h1>
 
-  Username is user
-  Password is secret
+  Username is <bold>user</bold>
+  Password is <bold>secret</bold>
  
   <div class="center">
     <Login session={session} endpoint="/api/login" result={result}/>
