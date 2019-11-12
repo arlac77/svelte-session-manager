@@ -22,9 +22,9 @@
     "rollup": "^1.26.5",
     "rollup-plugin-dev": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-svelte": "^5.1.0",
+    "rollup-plugin-svelte": "^5.1.1",
     "semantic-release": "^15.13.30",
-    "svelte": "^3.12.1",
+    "svelte": "^3.14.0",
     "testcafe": "^1.6.1"
   },
   "engines": {
