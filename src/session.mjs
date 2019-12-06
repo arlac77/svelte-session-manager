@@ -23,28 +23,14 @@
  * @property {SessionData} store backing store to use for save same as data param
  */
 export class Session {
+
+  store;
+  expirationTimer;
+  subscriptions = new Set();
+  entitlements = new Set();
+  expirationDate = new Date(0);
+  
   constructor(data) {
-    let expirationTimer;
-
-    Object.defineProperties(this, {
-      store: {
-        value: data
-      },
-      subscriptions: {
-        value: new Set()
-      },
-      entitlements: {
-        value: new Set()
-      },
-      expirationDate: {
-        value: new Date(0)
-      },
-      expirationTimer: {
-        get: () => expirationTimer,
-        set: v => (expirationTimer = v)
-      }
-    });
-
     this.update(data);
   }
 
