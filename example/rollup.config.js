@@ -1,3 +1,5 @@
+import acornClassFields from "acorn-class-fields";
+
 import pkg from "../package.json";
 
 import dev from "rollup-plugin-dev";
