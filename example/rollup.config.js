@@ -1,7 +1,3 @@
-import acornClassFields from "acorn-class-fields";
-
-import pkg from "../package.json";
-
 import dev from "rollup-plugin-dev";
 import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
