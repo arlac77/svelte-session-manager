@@ -20,6 +20,7 @@
  * @property {Set<string>} entitlements
  * @property {Set<Object>} subscriptions store subscriptions
  * @property {Date} expirationDate
+ * @property {string} access_token token itself
  * @property {SessionData} store backing store to use for save same as data param
  */
 export class Session {
@@ -89,7 +90,7 @@ export class Session {
   }
 
   /**
-   * persist into the packing store
+   * persist into the backing store
    */
   save() {
     if (this.username === undefined) {
