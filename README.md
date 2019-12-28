@@ -99,7 +99,7 @@ To create as session backed by browser local storage
 let session = new Session(localStorage);
 ```
 
-or session storage
+or by browser session storage
 
 ```js
 let session = new Session(sessionStorage);
