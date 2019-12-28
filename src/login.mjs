@@ -29,6 +29,15 @@ export async function login(session, endpoint, username, password) {
 
       let message = response.statusText;
 
+      const wa = response.headers.get("WWW-Authenticate");
+
+      if(wa) {
+        const o = Object.fromEntries(wa.split(/\s*,\s*/).map(entry => entry.split(/=/)));
+        if(o.error_description) {
+          throw new Error(o.error_description);
+        }
+      }
+
       const ct = response.headers.get("Content-Type").replace(/;.*/,'');
     
       switch (ct) {
