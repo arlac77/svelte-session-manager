@@ -1,0 +1,10 @@
+{
+  "name": "svelte-session-manager",
+  "description": "Session store for svelte (currently only for JWT)",
+  "icons": [
+    {
+      "src": "facicon.ico",
+      "sizes": "16x16"
+    }
+  ]
+}
