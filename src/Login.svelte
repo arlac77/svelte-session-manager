@@ -39,6 +39,11 @@
     <label for="username">
       Username
       <input
+        aria-label="username"
+        aria-required="true"
+        maxlength="75"
+        autocorrect="off"
+        autocapitalize="off"
         id="username"
         type="text"
         placeholder="Username"
@@ -50,6 +55,10 @@
     <label for="password">
       Password
       <input
+        aria-label="password"
+        aria-required="true"
+        autocorrect="off"
+        autocapitalize="off"
         id="password"
         type="password"
         placeholder="Password"
