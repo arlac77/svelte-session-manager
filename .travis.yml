@@ -6,6 +6,9 @@ jobs:
     - stage: test
       script:
         - npm run test
+        - npm run cover
+        - npx codecov
+        - cat ./build/coverage/lcov.info | npx coveralls
       node_js: 12.14.1
     - stage: doc
       node_js: lts/*
