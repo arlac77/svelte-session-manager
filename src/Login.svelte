@@ -70,7 +70,7 @@
   </slot>
 
   <slot name="submit">
-    <button id="submit" type="submit" disabled={!username || !password}>
+    <button autofocus id="submit" type="submit" disabled={!username || !password}>
       Login
       {#if active}
         <div class="spinner" />
