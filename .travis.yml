@@ -6,7 +6,7 @@ jobs:
     - stage: test
       script:
         - npm run test
-      node_js: 12.16.0
+      node_js: 12.16.1
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
