@@ -28,7 +28,7 @@
     "testcafe": "^1.8.3"
   },
   "engines": {
-    "node": ">=12.16.1"
+    "node": ">=13.12.0"
   },
   "repository": {
     "type": "git",
