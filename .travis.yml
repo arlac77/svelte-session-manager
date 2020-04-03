@@ -1,6 +1,8 @@
 language: node_js
 addons:
   chrome: stable
+env:
+  - BROWSER=chrome
 jobs:
   include:
     - stage: test
@@ -27,5 +29,3 @@ branches:
     - /^greenkeeper/.*$/
     - /^mkpr/.*$/
     - /^npm-template-sync/.*$/
-env:
-  - BROWSER=chrome
