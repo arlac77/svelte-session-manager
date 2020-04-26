@@ -1,6 +1,9 @@
 {
   "name": "svelte-session-manager",
   "version": "0.0.0-semantic-release",
+  "publishConfig": {
+    "access": "public"
+  },
   "module": "src/index.mjs",
   "svelte": "src/index.svelte",
   "description": "Session store for svelte (currently only for JWT)",
@@ -8,6 +11,12 @@
     "svelte",
     "session",
     "JWT"
+  ],
+  "contributors": [
+    {
+      "name": "Markus Felten",
+      "email": "markus.felten@gmx.de"
+    }
   ],
   "license": "BSD-2-Clause",
   "scripts": {
@@ -40,8 +49,8 @@
   "homepage": "https://github.com/arlac77/svelte-session-manager#readme",
   "template": {
     "inheritFrom": [
-      "arlac77/template-svelte-component",
-      "arlac77/template-github"
+      "arlac77/template-arlac77-github",
+      "arlac77/template-svelte-component"
     ]
   }
 }
