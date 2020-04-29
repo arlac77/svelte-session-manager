@@ -4,6 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "src/index.mjs",
   "module": "src/index.mjs",
   "svelte": "src/index.svelte",
   "description": "Session store for svelte (currently only for JWT)",
@@ -22,13 +23,13 @@
   "scripts": {
     "start": "rollup -c example/rollup.config.mjs -w",
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.mjs -w\"",
-    "docs": "documentation readme src/index.mjs --section=API",
-    "lint": "documentation lint src/index.mjs"
+    "docs": "documentation readme src/index.mjs --section=API && documentation readme {{main}} --section=API",
+    "lint": "documentation lint src/index.mjs && documentation lint {{main}}"
   },
   "devDependencies": {
     "documentation": "^12.3.0",
     "jsonwebtoken": "^8.5.1",
-    "rollup": "^2.7.3",
+    "rollup": "^2.7.4",
     "rollup-plugin-dev": "^1.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.2.1",
