@@ -39,7 +39,7 @@
     "testcafe": "^1.8.4"
   },
   "engines": {
-    "node": ">=14.1.0"
+    "node": ">=14.2.0"
   },
   "repository": {
     "type": "git",
