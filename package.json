@@ -28,7 +28,7 @@
     "lint": "documentation lint src/index.mjs"
   },
   "devDependencies": {
-    "documentation": "^12.3.0",
+    "documentation": "^13.0.0",
     "jsonwebtoken": "^8.5.1",
     "rollup": "^2.8.2",
     "rollup-plugin-dev": "^1.1.2",
