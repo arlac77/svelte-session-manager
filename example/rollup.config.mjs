@@ -34,6 +34,7 @@ export default {
               content.password === "secret"
             ) {
               const access_token = jsonwebtoken.sign(
+                content.username === "user_no_entitlements" ? {} :
                 { entitlements: ["a", "b", "c"].join(",") },
                 readFileSync("example/demo.rsa"),
                 {

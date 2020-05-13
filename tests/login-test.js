@@ -15,6 +15,17 @@ test("correct credentials", async t => {
   await t.expect(Selector("#session_subscriptions").innerText).eql("1");
 });
 
+test("no entitlements in token", async t => {
+  await t
+    .typeText("#username", "user_no_entitlements")
+    .typeText("#password", "secret")
+    .click("#submit");
+  await t.expect(Selector("#session_username").innerText).eql("user_no_entitlements");
+  await t.expect(Selector("#session_validity").innerText).eql("valid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
+  await t.expect(Selector("#session_subscriptions").innerText).eql("1");
+});
+
 test("correct credentials + invalidate", async t => {
   await t
     .typeText("#username", "user")

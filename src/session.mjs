@@ -73,7 +73,9 @@ export class Session {
           this.expirationDate.valueOf() - new Date().valueOf();
 
         if(expiresInMilliSeconds > 0) {
-          decoded.entitlements.split(/,/).forEach(e => this.entitlements.add(e));
+          if(decoded.entitlements) {
+            decoded.entitlements.split(/,/).forEach(e => this.entitlements.add(e));
+          }
 
           this.expirationTimer = setTimeout(() => {
             this.expirationTimer = undefined;
