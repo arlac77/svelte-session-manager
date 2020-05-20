@@ -9,7 +9,7 @@ jobs:
       script:
         - npm run test
       node_js:
-        - 14.2.0
+        - 14.3.0
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
