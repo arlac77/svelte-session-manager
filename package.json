@@ -38,9 +38,6 @@
     "svelte": "^3.22.3",
     "testcafe": "^1.8.5"
   },
-  "engines": {
-    "node": ">=14.3.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/arlac77/svelte-session-manager.git"
