@@ -49,11 +49,18 @@ export class Session {
     this.update(data);
   }
 
-  update(data) {
+  /**
+   * invalidate session data
+   */
+  clear() {
     this.entitlements.clear();
     this.expirationDate.setTime(0);
     this.username = undefined;
     this.access_token = undefined;
+  }
+
+  update(data) {
+    this.clear();
 
     if (this.expirationTimer) {
       clearTimeout(this.expirationTimer);
@@ -70,7 +77,7 @@ export class Session {
         this.expirationDate.setUTCSeconds(decoded.exp);
 
         const expiresInMilliSeconds =
-          this.expirationDate.valueOf() - new Date().valueOf();
+          this.expirationDate.valueOf() - Date.now();
 
         if(expiresInMilliSeconds > 0) {
           if(decoded.entitlements) {
@@ -78,10 +85,7 @@ export class Session {
           }
 
           this.expirationTimer = setTimeout(() => {
-            this.expirationTimer = undefined;
-            this.entitlements.clear();
-            this.access_token = undefined;
-            this.expirationDate.setTime(0);
+            this.clear();
             this.fire();
           }, expiresInMilliSeconds);
         }
