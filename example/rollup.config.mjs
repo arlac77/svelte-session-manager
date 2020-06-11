@@ -34,8 +34,9 @@ export default {
               content.password === "secret"
             ) {
               const access_token = jsonwebtoken.sign(
-                content.username === "user_no_entitlements" ? {} :
-                { entitlements: ["a", "b", "c"].join(",") },
+                content.username === "user_no_entitlements"
+                  ? {}
+                  : { entitlements: ["a", "b", "c"].join(",") },
                 readFileSync("example/demo.rsa"),
                 {
                   algorithm: "RS256",
@@ -44,23 +45,46 @@ export default {
               );
 
               await new Promise(resolve =>
-                setTimeout(resolve,
+                setTimeout(
+                  resolve,
                   content.username === "userSlowLogin" ? 2000 : 500
                 )
               );
 
               ctx.body = { access_token };
             } else {
-              if (content.username.startsWith("error")) {
-                ctx.status = 502;
-                ctx.type = 'text/html';
-                ctx.body = '<html><head><title>502 Bad Gateway</title></head><body><center><h1>502 Bad Gateway</h1></center><hr><center>nginx/1.17.4</center></body></html>';
-                ctx.throw(502, "Bad Gateway");
-              } else {
-                ctx.status = 401;
-                ctx.body = { message: "forbidden" };
-                ctx.throw(401, "Unauthorized");
+              function message(n) {
+                const messages = {
+                  400: "Bad Request",
+                  401: "Unauthorized",
+                  500: "Internal Server Error",
+                  502: "Bad Gateway"
+                };
+                return messages[n] ? messages[n] : "Unknown";
               }
+              let status = 401;
+
+              const m = content.username.match(/^error\s*(\d+)(\s+(\w+))?/);
+              if (m) {
+                status = parseInt(m[1]);
+
+                switch (m[3]) {
+                  case "html":
+                    ctx.type = "text/html";
+                    ctx.body = `<html><head><title>Title ${status} ${message(
+                      status
+                    )}</title></head><body><center><h1>Body ${status} ${message(
+                      status
+                    )}</h1></center><hr><center>nginx/1.17.4</center></body></html>`;
+                    break;
+                    default:
+                      ctx.body = "Plain text " + message(status);
+                }
+              } else {
+                ctx.body = { message: message(status) };
+              }
+              ctx.status = status;
+              return;
             }
             next();
           })
