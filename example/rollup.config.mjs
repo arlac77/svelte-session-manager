@@ -44,8 +44,7 @@ export default {
               );
 
               await new Promise(resolve =>
-                setTimeout(
-                  () => resolve(),
+                setTimeout(resolve,
                   content.username === "userSlowLogin" ? 2000 : 500
                 )
               );

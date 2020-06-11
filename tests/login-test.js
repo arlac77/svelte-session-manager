@@ -74,10 +74,10 @@ test("wrong credentials", async t => {
 
 test("unknown user", async t => {
   await t
-    .typeText("#username", "user")
+    .typeText("#username", "someone")
     .typeText("#password", "something")
     .click("#submit");
-  await t.expect(Selector("#session_username").innerText).eql("user");
+  await t.expect(Selector("#session_username").innerText).eql("someone");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("Unauthorized");
