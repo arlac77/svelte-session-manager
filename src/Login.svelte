@@ -13,15 +13,14 @@
 
   async function submit() {
     try {
-      message = undefined;
       active = true;
-      await login(session, endpoint, username, password);
+      message = await login(session, endpoint, username, password);
+      if(!message && result !== undefined) {
+        await result();
+      }
     } catch (e) {
       message = e;
     } finally {
-      if(result !== undefined) {
-        await result();
-      }
       active = false;
       password = "";
     }

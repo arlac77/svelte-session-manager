@@ -7,6 +7,7 @@
  * @param {string} endpoint authorization url
  * @param {string} username id of the user
  * @param {string} password user credentials
+ * @return {string} error message or undefined
  */
 export async function login(session, endpoint, username, password) {
   try {
@@ -26,36 +27,43 @@ export async function login(session, endpoint, username, password) {
       session.save();
     } else {
       session.update({ username });
-
-      let message = response.statusText;
-
-      const wa = response.headers.get("WWW-Authenticate");
-
-      if(wa) {
-        const o = Object.fromEntries(wa.split(/\s*,\s*/).map(entry => entry.split(/=/)));
-        if(o.error_description) {
-          throw new Error(o.error_description);
-        }
-      }
-
-      const ct = response.headers.get("Content-Type").replace(/;.*/,'');
-    
-      switch (ct) {
-        case "text/plain":
-          message += "\n" + (await response.text());
-        break;
-        case "text/html":
-          const el = document.createElement( 'html' );
-          el.innerHTML = await response.text();
-          const titles = el.getElementsByTagName( 'title' );
-          message = titles.item(0).text;
-        break;
-      }
-
-      throw new Error(message);
+      return await handleFailedResponse(response);
     }
   } catch (e) {
     session.update({ username });
     throw e;
   }
+}
+
+export async function handleFailedResponse(response)
+{
+  let message = response.statusText;
+
+  const wa = response.headers.get("WWW-Authenticate");
+
+  if(wa) {
+    const o = Object.fromEntries(wa.split(/\s*,\s*/).map(entry => entry.split(/=/)));
+    if(o.error_description) {
+      return o.error_description;
+    }
+  }
+
+  const ct = response.headers.get("Content-Type").replace(/;.*/,'');
+
+  switch (ct) {
+    case "text/plain":
+      message += "\n" + (await response.text());
+    break;
+    case "text/html":
+      const el = document.createElement( 'html' );
+      el.innerHTML = await response.text();
+      const titles = el.getElementsByTagName( 'title' );
+      const m = titles.item(0).text;
+      if(m) {
+        return m;
+      }
+    break;
+  }
+
+  return message;
 }
