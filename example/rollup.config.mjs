@@ -1,6 +1,6 @@
 import dev from "rollup-plugin-dev";
 import svelte from "rollup-plugin-svelte";
-import resolve from "rollup-plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
 import { readFileSync } from "fs";
 import jsonwebtoken from "jsonwebtoken";
 
@@ -68,7 +68,7 @@ export default {
         );
       }
     }),
-    resolve({ browser: true }),
+    resolve.nodeResolve({ browser: true }),
     svelte()
   ]
 };
