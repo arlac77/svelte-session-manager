@@ -50,22 +50,21 @@ export class Session {
   }
 
   /**
-   * invalidate session data
+   * Invalidate session data
    */
   clear() {
     this.entitlements.clear();
     this.expirationDate.setTime(0);
     this.username = undefined;
     this.access_token = undefined;
-  }
-
-  update(data) {
-    this.clear();
-
     if (this.expirationTimer) {
       clearTimeout(this.expirationTimer);
       this.expirationTimer = undefined;
     }
+  }
+
+  update(data) {
+    this.clear();
 
     if (data !== undefined) {
       this.username = data.username !== "undefined" ? data.username : undefined;
