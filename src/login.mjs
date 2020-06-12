@@ -7,7 +7,7 @@
  * @param {string} endpoint authorization url
  * @param {string} username id of the user
  * @param {string} password user credentials
- * @return {string} error message or undefined
+ * @return {string} error message in case of failure or undefined on success
  */
 export async function login(session, endpoint, username, password) {
   try {
@@ -35,10 +35,12 @@ export async function login(session, endpoint, username, password) {
   }
 }
 
+/**
+ * Extract error description from response
+ * @return {string}
+ */
 export async function handleFailedResponse(response)
 {
-  let message = response.statusText;
-
   const wa = response.headers.get("WWW-Authenticate");
 
   if(wa) {
@@ -47,6 +49,8 @@ export async function handleFailedResponse(response)
       return o.error_description;
     }
   }
+
+  let message = response.statusText;
 
   const ct = response.headers.get("Content-Type").replace(/;.*/,'');
 

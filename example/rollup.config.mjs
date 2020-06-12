@@ -64,21 +64,27 @@ export default {
               }
               let status = 401;
 
-              const m = content.username.match(/^error\s*(\d+)(\s+(\w+))?/);
+              const m = content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
               if (m) {
                 status = parseInt(m[1]);
 
                 switch (m[3]) {
                   case "html":
                     ctx.type = "text/html";
-                    ctx.body = `<html><head><title>Title ${status} ${message(
+                    ctx.body = `<html><head><title>Title #H ${status} ${message(
                       status
-                    )}</title></head><body><center><h1>Body ${status} ${message(
+                    )}</title></head><body><center><h1>#H ${status} ${message(
                       status
                     )}</h1></center><hr><center>nginx/1.17.4</center></body></html>`;
                     break;
-                    default:
-                      ctx.body = "Plain text " + message(status);
+                  case 'WWW-Authenticate'
+                    ctx.set('WWW-Authenticate','Bearer realm="example"');
+                    ctx.append('WWW-Authenticate','error="invalid_token"');
+                    ctx.append('WWW-Authenticate',`error_description="#W ${message(status)}"`);  
+                    ctx.body = "WWW-Authenticate " + message(status);
+                    break;
+                  default:
+                    ctx.body = "#T " + message(status);
                 }
               } else {
                 ctx.body = { message: message(status) };
