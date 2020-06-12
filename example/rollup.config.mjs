@@ -71,11 +71,11 @@ export default {
                 switch (m[3]) {
                   case "html":
                     ctx.type = "text/html";
-                    ctx.body = `<html><head><title>Title #H ${status} ${message(
+                    ctx.body = `<html><head><title>Title #HT ${message(
                       status
-                    )}</title></head><body><center><h1>#H ${status} ${message(
+                    )}</title></head><body><center><h1>#H ${message(
                       status
-                    )}</h1></center><hr><center>nginx/1.17.4</center></body></html>`;
+                    )}</h1></center><center>nginx/1.17.4</center></body></html>`;
                     break;
                   case 'WWW-Authenticate':
                     ctx.set('WWW-Authenticate','Bearer realm="example"');

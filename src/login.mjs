@@ -59,12 +59,18 @@ export async function handleFailedResponse(response)
       message += "\n" + (await response.text());
     break;
     case "text/html":
-      const el = document.createElement( 'html' );
-      el.innerHTML = await response.text();
-      const titles = el.getElementsByTagName( 'title' );
-      const m = titles.item(0).text;
-      if(m) {
-        return m;
+      const root = document.createElement( 'html' );
+      root.innerHTML = await response.text();
+
+      for(const items of [
+        root.getElementsByTagName( 'title' ),
+        root.getElementsByTagName( 'h1' )]) {
+        for(const item of items) {
+          const m = item.innerText;
+          if(m) {
+            return m;
+          }
+        }
       }
     break;
   }
