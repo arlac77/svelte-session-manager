@@ -1,4 +1,3 @@
-
 /**
  * Bring session into the valid state by calling the authorization endpoint
  * and asking for a access_token.
@@ -39,40 +38,39 @@ export async function login(session, endpoint, username, password) {
  * Extract error description from response
  * @return {string}
  */
-export async function handleFailedResponse(response)
-{
+export async function handleFailedResponse(response) {
   const wa = response.headers.get("WWW-Authenticate");
 
-  if(wa) {
-    const o = Object.fromEntries(wa.split(/\s*,\s*/).map(entry => entry.split(/=/)));
-    if(o.error_description) {
+  if (wa) {
+    const o = Object.fromEntries(
+      wa.split(/\s*,\s*/).map(entry => entry.split(/=/))
+    );
+    if (o.error_description) {
       return o.error_description;
     }
   }
 
   let message = response.statusText;
 
-  const ct = response.headers.get("Content-Type").replace(/;.*/,'');
+  const ct = response.headers.get("Content-Type").replace(/;.*/, "");
 
   switch (ct) {
     case "text/plain":
       message += "\n" + (await response.text());
-    break;
+      break;
     case "text/html":
-      const root = document.createElement( 'html' );
+      const root = document.createElement("html");
       root.innerHTML = await response.text();
 
-      for(const items of [
-        root.getElementsByTagName( 'title' ),
-        root.getElementsByTagName( 'h1' )]) {
-        for(const item of items) {
-          const m = item.innerText;
-          if(m) {
-            return m;
+      for (const tag of ["title", "h1", "h2"]) {
+        for (const item of root.getElementsByTagName(tag)) {
+          const text = item.innerText;
+          if (text) {
+            return text;
           }
         }
       }
-    break;
+      break;
   }
 
   return message;
