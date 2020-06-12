@@ -77,7 +77,7 @@ export default {
                       status
                     )}</h1></center><hr><center>nginx/1.17.4</center></body></html>`;
                     break;
-                  case 'WWW-Authenticate'
+                  case 'WWW-Authenticate':
                     ctx.set('WWW-Authenticate','Bearer realm="example"');
                     ctx.append('WWW-Authenticate','error="invalid_token"');
                     ctx.append('WWW-Authenticate',`error_description="#W ${message(status)}"`);  
