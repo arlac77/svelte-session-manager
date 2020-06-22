@@ -41,7 +41,7 @@
         aria-label="username"
         aria-required="true"
         maxlength="75"
-        size="40"
+        size="32"
         autocorrect="off"
         autocapitalize="off"
         id="username"
@@ -57,7 +57,7 @@
       <input
         aria-label="password"
         aria-required="true"
-        size="40"
+        size="32"
         autocorrect="off"
         autocapitalize="off"
         id="password"
