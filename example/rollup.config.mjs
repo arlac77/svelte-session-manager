@@ -97,7 +97,7 @@ export default {
         );
       }
     }),
-    resolve.nodeResolve({ browser: true }),
+    resolve({ browser: true }),
     svelte()
   ]
 };
