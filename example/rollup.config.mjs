@@ -71,7 +71,7 @@ export default {
                 switch (m[3]) {
                   case "html":
                     ctx.type = "text/html";
-                    ctx.body = `<html><head><title>Title #HT ${message(
+                    ctx.body = `<html><head><title>#HT ${message(
                       status
                     )}</title></head><body><center><h1>#H ${message(
                       status

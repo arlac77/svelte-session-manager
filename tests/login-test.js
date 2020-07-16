@@ -90,7 +90,7 @@ test("server error 502 html", async t => {
     .click("#submit");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
-  await t.expect(Selector("#message").innerText).contains("#H Bad Gateway");
+  await t.expect(Selector("#message").innerText).contains("#HT Bad Gateway");
 });
 
 test("server error 502 text", async t => {
