@@ -66,6 +66,7 @@ npm|yarn test
 -   [Session](#session)
     -   [Parameters](#parameters)
     -   [Properties](#properties-1)
+    -   [clear](#clear)
     -   [save](#save)
     -   [authorizationHeader](#authorizationheader)
     -   [isValid](#isvalid)
@@ -74,6 +75,8 @@ npm|yarn test
         -   [Parameters](#parameters-1)
 -   [login](#login)
     -   [Parameters](#parameters-2)
+-   [handleFailedResponse](#handlefailedresponse)
+    -   [Parameters](#parameters-3)
 
 ## SessionData
 
@@ -112,6 +115,10 @@ let session = new Session(sessionStorage);
 -   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
 -   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** token itself
 -   `store` **[SessionData](#sessiondata)** backing store to use for save same as data param
+
+### clear
+
+Invalidate session data
 
 ### save
 
@@ -155,6 +162,18 @@ Executess a POST on the endpoint url providing username, and password as json
 -   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** authorization url
 -   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id of the user
 -   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user credentials
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** error message in case of failure or undefined on success
+
+## handleFailedResponse
+
+Extract error description from response
+
+### Parameters
+
+-   `response`  
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 # install
 
