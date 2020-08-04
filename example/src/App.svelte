@@ -10,12 +10,6 @@
   }
 </script>
 
-<style>
-  .white {
-    background-color: white;
-  }
-</style>
-
 <div>
   <h1>Example</h1>
   Username is
@@ -24,7 +18,7 @@
   <bold>secret</bold>
 
   <div class="modal center">
-    <div class="white">
+    <div class="window">
       <Login {session} endpoint="/api/login" {result} />
     </div>
   </div>
