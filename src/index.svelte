@@ -1,5 +1,5 @@
 <script context="module">
-  import { Session, login } from "./index.mjs";
-  import Login from "./Login.svelte";
-  export { Session, Login, login };
+  export { Session } from './session.mjs';
+  export { login } from './login.mjs';
+  export { Login } from "./Login.svelte";
 </script>
