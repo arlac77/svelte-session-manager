@@ -1,5 +1,6 @@
 :root {
-  --main-color:#6e3e81;
+  --primary-color:#6e3e81;
+  --background-color: #ecebeb;
 
   --transition-time: 0.15s;
   --border-radius: 0.25rem;
@@ -11,7 +12,7 @@
 
   --error-color: #b00020;
   --ok-color: #15b000;
-  --unknwon-color: #7f7f7f;
+  --unknown-color: #7f7f7f;
 
   --button-color: #9555af;
 
@@ -21,7 +22,7 @@
 
   --button-text-color: #fff;
 
-  --button-primary-color: var(--main-color);
+  --button-primary-color: var(--primary-color);
 
   --input-color: #495057;
   --input-background-color: #ecebeb;
@@ -37,7 +38,7 @@
   --table-border-color: #dee2e6;
   --table-padding: 0.75rem;
 
-  --nav-background-color: var(--main-color);
+  --nav-background-color: var(--primary-color);
   --nav-color: var(--nav-primary-color);
   --nav-primary-color:#fafafa;
   --nav-secondary-color:#aaaaaa;
@@ -123,7 +124,7 @@ nav a.active {
   background-color: var(--nav-active-background-color)
 }
 
-nav a:hover {
+nav a:focus:hover {
   background-color: var(--nav-active-background-color)
 }
 
@@ -258,6 +259,14 @@ button[type="submit"] {
   background-color: var(--button-primary-color)
 }
 
+/*
+button:focus {
+  box-shadow:
+    0 0 5px var(--background-color),
+    0 0 10px var(--primary-color)
+}
+*/
+
 button:hover {
   outline: 2px;
   background-color: var(--button-hover-color)
@@ -312,6 +321,17 @@ input:disabled {
   justify-content: center
 }
 
+.modal {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.384);
+}
+
 .spinner {
   opacity: 1;
   display: inline-block;
@@ -335,35 +355,6 @@ input:disabled {
   100% {
     transform: rotate(360deg);
   }
-}
-
-.item-list {
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none
-}
-
-.item {
-  background-color: var(--main-color);
-  box-sizing: border-box;
-
-  color: white;
-  cursor: default;
-  display: flex;
-  flex-basis: 40%;
-  flex-grow: 1;
-  flex-shrink: 1;
-  line-height: 19px;
-  list-style-type: none;
-  margin: 4px 4px 4px 4px;
-  padding: 0 0 0 0;
-  text-align: left
-}
-
-.item a {
-  padding: 16px;
-  color: white
 }
 
 .error {

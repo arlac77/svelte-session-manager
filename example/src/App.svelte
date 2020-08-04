@@ -3,10 +3,6 @@
 
   export const session = new Session(localStorage);
 
-  async function logoff() {
-    session.invalidate();
-  }
-
   let resultCalled = false;
 
   function result() {
@@ -14,23 +10,31 @@
   }
 </script>
 
+<style>
+  .white {
+    background-color: white;
+  }
+</style>
+
 <div>
   <h1>Example</h1>
+  Username is
+  <bold>user</bold>
+  Password is
+  <bold>secret</bold>
 
-  Username is <bold>user</bold>
-  Password is <bold>secret</bold>
- 
-  <div class="center">
-    <Login session={session} endpoint="/api/login" result={result}/>
+  <div class="modal center">
+    <div class="white">
+      <Login {session} endpoint="/api/login" {result} />
+    </div>
   </div>
 
-  <form on:submit|preventDefault={logoff}>
-    <button id="logoff" type="submit" disabled={!$session.isValid}>Logoff</button>
+  <form on:submit|preventDefault={() => session.invalidate()}>
+    <button id="logoff" type="submit" disabled={!$session.isValid}>
+      Logoff
+    </button>
   </form>
-
-
-  {resultCalled ? 'RESULT CALLED' :  'NOT CALLED'}
-
+  {resultCalled ? 'RESULT CALLED' : 'NOT CALLED'}
   <h3>Session Details</h3>
   <table class="bordered">
     <tbody>
@@ -62,7 +66,9 @@
       </tr>
       <tr>
         <td>Authorization Header</td>
-        <td id="session_authorization_header">{JSON.stringify($session.authorizationHeader)}</td>
+        <td id="session_authorization_header">
+          {JSON.stringify($session.authorizationHeader)}
+        </td>
       </tr>
     </tbody>
   </table>
