@@ -1,6 +1,5 @@
 build
 tests
-test-results
 rollup.config.*
 example
 doc
