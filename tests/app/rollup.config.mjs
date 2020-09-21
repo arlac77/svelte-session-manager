@@ -4,21 +4,22 @@ import resolve from "@rollup/plugin-node-resolve";
 import { readFileSync } from "fs";
 import jsonwebtoken from "jsonwebtoken";
 
+const basedir = "tests/app";
 const port = 5000;
 
 export default {
-  input: "example/src/index.mjs",
+  input: `${basedir}/src/index.mjs`,
   output: {
     sourcemap: true,
     format: "esm",
-    file: `example/public/bundle.mjs`
+    file: `${basedir}/public/bundle.main.mjs`
   },
   plugins: [
     dev({
       port,
-      dirs: ["example/public"],
-      spa: "example/public/index.html",
-      basePath: "/base",
+      dirs: [`${basedir}/public`],
+      spa: `${basedir}/public/index.html`,
+      basePath: `/components/svelte-session-manager/${basedir}`,
       extend(app, modules) {
         app.use(
           modules.router.post("/api/login", async (ctx, next) => {
@@ -37,7 +38,7 @@ export default {
                 content.username === "user_no_entitlements"
                   ? {}
                   : { entitlements: ["a", "b", "c"].join(",") },
-                readFileSync("example/demo.rsa"),
+                readFileSync("tests/app/demo.rsa"),
                 {
                   algorithm: "RS256",
                   expiresIn: "15s"
@@ -97,7 +98,11 @@ export default {
         );
       }
     }),
-    resolve({ browser: true }),
-    svelte()
+    svelte(),
+    resolve({
+      browser: true,
+      dedupe: importee =>
+        importee === "svelte" || importee.startsWith("svelte/")
+    })
   ]
 };

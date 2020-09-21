@@ -1,5 +1,5 @@
 <script>
-  import { Login, Session } from "../../src/index.svelte";
+  import { Login, Session } from "../../../src/index.svelte";
 
   export const session = new Session(localStorage);
 
