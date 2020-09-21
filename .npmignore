@@ -1,7 +1,6 @@
 build
 tests
 rollup.config.*
-example
 doc
 *.log
 *.tmp
