@@ -95,7 +95,7 @@ export class Session {
   }
 
   /**
-   * persist into the backing store
+   * Persist into the backing store
    */
   save() {
     if (this.username === undefined) {
@@ -125,7 +125,7 @@ export class Session {
   }
 
   /**
-   * remove all tokens from the session and the backing store
+   * Remove all tokens from the session and the backing store
    */
   invalidate() {
     this.update();
