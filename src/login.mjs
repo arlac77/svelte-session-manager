@@ -1,7 +1,7 @@
 /**
  * Bring session into the valid state by calling the authorization endpoint
  * and asking for a access_token.
- * Executes a POST on the endpoint url providing username, and password as json
+ * Executes a POST on the endpoint url expecting username, and password as json
  * @param {Session} session to be opened
  * @param {string} endpoint authorization url
  * @param {string} username id of the user

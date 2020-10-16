@@ -132,6 +132,11 @@ export class Session {
     this.save();
   }
 
+  /**
+   * Check presence of an entilement.
+   * @param {string} name of the entitlement
+   * @return {boolean} true if the named entitlement is present
+   */ 
   hasEntitlement(name) {
     return this.entitlements.has(name);
   }
