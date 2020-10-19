@@ -36,6 +36,7 @@ export async function login(session, endpoint, username, password) {
 
 /**
  * Extract error description from response
+ * @param {FetchResponse} response
  * @return {string}
  */
 export async function handleFailedResponse(response) {
