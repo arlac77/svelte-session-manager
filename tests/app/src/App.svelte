@@ -17,11 +17,13 @@
   Password is
   <bold>secret</bold>
 
+  {#if !$session.isValid}
   <div class="modal center">
     <div class="window">
       <Login {session} endpoint="/api/login" {result} />
     </div>
   </div>
+  {/if}
 
   <form on:submit|preventDefault={() => session.invalidate()}>
     <button id="logoff" type="submit" disabled={!$session.isValid}>
