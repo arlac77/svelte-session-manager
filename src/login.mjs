@@ -26,7 +26,7 @@ export async function login(session, endpoint, username, password) {
       session.save();
     } else {
       session.update({ username });
-      return await handleFailedResponse(response);
+      return handleFailedResponse(response);
     }
   } catch (e) {
     session.update({ username });
