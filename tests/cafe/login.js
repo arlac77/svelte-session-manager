@@ -64,7 +64,7 @@ test("correct credentials delayed response", async t => {
 test("wrong credentials", async t => {
   await t
     .typeText("#username", "user")
-    .typeText("#password", "something")
+    .typeText("#password", "wrong")
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
