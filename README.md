@@ -54,22 +54,21 @@ npm|yarn test
 
 The test runs the following requests against the server
 
-- successful auth
+-   successful auth
+
 ```sh
 curl -X POST -d '{"username":"user","password":"secret"}' 'http://[::]:5000/api/login'
 ```
-```
-{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnRpdGxlbWVudHMiOiJhLGIsYyIsImlhdCI6MTYwNDY2NDI0NywiZXhwIjoxNjA0NjY0MjYyfQ.qyjeoCuXO0iyYwSxM2sM02_BVhaZobRmEWam1M8Hzkx51nbsAuTR8G1rNgz1COo_KvbCU7LwZt7qnSEFB1tcwyDA1eBxwc2Wb7JxWgQ50m1IWkr2JCgY1seWRJRcwZBXiTRtiPqhzofP-l3S-CBluzU48cd4yzoPayczLkKuPK4"}
-```
 
-- invalid credentials
+    {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnRpdGxlbWVudHMiOiJhLGIsYyIsImlhdCI6MTYwNDY2NDI0NywiZXhwIjoxNjA0NjY0MjYyfQ.qyjeoCuXO0iyYwSxM2sM02_BVhaZobRmEWam1M8Hzkx51nbsAuTR8G1rNgz1COo_KvbCU7LwZt7qnSEFB1tcwyDA1eBxwc2Wb7JxWgQ50m1IWkr2JCgY1seWRJRcwZBXiTRtiPqhzofP-l3S-CBluzU48cd4yzoPayczLkKuPK4"}
+
+-   invalid credentials
+
 ```sh
 curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/login'
 ```
-```
-{"message":"Unauthorized"}
-```
 
+    {"message":"Unauthorized"}
 
 # API
 
