@@ -63,7 +63,6 @@ curl -X POST -d '{"username":"user","password":"secret"}' 'http://[::]:5000/api/
 ```
 
 - invalid credentials
--
 ```sh
 curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/login'
 ```
