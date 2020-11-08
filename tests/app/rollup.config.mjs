@@ -31,7 +31,7 @@ export default {
       port,
       dirs: [`${basedir}/public`],
       spa: `${basedir}/public/index.html`,
-      basePath: `/components/svelte-session-manager/${basedir}`,
+      basePath: "/",
       extend(app, modules) {
         app.use(
           modules.router.post("/api/login", async (ctx, next) => {
