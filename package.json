@@ -25,7 +25,8 @@
     "test": "npm run test:cafe",
     "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
     "docs": "documentation readme ./src/index.mjs --section=API",
-    "lint": "documentation lint ./src/index.mjs"
+    "lint": "documentation lint ./src/index.mjs",
+    "build": "rollup -c tests/app/rollup.config.mjs"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^10.0.0",
@@ -50,6 +51,7 @@
   "template": {
     "inheritFrom": [
       "arlac77/template-arlac77-github",
+      "arlac77/template-netlify",
       "arlac77/template-svelte-component"
     ]
   }
