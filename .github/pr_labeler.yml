@@ -10,3 +10,5 @@ npm:
   - .npmignore
 deployment:
   - netlify.toml
+labels:
+  - .github/pr_labeler.yml
