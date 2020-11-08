@@ -1,4 +1,3 @@
-
 /**
  * Data as preserved in the backing store
  * @typedef {Object} SessionData
@@ -78,9 +77,11 @@ export class Session {
         const expiresInMilliSeconds =
           this.expirationDate.valueOf() - Date.now();
 
-        if(expiresInMilliSeconds > 0) {
-          if(decoded.entitlements) {
-            decoded.entitlements.split(/,/).forEach(e => this.entitlements.add(e));
+        if (expiresInMilliSeconds > 0) {
+          if (decoded.entitlements) {
+            decoded.entitlements
+              .split(/,/)
+              .forEach(e => this.entitlements.add(e));
           }
 
           this.expirationTimer = setTimeout(() => {
@@ -108,12 +109,12 @@ export class Session {
   }
 
   /**
-   * http header suitable for fetch
+   * Http header suitable for fetch.
    * @return {Object} header The http header.
    * @return {string} header.Authorization The Bearer access token.
    */
   get authorizationHeader() {
-    return { Authorization: "Bearer " + this.access_token };
+    return this.isValid ? { Authorization: "Bearer " + this.access_token } : {};
   }
 
   /**
@@ -125,7 +126,7 @@ export class Session {
   }
 
   /**
-   * Remove all tokens from the session and the backing store
+   * Remove all tokens from the session and the backing store.
    */
   invalidate() {
     this.update();
@@ -136,7 +137,7 @@ export class Session {
    * Check presence of an entilement.
    * @param {string} name of the entitlement
    * @return {boolean} true if the named entitlement is present
-   */ 
+   */
   hasEntitlement(name) {
     return this.entitlements.has(name);
   }
