@@ -49,6 +49,13 @@
   },
   "homepage": "https://github.com/arlac77/svelte-session-manager#readme",
   "template": {
+    "properties": {
+      "netlifly": {
+        "site": {
+          "uuid": "57021a61-08a4-441d-a216-31d0167fff02"
+        }
+      }
+    },
     "inheritFrom": [
       "arlac77/template-arlac77-github",
       "arlac77/template-netlify",
