@@ -82,6 +82,10 @@ export default {
                 status = parseInt(m[1]);
 
                 switch (m[3]) {
+                  case "json":
+                    ctx.type = "application/json";
+                    ctx.body = { "key": "value" };
+                  break;
                   case "html":
                     ctx.type = "text/html";
                     ctx.body = `<html><head><title>#HT ${message(

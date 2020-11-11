@@ -103,6 +103,15 @@ test("server error 502 text", async t => {
   await t.expect(Selector("#message").innerText).contains("#T Bad Gateway");
 });
 
+test("server error 0 json", async t => {
+  await t
+    .typeText("#username", "error 0 json")
+    .typeText("#password", "something")
+    .click("#submit");
+  await t.expect(Selector("#session_validity").innerText).eql("invalid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
+});
+
 test("server error WWW-Authenticate", async t => {
   await t
     .typeText("#username", "error 500 WWW-Authenticate")

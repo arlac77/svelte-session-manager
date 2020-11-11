@@ -22,6 +22,10 @@ export async function login(session, endpoint, username, password) {
     });
     if (response.ok) {
       const data = await response.json();
+      if(!data.access_token) {
+        return "missing access_token";
+      }
+
       session.update({ username, access_token: data.access_token });
       session.save();
     } else {
