@@ -17,19 +17,28 @@ yzvVowoeX6iTae+vbRLmXA6oLyiZ//j20Un2GWdWS+GW
 -----END RSA PRIVATE KEY-----`;
 
 exports.handler = async (event, context) => {
-  const access_token = jsonwebtoken.sign(
-    { entitlements: ["a", "b", "c"].join(",") },
-    key,
-    {
-      algorithm: "RS256",
-      expiresIn: "15s"
-    }
-  );
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      access_token
-    })
-  };
+  const content = JSON.parse(event.body);
+
+  if (content.username.startsWith("user") && content.password === "secret") {
+    const access_token = jsonwebtoken.sign(
+      { entitlements: ["a", "b", "c"].join(",") },
+      key,
+      {
+        algorithm: "RS256",
+        expiresIn: "15s"
+      }
+    );
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        access_token
+      })
+    };
+  }
+  return { statusCode: 401, body: "Unauthorized" };
 };
