@@ -1,0 +1,6 @@
+seqdiag {
+  browser  -> webserver [label = "POST /login"];
+  browser <-- webserver [label = "access_token"];
+}
+
+# curl https://kroki.io/seqdiag/svg --data-binary '@login.seq' > login.svg
