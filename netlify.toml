@@ -1,4 +1,4 @@
 [build]
 publish = "tests/app/public/"
 command = "npm install && npm run-script build"
-functions = "tests/app/serverless/"
+functions = "tests/app/serverless"
