@@ -5,7 +5,7 @@ const jsonwebtoken = require("jsonwebtoken");
 exports.handler = async (event, context) => {
   const access_token = jsonwebtoken.sign(
     { entitlements: ["a", "b", "c"].join(",") },
-    readFileSync(join(__dirname__, "demo.rsa")),
+    readFileSync(join(__dirname, "demo.rsa")),
     {
       algorithm: "RS256",
       expiresIn: "15s"
