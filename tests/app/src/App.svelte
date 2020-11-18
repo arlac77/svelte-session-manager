@@ -12,17 +12,26 @@
 
 <div>
   <h1>Example</h1>
-  Username is
-  <bold>user</bold>
-  Password is
-  <bold>secret</bold>
+
+  <table>
+    <thead>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Result</th>
+    </thead>
+    <tr>
+      <td>user</td>
+      <td>secret</td>
+      <td>valid</td>
+    </tr>
+  </table>
 
   {#if !$session.isValid}
-  <div class="modal center">
-    <div class="window">
-      <Login {session} endpoint="/api/login" {result} />
+    <div class="modal center">
+      <div class="window">
+        <Login {session} endpoint="/api/login" {result} />
+      </div>
     </div>
-  </div>
   {/if}
 
   <form on:submit|preventDefault={() => session.invalidate()}>
