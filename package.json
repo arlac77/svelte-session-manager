@@ -34,7 +34,7 @@
     "documentation": "^13.0.2",
     "jsonwebtoken": "^8.5.1",
     "rollup": "^2.33.3",
-    "rollup-plugin-dev": "^1.1.2",
+    "rollup-plugin-dev": "^1.1.3",
     "rollup-plugin-svelte": "^6.1.1",
     "semantic-release": "^17.3.0",
     "svelte": "^3.29.7",
