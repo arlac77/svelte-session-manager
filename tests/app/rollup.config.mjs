@@ -57,6 +57,15 @@ export default {
                 }
               );
 
+              const refresh_token = jsonwebtoken.sign(
+                {},
+                readFileSync("tests/app/demo.rsa"),
+                {
+                  algorithm: "RS256",
+                  expiresIn: "30d"
+                }
+              );
+
               await new Promise(resolve =>
                 setTimeout(
                   resolve,
@@ -64,7 +73,7 @@ export default {
                 )
               );
 
-              ctx.body = { access_token };
+              ctx.body = { access_token, refresh_token };
             } else {
               function message(n) {
                 const messages = {
@@ -84,8 +93,8 @@ export default {
                 switch (m[3]) {
                   case "json":
                     ctx.type = "application/json";
-                    ctx.body = { "key": "value" };
-                  break;
+                    ctx.body = { key: "value" };
+                    break;
                   case "html":
                     ctx.type = "text/html";
                     ctx.body = `<html><head><title>#HT ${message(

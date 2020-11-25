@@ -32,11 +32,20 @@ exports.handler = async (event, context) => {
         expiresIn: "15s"
       }
     );
+    const refresh_token = jsonwebtoken.sign(
+      { },
+      key,
+      {
+        algorithm: "RS256",
+        expiresIn: "30d"
+      }
+    );
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        access_token
+        access_token,
+        refresh_token
       })
     };
   }
