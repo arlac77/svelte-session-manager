@@ -3,6 +3,7 @@
  * @typedef {Object} SessionData
  * @property {string} username user name (id)
  * @property {string} access_token JWT token
+ * @property {string} refresh_token JWT token
  */
 
 /**
@@ -20,6 +21,7 @@
  * @property {Set<Object>} subscriptions store subscriptions
  * @property {Date} expirationDate
  * @property {string} access_token token itself
+ * @property {string} refresh_token refresh token
  * @property {SessionData} store backing store to use for save same as data param
  */
 export class Session {
@@ -56,6 +58,7 @@ export class Session {
     this.expirationDate.setTime(0);
     this.username = undefined;
     this.access_token = undefined;
+    this.refresh_token = undefined;
     if (this.expirationTimer) {
       clearTimeout(this.expirationTimer);
       this.expirationTimer = undefined;
@@ -68,6 +71,7 @@ export class Session {
     if (data !== undefined) {
       this.username = data.username !== "undefined" ? data.username : undefined;
       this.access_token = data.access_token;
+      this.refresh_token = data.refresh_token;
 
       const decoded = decode(data.access_token);
 
@@ -101,9 +105,11 @@ export class Session {
   save() {
     if (this.username === undefined) {
       delete this.store.access_token;
+      delete this.store.refresh_token;
       delete this.store.username;
     } else {
       this.store.access_token = this.access_token;
+      this.store.refresh_token = this.refresh_token;
       this.store.username = this.username;
     }
   }

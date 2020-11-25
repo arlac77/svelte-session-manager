@@ -64,6 +64,10 @@
         <td id="session_acccess_token">{$session.access_token}</td>
       </tr>
       <tr>
+        <td>Refresh Token</td>
+        <td id="session_refresh_token">{$session.refresh_token}</td>
+      </tr>
+      <tr>
         <td>Entitlements</td>
         <td id="session_entitlements">
           {[...$session.entitlements].join(',')}
