@@ -46,7 +46,19 @@ test("correct credentials expiring", async t => {
     .click("#submit");
   await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
-  await t.wait(17 * 1000);
+  await t.wait(12 * 1000);
+  await t.expect(Selector("#session_validity").innerText).eql("invalid");
+  await t.expect(Selector("#session_entitlements").innerText).eql("");
+});
+
+test("correct credentials expiring no refresh token", async t => {
+  await t
+    .typeText("#username", "user_no_refresh_token")
+    .typeText("#password", "secret")
+    .click("#submit");
+  await t.expect(Selector("#session_username").innerText).eql("user_no_refresh_token");
+  await t.expect(Selector("#session_validity").innerText).eql("valid");
+  await t.wait(12 * 1000);
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
 });

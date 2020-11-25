@@ -46,34 +46,40 @@ export default {
               content.username.startsWith("user") &&
               content.password === "secret"
             ) {
-              const access_token = jsonwebtoken.sign(
-                content.username === "user_no_entitlements"
-                  ? {}
-                  : { entitlements: ["a", "b", "c"].join(",") },
-                readFileSync("tests/app/demo.rsa"),
-                {
-                  algorithm: "RS256",
-                  expiresIn: "15s"
-                }
-              );
+              const body = {
+                access_token: jsonwebtoken.sign(
+                  content.username.toLowerCase().includes("no_entitlements")
+                    ? {}
+                    : { entitlements: ["a", "b", "c"].join(",") },
+                  readFileSync("tests/app/demo.rsa"),
+                  {
+                    algorithm: "RS256",
+                    expiresIn: "8s"
+                  }
+                )
+              };
 
-              const refresh_token = jsonwebtoken.sign(
-                {},
-                readFileSync("tests/app/demo.rsa"),
-                {
-                  algorithm: "RS256",
-                  expiresIn: "30d"
-                }
-              );
+              if (
+                !content.username.toLowerCase().includes("no_refresh_token")
+              ) {
+                body.refresh_token = jsonwebtoken.sign(
+                  {},
+                  readFileSync("tests/app/demo.rsa"),
+                  {
+                    algorithm: "RS256",
+                    expiresIn: "20s"
+                  }
+                );
+              }
 
               await new Promise(resolve =>
                 setTimeout(
                   resolve,
-                  content.username === "userSlowLogin" ? 2000 : 500
+                  content.username.toLowerCase().includes("slow") ? 2000 : 500
                 )
               );
 
-              ctx.body = { access_token, refresh_token };
+              ctx.body = body;
             } else {
               function message(n) {
                 const messages = {
