@@ -1,5 +1,6 @@
 import dev from "rollup-plugin-dev";
 import svelte from "rollup-plugin-svelte";
+import postcss from "rollup-plugin-postcss";
 import resolve from "@rollup/plugin-node-resolve";
 import virtual from "@rollup/plugin-virtual";
 import { readFileSync } from "fs";
@@ -22,6 +23,7 @@ export default {
       buffer: "export class Buffer {}"
     }),
     svelte(),
+    postcss(),
     resolve({
       browser: true,
       dedupe: importee =>
