@@ -48,11 +48,15 @@ export default {
               content.username.startsWith("user") &&
               content.password === "secret"
             ) {
+              const scope = content.username.toLowerCase().includes("no_entitlements") ?
+                    "" :
+                    ["a", "b", "c"].join(",");
+                 
               const body = {
+                token_type: "bearer",
+                scope,
                 access_token: jsonwebtoken.sign(
-                  content.username.toLowerCase().includes("no_entitlements")
-                    ? {}
-                    : { entitlements: ["a", "b", "c"].join(",") },
+                  scope.length ? { entitlements: scope } : {},
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",

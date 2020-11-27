@@ -24,8 +24,10 @@ exports.handler = async (event, context) => {
   const content = JSON.parse(event.body);
 
   if (content.username.startsWith("user") && content.password === "secret") {
+  
+    const scope = ["a", "b", "c"].join(",");
     const access_token = jsonwebtoken.sign(
-      { entitlements: ["a", "b", "c"].join(",") },
+      { entitlements: scope },
       key,
       {
         algorithm: "RS256",
@@ -44,6 +46,8 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
+        token_type: "bearer",
+        scope,
         access_token,
         refresh_token
       })
