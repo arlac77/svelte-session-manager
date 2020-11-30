@@ -80,4 +80,6 @@
       {/if}
     </button>
   </slot>
+
+  <slot name="footer"/>
 </form>

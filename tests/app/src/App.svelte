@@ -29,7 +29,12 @@
   {#if !$session.isValid}
     <div class="modal center">
       <div class="window">
-        <Login {session} endpoint="/api/login" {result} />
+        <Login {session} endpoint="/api/login" {result}>
+          <div slot="footer">
+            <a href="somewhere">create account</a>
+            <a href="somewhere">lost password</a>
+          </div>
+          </Login>
       </div>
     </div>
   {/if}
