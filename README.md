@@ -3,8 +3,12 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![minified size](https://badgen.net/bundlephobia/min/svelte-session-manager)](https://bundlephobia.com/result?p=svelte-session-manager)
 [![downloads](http://img.shields.io/npm/dm/svelte-session-manager.svg?style=flat-square)](https://npmjs.org/package/svelte-session-manager)
+[![GitHub Issues](https://img.shields.io/github/issues/arlac77/svelte-session-manager.svg?style=flat-square)](https://github.com/arlac77/svelte-session-manager/issues)
+[![Build Action Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fsvelte-session-manager%2Fbadge&style=flat)](https://actions-badge.atrox.dev/arlac77/svelte-session-manager/goto)
 [![Styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Known Vulnerabilities](https://snyk.io/test/github/arlac77/svelte-session-manager/badge.svg)](https://snyk.io/test/github/arlac77/svelte-session-manager)
+[![Coverage Status](https://coveralls.io/repos/arlac77/svelte-session-manager/badge.svg)](https://coveralls.io/github/arlac77/svelte-session-manager)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/57021a61-08a4-441d-a216-31d0167fff02/deploy-status)](https://app.netlify.com/sites/svelte-session-manager/deploys)
 
 # svelte-session-manager
