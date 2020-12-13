@@ -51,7 +51,7 @@ export class Session {
   }
 
   /**
-   * Invalidate session data
+   * Invalidate session data.
    */
   clear() {
     this.entitlements.clear();
@@ -90,17 +90,17 @@ export class Session {
 
           this.expirationTimer = setTimeout(() => {
             this.clear();
-            this.fire();
+            this.emit();
           }, expiresInMilliSeconds);
         }
       }
     }
 
-    this.fire();
+    this.emit();
   }
 
   /**
-   * Persist into the backing store
+   * Persist into the backing store.
    */
   save() {
     if (this.username === undefined) {
@@ -124,7 +124,7 @@ export class Session {
   }
 
   /**
-   * As long as the expirationTimer is running we must be valid
+   * As long as the expirationTimer is running we must be valid.
    * @return {boolean} true if session is valid (not expired)
    */
   get isValid() {
@@ -148,12 +148,12 @@ export class Session {
     return this.entitlements.has(name);
   }
 
-  fire() {
+  emit() {
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
   /**
-   * Fired when the session changes
+   * Fired when the session changes.
    * @param {Function} subscription
    */
   subscribe(subscription) {
