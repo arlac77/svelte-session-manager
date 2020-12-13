@@ -42,6 +42,7 @@
         aria-required="true"
         maxlength="75"
         size="32"
+        autofocus
         autocorrect="off"
         autocapitalize="off"
         autocomplete="username"
