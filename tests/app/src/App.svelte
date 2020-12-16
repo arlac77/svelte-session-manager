@@ -25,6 +25,17 @@
       <td>secret</td>
       <td>valid</td>
     </tr>
+    <tr>
+      <td>userSlowLogin</td>
+      <td>secret</td>
+      <td>valid but takes some time</td>
+    </tr>
+    <tr>
+      <td>error 502 html</td>
+      <td>any</td>
+      <td>502 reported as html</td>
+    </tr>
+
   </table>
 
   {#if !$session.isValid}

@@ -1,5 +1,3 @@
-import postcssImport from "postcss-import";
-
 import dev from "rollup-plugin-dev";
 import svelte from "rollup-plugin-svelte";
 import postcss from "rollup-plugin-postcss";
