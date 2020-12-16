@@ -3,11 +3,14 @@ import svelte from "rollup-plugin-svelte";
 import postcss from "rollup-plugin-postcss";
 import resolve from "@rollup/plugin-node-resolve";
 import virtual from "@rollup/plugin-virtual";
+import postcssImport from "postcss-import";
+
 import { readFileSync } from "fs";
 import jsonwebtoken from "jsonwebtoken";
 
 const basedir = "tests/app";
 const port = 5000;
+const production = !process.env.ROLLUP_WATCH;
 
 export default {
   input: `${basedir}/src/index.mjs`,
@@ -22,8 +25,15 @@ export default {
       stream: "export class Readable {}",
       buffer: "export class Buffer {}"
     }),
-    svelte(),
-    postcss(),
+    postcss({
+      extract: true,
+      sourceMap: true,
+      minimize: production,
+      plugins: [postcssImport]
+    }),
+    svelte({
+      dev: !production
+    }),
     resolve({
       browser: true,
       dedupe: importee =>

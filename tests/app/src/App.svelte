@@ -1,4 +1,5 @@
 <script>
+  import * as style from "./main.css";
   import { Login, Session } from "../../../src/index.svelte";
 
   export const session = new Session(localStorage);
@@ -34,7 +35,7 @@
             <a href="somewhere">create account</a>
             <a href="somewhere">lost password</a>
           </div>
-          </Login>
+        </Login>
       </div>
     </div>
   {/if}
