@@ -21,6 +21,11 @@ jobs:
       - run: npm test
         env:
           BROWSER: '${{ matrix.browser }}'
+      - uses: actions/upload-artifact@v2
+        with:
+          path: '${{ github.workspace }}/build/test/**/*'
+          retention-days: 3
+        if: always()
   release:
     needs:
       - test
