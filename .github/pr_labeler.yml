@@ -23,3 +23,5 @@ rollup:
   - rollup.config.mjs
 github:
   - .github/**/*
+vscode:
+  - .vscode/*
