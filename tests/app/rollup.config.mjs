@@ -32,7 +32,9 @@ export default {
       plugins: [postcssImport]
     }),
     svelte({
-      dev: !production
+      compilerOptions: {
+        dev: !production
+      }
     }),
     resolve({
       browser: true,
@@ -58,10 +60,12 @@ export default {
               content.username.startsWith("user") &&
               content.password === "secret"
             ) {
-              const scope = content.username.toLowerCase().includes("no_entitlements") ?
-                    "" :
-                    ["a", "b", "c"].join(",");
-                 
+              const scope = content.username
+                .toLowerCase()
+                .includes("no_entitlements")
+                ? ""
+                : ["a", "b", "c"].join(",");
+
               const body = {
                 token_type: "bearer",
                 scope,
