@@ -25,6 +25,7 @@ jobs:
         with:
           path: '${{ github.workspace }}/build/test/**/*'
           retention-days: 3
+          name: screenshots
         if: always()
   release:
     needs:
