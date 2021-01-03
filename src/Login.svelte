@@ -12,6 +12,7 @@
   let message;
 
   async function submit() {
+    if(active) { return; }
     try {
       active = true;
       message = await login(session, endpoint, username, password);
@@ -74,7 +75,7 @@
   </slot>
 
   <slot name="submit">
-    <button id="submit" type="submit" disabled={!username || !password}>
+    <button aria-keyshortcuts="Enter" type="submit" disabled={!username || !password}>
       Login
       {#if active}
         <div class="spinner" />
