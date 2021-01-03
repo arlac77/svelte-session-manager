@@ -12,8 +12,6 @@
 </script>
 
 <div>
-  <h1>Example</h1>
-
   <table>
     <thead>
       <th>Username</th>

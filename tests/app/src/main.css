@@ -4,3 +4,10 @@
 @import "mf-styling/table.css";
 @import "mf-styling/button.css";
 @import "mf-styling/form.css";
+
+button[aria-keyshortcuts*="Enter"] {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
