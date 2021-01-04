@@ -5,8 +5,3 @@
 @import "mf-styling/table.css";
 @import "mf-styling/button.css";
 @import "mf-styling/form.css";
-
-form {
-  display: grid;
-  grid-gap: 10px;
-}
