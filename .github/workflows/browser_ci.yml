@@ -2,7 +2,7 @@ name: CI
 'on': push
 jobs:
   test:
-    runs-on: '${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os:
@@ -16,14 +16,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '${{ matrix.node }}'
+          node-version: ${{ matrix.node }}
       - run: npm install
       - run: npm test
         env:
-          BROWSER: '${{ matrix.browser }}'
+          BROWSER: ${{ matrix.browser }}
       - uses: actions/upload-artifact@v2
         with:
-          path: '${{ github.workspace }}/build/test/**/*'
+          path: ${{ github.workspace }}/build/test/**/*
           retention-days: 3
           name: screenshots
         if: always()
@@ -40,5 +40,5 @@ jobs:
       - run: npx semantic-release
         env:
           CI: 'true'
-          NPM_TOKEN: '${{ secrets.NPM_TOKEN }}'
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
