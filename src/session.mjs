@@ -6,6 +6,8 @@
  * @property {string} refresh_token JWT token
  */
 
+const storeKeys = ["username", "access_token", "refresh_token"];
+
 /**
  * User session
  * To create as session backed by browser local storage
@@ -56,12 +58,13 @@ export class Session {
   clear() {
     this.entitlements.clear();
     this.expirationDate.setTime(0);
-    this.username = undefined;
-    this.access_token = undefined;
-    this.refresh_token = undefined;
     if (this.expirationTimer) {
       clearTimeout(this.expirationTimer);
       this.expirationTimer = undefined;
+    }
+
+    for (const key of storeKeys) {
+      delete this[key];
     }
   }
 
@@ -69,10 +72,15 @@ export class Session {
     this.clear();
 
     if (data !== undefined) {
-      this.username = data.username !== "undefined" ? data.username : undefined;
-      this.access_token = data.access_token;
-      this.refresh_token = data.refresh_token;
-
+      for (const key of storeKeys) {
+        if(data[key] === undefined) {
+          delete this[key];
+        }
+        else {
+          this[key] = data[key];
+        }
+      }
+  
       const decoded = decode(data.access_token);
 
       if (decoded) {
@@ -103,14 +111,12 @@ export class Session {
    * Persist into the backing store.
    */
   save() {
-    if (this.username === undefined) {
-      delete this.store.access_token;
-      delete this.store.refresh_token;
-      delete this.store.username;
-    } else {
-      this.store.access_token = this.access_token;
-      this.store.refresh_token = this.refresh_token;
-      this.store.username = this.username;
+    for (const key of storeKeys) {
+      if (this.username === undefined) {
+        delete this.store[key];
+      } else {
+        this.store[key] = this[key];
+      }
     }
   }
 
