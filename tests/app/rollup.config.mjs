@@ -70,7 +70,9 @@ export default {
                 token_type: "bearer",
                 scope,
                 access_token: jsonwebtoken.sign(
-                  scope.length ? { entitlements: scope } : {},
+                  scope.length
+                    ? { name: content.username, entitlements: scope }
+                    : { name: content.username },
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",
