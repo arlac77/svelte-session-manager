@@ -50,7 +50,6 @@
         id="username"
         type="text"
         placeholder="Username"
-        name="username"
         required
         disabled={active}
         bind:value={username} />
@@ -67,7 +66,6 @@
         id="password"
         type="password"
         placeholder="Password"
-        name="password"
         required
         disabled={active}
         bind:value={password} />
