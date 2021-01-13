@@ -25,3 +25,5 @@ github:
   - .github/**/*
 vscode:
   - .vscode/*
+openapi:
+  - openapi/*
