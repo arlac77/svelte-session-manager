@@ -9,6 +9,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/arlac77/svelte-session-manager/badge.svg)](https://snyk.io/test/github/arlac77/svelte-session-manager)
 [![Coverage Status](https://coveralls.io/repos/arlac77/svelte-session-manager/badge.svg)](https://coveralls.io/github/arlac77/svelte-session-manager)
+[![Tested with TestCafe](https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg)](https://github.com/DevExpress/testcafe)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/57021a61-08a4-441d-a216-31d0167fff02/deploy-status)](https://app.netlify.com/sites/svelte-session-manager/deploys)
 
 # svelte-session-manager
