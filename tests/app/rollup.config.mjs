@@ -68,6 +68,7 @@ export default {
 
               const body = {
                 token_type: "bearer",
+                expires: 8,
                 scope,
                 access_token: jsonwebtoken.sign(
                   scope.length
