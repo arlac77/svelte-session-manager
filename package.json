@@ -35,7 +35,7 @@
     "documentation": "github:arlac77/documentation",
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "arlac77/mf-styling",
-    "postcss": "^8.2.5",
+    "postcss": "^8.2.6",
     "postcss-import": "^14.0.0",
     "rollup": "^2.38.5",
     "rollup-plugin-dev": "^1.1.3",
