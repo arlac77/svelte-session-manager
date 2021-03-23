@@ -6,9 +6,11 @@
  * @param {string} endpoint authorization url
  * @param {string} username id of the user
  * @param {string} password user credentials
+ * @param {object} tokenmap token names in response to internal known values
  * @return {string} error message in case of failure or undefined on success
  */
-export async function login(session, endpoint, username, password) {
+export async function login(session, endpoint, username, password, tokenmap = {
+  'access_token': 'access_token', 'refresh_token': 'refresh_token'}) {
   try {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -22,14 +24,13 @@ export async function login(session, endpoint, username, password) {
     });
     if (response.ok) {
       const data = await response.json();
-      if (!data.access_token) {
+      if (!data[tokenmap['access_token']]) {
         return "missing access_token";
       }
-
       session.update({
         username,
-        access_token: data.access_token,
-        refresh_token: data.refresh_token
+        access_token: data[tokenmap['access_token']],
+        refresh_token: data[tokenmap['refresh_token']]
       });
       session.save();
     } else {
