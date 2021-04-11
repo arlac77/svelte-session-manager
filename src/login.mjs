@@ -9,8 +9,16 @@
  * @param {object} tokenmap token names in response to internal known values
  * @return {string} error message in case of failure or undefined on success
  */
-export async function login(session, endpoint, username, password, tokenmap = {
-  'access_token': 'access_token', 'refresh_token': 'refresh_token'}) {
+export async function login(
+  session,
+  endpoint,
+  username,
+  password,
+  tokenmap = {
+    access_token: "access_token",
+    refresh_token: "refresh_token"
+  }
+) {
   try {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -24,13 +32,13 @@ export async function login(session, endpoint, username, password, tokenmap = {
     });
     if (response.ok) {
       const data = await response.json();
-      if (!data[tokenmap['access_token']]) {
+      if (!data[tokenmap.access_token]) {
         return "missing access_token";
       }
       session.update({
         username,
-        access_token: data[tokenmap['access_token']],
-        refresh_token: data[tokenmap['refresh_token']]
+        access_token: data[tokenmap.access_token],
+        refresh_token: data[tokenmap.refresh_token]
       });
       session.save();
     } else {
