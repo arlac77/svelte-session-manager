@@ -4,7 +4,7 @@
 [![minified size](https://badgen.net/bundlephobia/min/svelte-session-manager)](https://bundlephobia.com/result?p=svelte-session-manager)
 [![downloads](http://img.shields.io/npm/dm/svelte-session-manager.svg?style=flat-square)](https://npmjs.org/package/svelte-session-manager)
 [![GitHub Issues](https://img.shields.io/github/issues/arlac77/svelte-session-manager.svg?style=flat-square)](https://github.com/arlac77/svelte-session-manager/issues)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fsvelte-session-manager%2Fbadge&style=flat)](https://actions-badge.atrox.dev/arlac77/svelte-session-manager/goto)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fsvelte-session-manager%2Fbadge\&style=flat)](https://actions-badge.atrox.dev/arlac77/svelte-session-manager/goto)
 [![Styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/arlac77/svelte-session-manager/badge.svg)](https://snyk.io/test/github/arlac77/svelte-session-manager)
@@ -61,7 +61,7 @@ npm|yarn test
 
 The test runs the following requests against the server
 
--   successful auth
+*   successful auth
 
 ```sh
 curl -X POST -d '{"username":"user","password":"secret"}' 'http://[::]:5000/api/login'
@@ -69,7 +69,7 @@ curl -X POST -d '{"username":"user","password":"secret"}' 'http://[::]:5000/api/
 
     {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnRpdGxlbWVudHMiOiJhLGIsYyIsImlhdCI6MTYwNDY2NDI0NywiZXhwIjoxNjA0NjY0MjYyfQ.qyjeoCuXO0iyYwSxM2sM02_BVhaZobRmEWam1M8Hzkx51nbsAuTR8G1rNgz1COo_KvbCU7LwZt7qnSEFB1tcwyDA1eBxwc2Wb7JxWgQ50m1IWkr2JCgY1seWRJRcwZBXiTRtiPqhzofP-l3S-CBluzU48cd4yzoPayczLkKuPK4"}
 
--   invalid credentials
+*   invalid credentials
 
 ```sh
 curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/login'
@@ -87,24 +87,24 @@ curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/l
 
 ### Table of Contents
 
--   [login](#login)
-    -   [Parameters](#parameters)
--   [handleFailedResponse](#handlefailedresponse)
-    -   [Parameters](#parameters-1)
--   [SessionData](#sessiondata)
-    -   [Properties](#properties)
--   [Session](#session)
-    -   [Parameters](#parameters-2)
-    -   [Properties](#properties-1)
-    -   [clear](#clear)
-    -   [save](#save)
-    -   [authorizationHeader](#authorizationheader)
-    -   [isValid](#isvalid)
-    -   [invalidate](#invalidate)
-    -   [hasEntitlement](#hasentitlement)
-        -   [Parameters](#parameters-3)
-    -   [subscribe](#subscribe)
-        -   [Parameters](#parameters-4)
+*   [login](#login)
+    *   [Parameters](#parameters)
+*   [handleFailedResponse](#handlefailedresponse)
+    *   [Parameters](#parameters-1)
+*   [SessionData](#sessiondata)
+    *   [Properties](#properties)
+*   [Session](#session)
+    *   [Parameters](#parameters-2)
+    *   [Properties](#properties-1)
+    *   [clear](#clear)
+    *   [save](#save)
+    *   [authorizationHeader](#authorizationheader)
+    *   [isValid](#isvalid)
+    *   [invalidate](#invalidate)
+    *   [hasEntitlement](#hasentitlement)
+        *   [Parameters](#parameters-3)
+    *   [subscribe](#subscribe)
+        *   [Parameters](#parameters-4)
 
 ## login
 
@@ -114,11 +114,11 @@ Executes a POST on the endpoint url expecting username, and password as json
 
 ### Parameters
 
--   `session` **[Session](#session)** to be opened
--   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** authorization url
--   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id of the user
--   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user credentials
--   `tokenmap` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** token names in response to internal known values (optional, default `{access_token:"access_token",refresh_token:"refresh_token"}`)
+*   `session` **[Session](#session)** to be opened
+*   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** authorization url
+*   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id of the user
+*   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user credentials
+*   `tokenmap` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** token names in response to internal known values (optional, default `{access_token:"access_token",refresh_token:"refresh_token"}`)
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** error message in case of failure or undefined on success
 
@@ -128,7 +128,7 @@ Extract error description from response
 
 ### Parameters
 
--   `response` **FetchResponse** 
+*   `response` **FetchResponse** 
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
@@ -140,9 +140,9 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 ### Properties
 
--   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user name (id)
--   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** JWT token
--   `refresh_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** JWT token
+*   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user name (id)
+*   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** JWT token
+*   `refresh_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** JWT token
 
 ## Session
 
@@ -161,16 +161,16 @@ let session = new Session(sessionStorage);
 
 ### Parameters
 
--   `data` **[SessionData](#sessiondata)** 
+*   `data` **[SessionData](#sessiondata)** 
 
 ### Properties
 
--   `entitlements` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
--   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** store subscriptions
--   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
--   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** token itself
--   `refresh_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** refresh token
--   `store` **[SessionData](#sessiondata)** backing store to use for save same as data param
+*   `entitlements` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+*   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** store subscriptions
+*   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** 
+*   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** token itself
+*   `refresh_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** refresh token
+*   `store` **[SessionData](#sessiondata)** backing store to use for save same as data param
 
 ### clear
 
@@ -204,7 +204,7 @@ Check presence of an entilement.
 
 #### Parameters
 
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** of the entitlement
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** of the entitlement
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if the named entitlement is present
 
@@ -214,7 +214,7 @@ Fired when the session changes.
 
 #### Parameters
 
--   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+*   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
 
 # install
 
