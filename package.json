@@ -32,7 +32,7 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-virtual": "^2.0.3",
-    "documentation": "^13.2.4",
+    "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "arlac77/mf-styling",
     "postcss": "^8.2.13",
