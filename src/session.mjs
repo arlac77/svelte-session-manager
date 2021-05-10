@@ -146,7 +146,7 @@ export class Session {
   }
 
   /**
-   * Check presence of an entilement.
+   * Check presence of an entitlement.
    * @param {string} name of the entitlement
    * @return {boolean} true if the named entitlement is present
    */
