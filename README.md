@@ -200,7 +200,7 @@ Remove all tokens from the session and the backing store.
 
 ### hasEntitlement
 
-Check presence of an entilement.
+Check presence of an entitlement.
 
 #### Parameters
 
