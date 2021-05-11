@@ -33,7 +33,8 @@ export class Session {
 
     Object.defineProperties(this, {
       store: {
-        value: data
+        get: () => data,
+        set: v => (data = v)
       },
       subscriptions: {
         value: new Set()
