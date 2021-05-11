@@ -29,6 +29,7 @@ const storeKeys = ["username", "access_token", "refresh_token"];
 export class Session {
   constructor(data) {
     let expirationTimer;
+    let refreshExpirationTimer;
 
     Object.defineProperties(this, {
       store: {
@@ -46,6 +47,13 @@ export class Session {
       expirationTimer: {
         get: () => expirationTimer,
         set: v => (expirationTimer = v)
+      },
+      refreshExpirationDate: {
+        value: new Date(0)
+      },
+      refreshExpirationTimer: {
+        get: () => refreshExpirationTimer,
+        set: v => (refreshExpirationTimer = v)
       }
     });
 
@@ -102,9 +110,27 @@ export class Session {
           }, expiresInMilliSeconds);
         }
       }
+
+      if(data.refresh_token) {
+        const decoded = decode(data.refresh_token);
+        if (decoded) {
+          this.refreshExpirationDate.setUTCSeconds(decoded.exp);
+          const expiresInMilliSeconds =
+          this.refreshExpirationDate.valueOf() - Date.now();
+          if (expiresInMilliSeconds > 0) {  
+            this.refreshExpirationTimer = setTimeout(() => {
+              this.refresh();
+            }, expiresInMilliSeconds);
+          }
+        }
+      }
     }
 
     this.emit();
+  }
+
+  reresh() {
+    console.log("not implemented");
   }
 
   /**
