@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
       key,
       {
         algorithm: "RS256",
-        expiresIn: "8s"
+        expiresIn: "10s"
       }
     );
     const refresh_token = jsonwebtoken.sign(
@@ -39,7 +39,7 @@ exports.handler = async (event, context) => {
       key,
       {
         algorithm: "RS256",
-        expiresIn: "20s"
+        expiresIn: "5s"
       }
     );
 

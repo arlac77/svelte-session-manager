@@ -90,7 +90,7 @@ export default {
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",
-                    expiresIn: "20s"
+                    expiresIn: "5s"
                   }
                 );
               }

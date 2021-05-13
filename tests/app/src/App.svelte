@@ -33,7 +33,6 @@
       <td>any</td>
       <td>502 reported as html</td>
     </tr>
-
   </table>
 
   {#if !$session.isValid}
@@ -81,6 +80,10 @@
       <tr>
         <td>Refresh Token</td>
         <td id="session_refresh_token">{$session.refresh_token}</td>
+      </tr>
+      <tr>
+        <td>Refresh At</td>
+        <td id="session_refresh_time">{$session.refreshDate}</td>
       </tr>
       <tr>
         <td>Entitlements</td>

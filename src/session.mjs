@@ -21,15 +21,16 @@ const storeKeys = ["username", "access_token", "refresh_token"];
  * @param {SessionData} data
  * @property {Set<string>} entitlements
  * @property {Set<Object>} subscriptions store subscriptions
- * @property {Date} expirationDate
+ * @property {Date} expirationDate when the access token expires
  * @property {string} access_token token itself
  * @property {string} refresh_token refresh token
+ * @property {Date} refreshDate when the refresh token expires
  * @property {SessionData} store backing store to use for save same as data param
  */
 export class Session {
   constructor(data) {
     let expirationTimer;
-    let refreshExpirationTimer;
+    let refreshTimer;
 
     Object.defineProperties(this, {
       store: {
@@ -49,12 +50,12 @@ export class Session {
         get: () => expirationTimer,
         set: v => (expirationTimer = v)
       },
-      refreshExpirationDate: {
+      refreshDate: {
         value: new Date(0)
       },
-      refreshExpirationTimer: {
-        get: () => refreshExpirationTimer,
-        set: v => (refreshExpirationTimer = v)
+      refreshTimer: {
+        get: () => refreshTimer,
+        set: v => (refreshTimer = v)
       }
     });
 
@@ -115,11 +116,11 @@ export class Session {
       if(data.refresh_token) {
         const decoded = decode(data.refresh_token);
         if (decoded) {
-          this.refreshExpirationDate.setUTCSeconds(decoded.exp);
+          this.refreshDate.setUTCSeconds(decoded.exp);
           const expiresInMilliSeconds =
-          this.refreshExpirationDate.valueOf() - Date.now();
+          this.refreshDate.valueOf() - Date.now();
           if (expiresInMilliSeconds > 0) {  
-            this.refreshExpirationTimer = setTimeout(() => {
+            this.refreshTimer = setTimeout(() => {
               this.refresh();
             }, expiresInMilliSeconds);
           }
