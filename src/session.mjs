@@ -131,7 +131,7 @@ export class Session {
     this.emit();
   }
 
-  reresh() {
+  refresh() {
     console.log("not implemented");
   }
 
