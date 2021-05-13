@@ -82,6 +82,10 @@ export class Session {
     this.clear();
 
     if (data !== undefined) {
+      if(data.endpoint) {
+        this.endpoint = data.endpoint;
+      }
+
       for (const key of storeKeys) {
         if(data[key] === undefined) {
           delete this[key];
@@ -131,8 +135,23 @@ export class Session {
     this.emit();
   }
 
-  refresh() {
-    console.log("not implemented");
+  /**
+   * Refresh with refresh_token
+   */
+  async refresh() {
+    const response = await fetch(this.endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        refresh_token: this.refresh_token,
+        grant_type: "refresh_token"
+      })
+    });
+    if (response.ok) {
+      this.update(await response.json());
+    }
   }
 
   /**

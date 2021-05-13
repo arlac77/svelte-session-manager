@@ -56,6 +56,31 @@ export default {
             }
 
             const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
+
+            if(content.grant_type === "refresh_token" && content.refresh_token) {
+              ctx.body = {
+                token_type: "bearer",
+                expires: 12,
+                scope: "unknwon",
+                access_token: jsonwebtoken.sign(
+                  { name: "unknown" },
+                  readFileSync("tests/app/demo.rsa"),
+                  {
+                    algorithm: "RS256",
+                    expiresIn: "12s"
+                  }
+                ),
+                refresh_token: jsonwebtoken.sign(
+                  {},
+                  readFileSync("tests/app/demo.rsa"),
+                  {
+                    algorithm: "RS256",
+                    expiresIn: "3s"
+                  }
+                )
+              };
+            }
+            else
             if (
               content.username.startsWith("user") &&
               content.password === "secret"
@@ -68,7 +93,7 @@ export default {
 
               const body = {
                 token_type: "bearer",
-                expires: 8,
+                expires: 12,
                 scope,
                 access_token: jsonwebtoken.sign(
                   scope.length
@@ -77,7 +102,7 @@ export default {
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",
-                    expiresIn: "8s"
+                    expiresIn: "12s"
                   }
                 )
               };
@@ -90,7 +115,7 @@ export default {
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",
-                    expiresIn: "5s"
+                    expiresIn: "3s"
                   }
                 );
               }
