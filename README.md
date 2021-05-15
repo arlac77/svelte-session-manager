@@ -97,6 +97,7 @@ curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/l
     *   [Parameters](#parameters-2)
     *   [Properties](#properties-1)
     *   [clear](#clear)
+    *   [refresh](#refresh)
     *   [save](#save)
     *   [authorizationHeader](#authorizationheader)
     *   [isValid](#isvalid)
@@ -176,6 +177,10 @@ let session = new Session(sessionStorage);
 ### clear
 
 Invalidate session data.
+
+### refresh
+
+Refresh with refresh_token
 
 ### save
 
