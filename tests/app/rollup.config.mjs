@@ -60,14 +60,14 @@ export default {
             if(content.grant_type === "refresh_token" && content.refresh_token) {
               ctx.body = {
                 token_type: "bearer",
-                expires: 12,
+                expires: 15,
                 scope: "unknwon",
                 access_token: jsonwebtoken.sign(
                   { name: "unknown" },
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",
-                    expiresIn: "12s"
+                    expiresIn: "15s"
                   }
                 ),
                 refresh_token: jsonwebtoken.sign(
@@ -93,7 +93,7 @@ export default {
 
               const body = {
                 token_type: "bearer",
-                expires: 12,
+                expires: 15,
                 scope,
                 access_token: jsonwebtoken.sign(
                   scope.length
@@ -102,7 +102,7 @@ export default {
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",
-                    expiresIn: "12s"
+                    expiresIn: "15s"
                   }
                 )
               };
