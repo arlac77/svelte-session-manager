@@ -57,7 +57,7 @@ export default {
 
             const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
 
-            if(content.grant_type === "refresh_token" && content.refresh_token) {
+            if (content.grant_type === "refresh_token" && content.refresh_token) {
               ctx.body = {
                 token_type: "bearer",
                 expires: 15,
@@ -81,100 +81,103 @@ export default {
               };
             }
             else
-            if (
-              content.username.startsWith("user") &&
-              content.password === "secret"
-            ) {
-              const scope = content.username
-                .toLowerCase()
-                .includes("no_entitlements")
-                ? ""
-                : ["a", "b", "c"].join(",");
-
-              const body = {
-                token_type: "bearer",
-                expires: 15,
-                scope,
-                access_token: jsonwebtoken.sign(
-                  scope.length
-                    ? { name: content.username, entitlements: scope }
-                    : { name: content.username },
-                  readFileSync("tests/app/demo.rsa"),
-                  {
-                    algorithm: "RS256",
-                    expiresIn: "15s"
-                  }
-                )
-              };
-
               if (
-                !content.username.toLowerCase().includes("no_refresh_token")
+                content.username.startsWith("user") &&
+                content.password === "secret"
               ) {
-                body.refresh_token = jsonwebtoken.sign(
-                  {},
-                  readFileSync("tests/app/demo.rsa"),
-                  {
-                    algorithm: "RS256",
-                    expiresIn: "3s"
-                  }
-                );
-              }
+                const scope = content.username
+                  .toLowerCase()
+                  .includes("no_entitlements")
+                  ? ""
+                  : ["a", "b", "c"].join(",");
 
-              await new Promise(resolve =>
-                setTimeout(
-                  resolve,
-                  content.username.toLowerCase().includes("slow") ? 2000 : 500
-                )
-              );
-
-              ctx.body = body;
-            } else {
-              function message(n) {
-                const messages = {
-                  400: "Bad Request",
-                  401: "Unauthorized",
-                  500: "Internal Server Error",
-                  502: "Bad Gateway"
+                const expires = 15;
+                const body = {
+                  token_type: "bearer",
+                  expires_in: expires,
+                  scope,
+                  access_token: jsonwebtoken.sign(
+                    scope.length
+                      ? { name: content.username, entitlements: scope }
+                      : { name: content.username },
+                    readFileSync("tests/app/demo.rsa"),
+                    {
+                      algorithm: "RS256",
+                      expiresIn: `${expires}s`
+                    }
+                  )
                 };
-                return messages[n] ? messages[n] : "Unknown";
-              }
-              let status = 401;
 
-              const m = content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
-              if (m) {
-                status = parseInt(m[1]);
-
-                switch (m[3]) {
-                  case "json":
-                    ctx.type = "application/json";
-                    ctx.body = { key: "value" };
-                    break;
-                  case "html":
-                    ctx.type = "text/html";
-                    ctx.body = `<html><head><title>#HT ${message(
-                      status
-                    )}</title></head><body><center><h1>#H ${message(
-                      status
-                    )}</h1></center><center>nginx/1.17.4</center></body></html>`;
-                    break;
-                  case "WWW-Authenticate":
-                    ctx.set("WWW-Authenticate", 'Bearer realm="example"');
-                    ctx.append("WWW-Authenticate", 'error="invalid_token"');
-                    ctx.append(
-                      "WWW-Authenticate",
-                      `error_description="#W ${message(status)}"`
-                    );
-                    ctx.body = "WWW-Authenticate " + message(status);
-                    break;
-                  default:
-                    ctx.body = "#T " + message(status);
+                if (
+                  !content.username.toLowerCase().includes("no_refresh_token")
+                ) {
+                  const expires = 3;
+                  body.refresh_token_expires_in = expires;
+                  body.refresh_token = jsonwebtoken.sign(
+                    {},
+                    readFileSync("tests/app/demo.rsa"),
+                    {
+                      algorithm: "RS256",
+                      expiresIn: `${expires}s`
+                    }
+                  );
                 }
+
+                await new Promise(resolve =>
+                  setTimeout(
+                    resolve,
+                    content.username.toLowerCase().includes("slow") ? 2000 : 500
+                  )
+                );
+
+                ctx.body = body;
               } else {
-                ctx.body = { message: message(status) };
+                function message(n) {
+                  const messages = {
+                    400: "Bad Request",
+                    401: "Unauthorized",
+                    500: "Internal Server Error",
+                    502: "Bad Gateway"
+                  };
+                  return messages[n] ? messages[n] : "Unknown";
+                }
+                let status = 401;
+
+                const m = content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
+                if (m) {
+                  status = parseInt(m[1]);
+
+                  switch (m[3]) {
+                    case "json":
+                      ctx.type = "application/json";
+                      ctx.body = { key: "value" };
+                      break;
+                    case "html":
+                      ctx.type = "text/html";
+                      ctx.body = `<html><head><title>#HT ${message(
+                        status
+                      )}</title></head><body><center><h1>#H ${message(
+                        status
+                      )}</h1></center><center>nginx/1.17.4</center></body></html>`;
+                      break;
+                    case "WWW-Authenticate":
+                      ctx.set("WWW-Authenticate", 'Bearer realm="example"');
+                      ctx.append("WWW-Authenticate", 'error="invalid_token"');
+                      ctx.append(
+                        "WWW-Authenticate",
+                        `error_description="#W ${message(status)}"`
+                      );
+                      ctx.body = "WWW-Authenticate " + message(status);
+                      break;
+                    default:
+                      ctx.body = "#T " + message(status);
+                  }
+                } else {
+                  ctx.body = { message: message(status) };
+                }
+                ctx.status = status;
+                return;
               }
-              ctx.status = status;
-              return;
-            }
             next();
           })
         );

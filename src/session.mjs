@@ -121,12 +121,13 @@ export class Session {
         const decoded = decode(data.refresh_token);
         if (decoded) {
           this.refreshDate.setUTCSeconds(decoded.exp);
-          const expiresInMilliSeconds =
+          const refreshInMilliSeconds =
           this.refreshDate.valueOf() - Date.now();
-          if (expiresInMilliSeconds > 0) {  
+
+          if (refreshInMilliSeconds > 0) {  
             this.refreshTimer = setTimeout(() => {
               this.refresh();
-            }, expiresInMilliSeconds);
+            }, refreshInMilliSeconds);
           }
         }
       }
