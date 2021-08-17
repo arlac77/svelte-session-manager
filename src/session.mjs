@@ -8,6 +8,17 @@
 
 const storeKeys = ["username", "access_token", "refresh_token"];
 
+function copy(destination, source) {
+  for (const key of storeKeys) {
+    if (source == undefined || source[key] === undefined) {
+      delete destination[key];
+    }
+    else {
+      destination[key] = source[key];
+    }
+  }
+}
+
 /**
  * User session
  * To create as session backed by browser local storage
@@ -73,28 +84,19 @@ export class Session {
       this.expirationTimer = undefined;
     }
 
-    for (const key of storeKeys) {
-      delete this[key];
-    }
+    copy(this);
   }
 
   update(data) {
     this.clear();
 
     if (data !== undefined) {
-      if(data.endpoint) {
+      if (data.endpoint) {
         this.endpoint = data.endpoint;
       }
 
-      for (const key of storeKeys) {
-        if(data[key] === undefined) {
-          delete this[key];
-        }
-        else {
-          this[key] = data[key];
-        }
-      }
-  
+      copy(this, data);
+
       const decoded = decode(data.access_token);
 
       if (decoded) {
@@ -117,14 +119,14 @@ export class Session {
         }
       }
 
-      if(data.refresh_token) {
+      if (data.refresh_token) {
         const decoded = decode(data.refresh_token);
         if (decoded) {
           this.refreshDate.setUTCSeconds(decoded.exp);
           const refreshInMilliSeconds =
-          this.refreshDate.valueOf() - Date.now();
+            this.refreshDate.valueOf() - Date.now();
 
-          if (refreshInMilliSeconds > 0) {  
+          if (refreshInMilliSeconds > 0) {
             this.refreshTimer = setTimeout(() => {
               this.refresh();
             }, refreshInMilliSeconds);
@@ -159,13 +161,7 @@ export class Session {
    * Persist into the backing store.
    */
   save() {
-    for (const key of storeKeys) {
-      if (this.username === undefined) {
-        delete this.store[key];
-      } else {
-        this.store[key] = this[key];
-      }
-    }
+    copy(this.store, this);
   }
 
   /**
