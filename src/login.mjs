@@ -53,7 +53,7 @@ export async function login(
 }
 
 /**
- * Extract error description from response
+ * Extract error description from response.
  * @param {FetchResponse} response
  * @return {string}
  */
