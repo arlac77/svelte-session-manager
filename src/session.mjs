@@ -87,6 +87,10 @@ export class Session {
     copy(this);
   }
 
+  /**
+   * Consume data and reflect internal state.
+   * @param {object} data
+   */
   update(data) {
     this.clear();
 
@@ -210,8 +214,17 @@ export class Session {
   }
 }
 
+/**
+ * Extract and decode the payload.
+ * @param {string} token
+ * @return {object} payload object
+ */
 function decode(token) {
-  return token === undefined || token === "undefined"
-    ? undefined
-    : JSON.parse(atob(token.split(".")[1]));
+  if (token === undefined) {
+    return undefined;
+  }
+
+  const payload = token.split(".")[1];
+
+  return payload === undefined ? undefined : JSON.parse(atob(payload));
 }
