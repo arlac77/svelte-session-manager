@@ -22,8 +22,10 @@
   "license": "BSD-2-Clause",
   "scripts": {
     "start": "rollup -c tests/app/rollup.config.mjs -w",
-    "test": "npm run test:cafe",
+    "test": "npm run test:cafe && npm run test:ava",
     "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
+    "test:ava": "ava --timeout 2m tests/*.mjs",
+    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme --section=API ./src/**/*.mjs",
     "lint": "documentation lint ./src/index.mjs && npm run lint:docs",
     "lint:docs": "documentation lint ./src/**/*.mjs",
@@ -32,6 +34,8 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@rollup/plugin-virtual": "^2.0.3",
+    "ava": "^3.15.0",
+    "c8": "^7.8.0",
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "arlac77/mf-styling",
@@ -63,6 +67,7 @@
     },
     "inheritFrom": [
       "arlac77/template-arlac77-github",
+      "arlac77/template-ava-coverage",
       "arlac77/template-netlify",
       "arlac77/template-svelte-component"
     ]
