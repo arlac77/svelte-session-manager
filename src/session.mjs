@@ -1,3 +1,5 @@
+import { JSONContentTypeHeader } from "./constants.mjs";
+
 /**
  * Data as preserved in the backing store
  * @typedef {Object} SessionData
@@ -5,15 +7,13 @@
  * @property {string} access_token JWT token
  * @property {string} refresh_token JWT token
  */
-
 const storeKeys = ["username", "access_token", "refresh_token"];
 
 function copy(destination, source) {
   for (const key of storeKeys) {
     if (source == undefined || source[key] === undefined) {
       delete destination[key];
-    }
-    else {
+    } else {
       destination[key] = source[key];
     }
   }
@@ -123,8 +123,7 @@ export class Session {
         const decoded = decode(data.refresh_token);
         if (decoded) {
           this.refreshDate.setUTCSeconds(decoded.exp);
-          const refreshInMilliSeconds =
-            this.refreshDate.valueOf() - Date.now();
+          const refreshInMilliSeconds = this.refreshDate.valueOf() - Date.now();
 
           if (refreshInMilliSeconds > 0) {
             this.refreshTimer = setTimeout(() => {
@@ -144,9 +143,7 @@ export class Session {
   async refresh() {
     const response = await fetch(this.endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: JSONContentTypeHeader,
       body: JSON.stringify({
         refresh_token: this.refresh_token,
         grant_type: "refresh_token"

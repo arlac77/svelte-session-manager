@@ -1,3 +1,5 @@
+import { JSONContentTypeHeader } from "./constants.mjs";
+
 /**
  * Bring session into the valid state by calling the authorization endpoint
  * and asking for a access_token.
@@ -22,9 +24,7 @@ export async function login(
   try {
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: JSONContentTypeHeader,
       body: JSON.stringify({
         username,
         password
