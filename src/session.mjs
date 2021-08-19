@@ -1,7 +1,7 @@
 import { JSONContentTypeHeader } from "./constants.mjs";
 
 /**
- * Data as preserved in the backing store
+ * Data as preserved in the backing store.
  * @typedef {Object} SessionData
  * @property {string} username user name (id)
  * @property {string} access_token JWT token
@@ -12,7 +12,7 @@ const storeKeys = ["username", "access_token", "refresh_token"];
 function copy(destination, source) {
   for (const key of storeKeys) {
     if (source == undefined || source[key] === undefined) {
-      delete destination[key];
+      destination[key] = undefined;
     } else {
       destination[key] = source[key];
     }
@@ -20,8 +20,8 @@ function copy(destination, source) {
 }
 
 /**
- * User session
- * To create as session backed by browser local storage
+ * User session.
+ * To create as session backed by browser local storage.
  * ```js
  * let session = new Session(localStorage);
  * ```
@@ -35,18 +35,16 @@ function copy(destination, source) {
  * @property {Date} expirationDate when the access token expires
  * @property {string} access_token token itself
  * @property {string} refresh_token refresh token
- * @property {Date} refreshDate when the refresh token expires
  * @property {SessionData} store backing store to use for save same as data param
  */
 export class Session {
-  constructor(data) {
+  constructor(store = localStorage) {
     let expirationTimer;
-    let refreshTimer;
 
     Object.defineProperties(this, {
       store: {
-        get: () => data,
-        set: v => (data = v)
+        get: () => store,
+        set: v => (store = v)
       },
       subscriptions: {
         value: new Set()
@@ -61,30 +59,24 @@ export class Session {
         get: () => expirationTimer,
         set: v => (expirationTimer = v)
       },
-      refreshDate: {
-        value: new Date(0)
-      },
-      refreshTimer: {
-        get: () => refreshTimer,
-        set: v => (refreshTimer = v)
-      }
+      ...Object.fromEntries(storeKeys.map(key => [
+        key,
+        {
+          get: () => store[key],
+          set: v => {
+            if (v === undefined) {
+              delete store[key];
+            } else {
+              store[key] = v;
+            }
+            this.emit();
+          }
+        }
+      ]))
     });
 
-    this.update(data);
-  }
 
-  /**
-   * Invalidate session data.
-   */
-  clear() {
-    this.entitlements.clear();
-    this.expirationDate.setTime(0);
-    if (this.expirationTimer) {
-      clearTimeout(this.expirationTimer);
-      this.expirationTimer = undefined;
-    }
-
-    copy(this);
+    this.update(store);
   }
 
   /**
@@ -92,8 +84,6 @@ export class Session {
    * @param {object} data
    */
   update(data) {
-    this.clear();
-
     if (data !== undefined) {
       if (data.endpoint) {
         this.endpoint = data.endpoint;
@@ -116,53 +106,37 @@ export class Session {
               .forEach(e => this.entitlements.add(e));
           }
 
-          this.expirationTimer = setTimeout(() => {
-            this.clear();
-            this.emit();
+          this.expirationTimer = setTimeout(async () => {
+            if (!(await this.refresh())) {
+              this.invalidate();
+            }
           }, expiresInMilliSeconds);
         }
       }
+    }
+  }
 
-      if (data.refresh_token) {
-        const decoded = decode(data.refresh_token);
-        if (decoded) {
-          this.refreshDate.setUTCSeconds(decoded.exp);
-          const refreshInMilliSeconds = this.refreshDate.valueOf() - Date.now();
-
-          if (refreshInMilliSeconds > 0) {
-            this.refreshTimer = setTimeout(() => {
-              this.refresh();
-            }, refreshInMilliSeconds);
-          }
-        }
+  /**
+   * Refresh with refresh_token.
+   * @return {boolean} true if refresh was succcessfull false otherwise
+   */
+  async refresh() {
+    if (this.refresh_token) {
+      const response = await fetch(this.endpoint, {
+        method: "POST",
+        headers: JSONContentTypeHeader,
+        body: JSON.stringify({
+          refresh_token: this.refresh_token,
+          grant_type: "refresh_token"
+        })
+      });
+      if (response.ok) {
+        this.update(await response.json());
+        return true;
       }
     }
 
-    this.emit();
-  }
-
-  /**
-   * Refresh with refresh_token
-   */
-  async refresh() {
-    const response = await fetch(this.endpoint, {
-      method: "POST",
-      headers: JSONContentTypeHeader,
-      body: JSON.stringify({
-        refresh_token: this.refresh_token,
-        grant_type: "refresh_token"
-      })
-    });
-    if (response.ok) {
-      this.update(await response.json());
-    }
-  }
-
-  /**
-   * Persist into the backing store.
-   */
-  save() {
-    copy(this.store, this);
+    return false;
   }
 
   /**
@@ -186,8 +160,15 @@ export class Session {
    * Remove all tokens from the session and the backing store.
    */
   invalidate() {
-    this.update();
-    this.save();
+    this.expirationDate.setTime(0);
+    this.entitlements.clear();
+
+    if (this.expirationTimer) {
+      clearTimeout(this.expirationTimer);
+      this.expirationTimer = undefined;
+    }
+
+    copy(this);
   }
 
   /**
