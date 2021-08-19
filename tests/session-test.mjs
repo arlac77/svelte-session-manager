@@ -1,4 +1,6 @@
 import test from "ava";
+import jsonwebtoken from "jsonwebtoken";
+import { readFile } from "fs/promises";
 import { Session } from "../src/session.mjs";
 
 const RT =
@@ -42,16 +44,44 @@ test("session invalidate", t => {
   t.is(store.access_token, undefined);
 });
 
-test("session update", t => {
-  const store = { };
+test("session update", async t => {
+  const store = {};
+
+  const expires = 3;
+
+  const data = {
+    username: "emil",
+    token_type: "bearer",
+    expires_in: expires,
+    scope: "unknwon",
+    access_token: jsonwebtoken.sign(
+      { name: "unknown" },
+      await readFile(new URL("app/demo.rsa", import.meta.url).pathname),
+      {
+        algorithm: "RS256",
+        expiresIn: `${expires}s`
+      }
+    )
+  };
 
   const session = new Session(store);
 
-  session.update({ username: "emil", access_token: AT, refresh_token: RT });
+  session.update(data);
 
+  t.is(session.isValid, true);
   t.is(store.username, "emil");
-  t.is(store.refresh_token, RT);
-  t.is(store.access_token, AT);
+  t.is(store.access_token, data.access_token);
+
+  let valid = 77;
+
+  const unsubscribe = session.subscribe(session => {
+    valid = session.isValid;
+  });
+
+  await new Promise((resolve, reject) => setTimeout(resolve, 4000));
+
+  t.is(session.isValid, false);
+  t.is(valid, false);
 });
 
 test("session subsription", t => {
