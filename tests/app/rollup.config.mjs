@@ -58,16 +58,18 @@ export default {
             const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
 
             if (content.grant_type === "refresh_token" && content.refresh_token) {
+              const expires = 10;
+
               ctx.body = {
                 token_type: "bearer",
-                expires: 15,
+                expires_in: expires,
                 scope: "unknwon",
                 access_token: jsonwebtoken.sign(
                   { name: "unknown" },
                   readFileSync("tests/app/demo.rsa"),
                   {
                     algorithm: "RS256",
-                    expiresIn: "15s"
+                    expiresIn: `${expires}s`
                   }
                 ),
                 refresh_token: jsonwebtoken.sign(
@@ -91,7 +93,7 @@ export default {
                   ? ""
                   : ["a", "b", "c"].join(",");
 
-                const expires = 15;
+                const expires = 10;
                 const body = {
                   token_type: "bearer",
                   expires_in: expires,
@@ -111,7 +113,7 @@ export default {
                 if (
                   !content.username.toLowerCase().includes("no_refresh_token")
                 ) {
-                  const expires = 3;
+                  const expires = 30;
                   body.refresh_token_expires_in = expires;
                   body.refresh_token = jsonwebtoken.sign(
                     {},
