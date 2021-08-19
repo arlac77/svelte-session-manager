@@ -96,16 +96,18 @@ curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/l
 *   [Session](#session)
     *   [Parameters](#parameters-2)
     *   [Properties](#properties-1)
-    *   [clear](#clear)
+    *   [update](#update)
+        *   [Parameters](#parameters-3)
     *   [refresh](#refresh)
-    *   [save](#save)
     *   [authorizationHeader](#authorizationheader)
     *   [isValid](#isvalid)
     *   [invalidate](#invalidate)
     *   [hasEntitlement](#hasentitlement)
-        *   [Parameters](#parameters-3)
-    *   [subscribe](#subscribe)
         *   [Parameters](#parameters-4)
+    *   [subscribe](#subscribe)
+        *   [Parameters](#parameters-5)
+*   [decode](#decode)
+    *   [Parameters](#parameters-6)
 
 ## login
 
@@ -125,7 +127,7 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ## handleFailedResponse
 
-Extract error description from response
+Extract error description from response.
 
 ### Parameters
 
@@ -135,7 +137,7 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ## SessionData
 
-Data as preserved in the backing store
+Data as preserved in the backing store.
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -147,8 +149,8 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 ## Session
 
-User session
-To create as session backed by browser local storage
+User session.
+To create as session backed by browser local storage.
 
 ```js
 let session = new Session(localStorage);
@@ -162,6 +164,7 @@ let session = new Session(sessionStorage);
 
 ### Parameters
 
+*   `store`   (optional, default `localStorage`)
 *   `data` **[SessionData](#sessiondata)** 
 
 ### Properties
@@ -171,20 +174,21 @@ let session = new Session(sessionStorage);
 *   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** when the access token expires
 *   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** token itself
 *   `refresh_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** refresh token
-*   `refreshDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** when the refresh token expires
 *   `store` **[SessionData](#sessiondata)** backing store to use for save same as data param
 
-### clear
+### update
 
-Invalidate session data.
+Consume data and reflect internal state.
+
+#### Parameters
+
+*   `data` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### refresh
 
-Refresh with refresh_token
+Refresh with refresh_token.
 
-### save
-
-Persist into the backing store.
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if refresh was succcessfull false otherwise
 
 ### authorizationHeader
 
@@ -221,6 +225,16 @@ Fired when the session changes.
 #### Parameters
 
 *   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+
+## decode
+
+Extract and decode the payload.
+
+### Parameters
+
+*   `token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** payload object
 
 # install
 
