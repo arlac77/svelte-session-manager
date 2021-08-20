@@ -35,17 +35,12 @@ function copy(destination, source) {
  * @property {Date} expirationDate when the access token expires
  * @property {string} access_token token itself
  * @property {string} refresh_token refresh token
- * @property {SessionData} store backing store to use for save same as data param
  */
 export class Session {
   constructor(store = localStorage) {
     let expirationTimer;
 
     Object.defineProperties(this, {
-      store: {
-        get: () => store,
-        set: v => (store = v)
-      },
       subscriptions: {
         value: new Set()
       },
@@ -74,7 +69,6 @@ export class Session {
         }
       ]))
     });
-
 
     this.update(store);
   }
