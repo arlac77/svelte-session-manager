@@ -53,9 +53,9 @@ test("session update", async t => {
     username: "emil",
     token_type: "bearer",
     expires_in: expires,
-    scope: "unknwon",
+    scope: "a,b,c",
     access_token: jsonwebtoken.sign(
-      { name: "unknown" },
+      { name: "unknown", entitlements: "a,b,c" },
       await readFile(new URL("app/demo.rsa", import.meta.url).pathname),
       {
         algorithm: "RS256",
@@ -66,19 +66,20 @@ test("session update", async t => {
 
   const session = new Session(store);
 
-  session.update(data);
-
+  console.log(session.entitlements);
   t.is(session.isValid, true);
+  t.true(session.authorizationHeader.Authorization.startsWith("Bearer "));
+  t.true(session.hasEntitlement('a'));
   t.is(store.username, "emil");
   t.is(store.access_token, data.access_token);
-
+  
   let valid = 77;
 
   const unsubscribe = session.subscribe(session => {
     valid = session.isValid;
   });
 
-  await new Promise((resolve, reject) => setTimeout(resolve, 4000));
+  await new Promise(resolve => setTimeout(resolve, 4000));
 
   t.is(session.isValid, false);
   t.is(valid, false);
