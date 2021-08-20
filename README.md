@@ -174,7 +174,6 @@ let session = new Session(sessionStorage);
 *   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** when the access token expires
 *   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** token itself
 *   `refresh_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** refresh token
-*   `store` **[SessionData](#sessiondata)** backing store to use for save same as data param
 
 ### update
 
