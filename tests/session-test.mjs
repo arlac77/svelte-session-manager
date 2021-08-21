@@ -3,9 +3,6 @@ import jsonwebtoken from "jsonwebtoken";
 import { readFile } from "fs/promises";
 import { Session } from "../src/session.mjs";
 
-const RT =
-  "eyJhbGciOiJIUzUxMiJ9.ZjVhOThkYTMtNjkwZC00NTk4LWFmYzctODVkNzQ3NTFiYTI4.y0tlNveVhkHfI1KFgDJhW3PziuhnsWI14JBzEP6wyCCd0EAZRAr_7ndzxn46CyNA4yyLgNvvCPuAAfKmEhAttg";
-
 globalThis.localStorage = {};
 globalThis.fetch = async function () { return { ok: false } };
 
@@ -20,6 +17,15 @@ test.before(async t => {
       expiresIn: `${EXPIRES}s`
     }
   );
+
+  t.context.refresh_token = jsonwebtoken.sign(
+    {},
+    await readFile(new URL("app/demo.rsa", import.meta.url).pathname),
+    {
+      algorithm: "RS256",
+      expiresIn: "3600s"
+    }
+  );
 });
 
 test("session initiial", t => {
@@ -29,7 +35,6 @@ test("session initiial", t => {
 });
 
 test("session read/write store", t => {
-
   const store = { username: "emil", access_token: t.context.access_token };
 
   const session = new Session(store);
@@ -41,15 +46,15 @@ test("session read/write store", t => {
   session.username = "hugo";
   t.is(store.username, "hugo");
 
-  session.refresh_token = "RT";
-  t.is(store.refresh_token, "RT");
+  session.refresh_token = t.context.refresh_token;
+  t.is(store.refresh_token, t.context.refresh_token);
 
   session.access_token = t.context.access_token;
   t.is(store.access_token, t.context.access_token);
 });
 
 test("session invalidate", t => {
-  const store = { username: "emil", refresh_token: RT, access_token: t.context.access_token };
+  const store = { username: "emil", access_token: t.context.access_token };
 
   const session = new Session(store);
 
