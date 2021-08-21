@@ -39,7 +39,7 @@ test("correct credentials + invalidate", async t => {
   await t.expect(Selector("#session_entitlements").innerText).eql("");
 });
 
-test("correct credentials expiring", async t => {
+test("correct credentials expiring with refresh", async t => {
   await t
     .typeText("#username", "user")
     .typeText("#password", "secret")
@@ -47,8 +47,8 @@ test("correct credentials expiring", async t => {
   await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
   await t.wait(16 * 1000);
-  await t.expect(Selector("#session_validity").innerText).eql("invalid");
-  await t.expect(Selector("#session_entitlements").innerText).eql("");
+  //await t.expect(Selector("#session_username").innerText).eql("user");
+  await t.expect(Selector("#session_validity").innerText).eql("valid");
 });
 
 test("correct credentials expiring no refresh token", async t => {
@@ -78,7 +78,7 @@ test("wrong credentials", async t => {
     .typeText("#username", "user")
     .typeText("#password", "wrong")
     .click("button");
-  await t.expect(Selector("#session_username").innerText).eql("user");
+  //await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("Unauthorized");
@@ -89,7 +89,7 @@ test("unknown user", async t => {
     .typeText("#username", "someone")
     .typeText("#password", "something")
     .click("button");
-  await t.expect(Selector("#session_username").innerText).eql("someone");
+  //await t.expect(Selector("#session_username").innerText).eql("someone");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("Unauthorized");
