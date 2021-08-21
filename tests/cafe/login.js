@@ -47,7 +47,7 @@ test("correct credentials expiring with refresh", async t => {
   await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
   await t.wait(16 * 1000);
-  //await t.expect(Selector("#session_username").innerText).eql("user");
+ // await t.expect(Selector("#session_username").innerText).eql("user");
   await t.expect(Selector("#session_validity").innerText).eql("valid");
 });
 

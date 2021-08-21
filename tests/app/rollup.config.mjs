@@ -57,72 +57,68 @@ export default {
 
             const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
 
-            if (content.grant_type === "refresh_token" && content.refresh_token) {
-              const expires = 10;
+            const expires = 10;
+            const refreshExpires = 3600;
 
+            function entitlements(username) {
+              return username === undefined || username
+                .toLowerCase()
+                .includes("no_entitlements")
+                ? ""
+                : ["a", "b", "c"].join(",");
+            }
+
+            function accessToken(username, expires) {
+              const scope = entitlements(username);
+              return jsonwebtoken.sign(
+                scope.length
+                  ? { name: username, entitlements: scope }
+                  : { name: username },
+                readFileSync("tests/app/demo.rsa"),
+                {
+                  algorithm: "RS256",
+                  expiresIn: `${expires}s`
+                }
+              )
+            }
+
+            function refreshToken(expires = 3600) {
+              return jsonwebtoken.sign(
+                {},
+                readFileSync("tests/app/demo.rsa"),
+                {
+                  algorithm: "RS256",
+                  expiresIn: `${expires}s`
+                }
+              );
+            }
+
+            if (content.grant_type === "refresh_token" && content.refresh_token) {
               ctx.body = {
+                username: content.username,
                 token_type: "bearer",
                 expires_in: expires,
-                scope: "unknwon",
-                access_token: jsonwebtoken.sign(
-                  { name: "unknown" },
-                  readFileSync("tests/app/demo.rsa"),
-                  {
-                    algorithm: "RS256",
-                    expiresIn: `${expires}s`
-                  }
-                ),
-                refresh_token: jsonwebtoken.sign(
-                  {},
-                  readFileSync("tests/app/demo.rsa"),
-                  {
-                    algorithm: "RS256",
-                    expiresIn: "3s"
-                  }
-                )
-              };
+                access_token: accessToken(content.username, expires),
+                refresh_token: refreshToken(refreshExpires)
+              }
             }
             else
               if (
                 content.username.startsWith("user") &&
                 content.password === "secret"
               ) {
-                const scope = content.username
-                  .toLowerCase()
-                  .includes("no_entitlements")
-                  ? ""
-                  : ["a", "b", "c"].join(",");
-
-                const expires = 10;
                 const body = {
                   token_type: "bearer",
                   expires_in: expires,
-                  scope,
-                  access_token: jsonwebtoken.sign(
-                    scope.length
-                      ? { name: content.username, entitlements: scope }
-                      : { name: content.username },
-                    readFileSync("tests/app/demo.rsa"),
-                    {
-                      algorithm: "RS256",
-                      expiresIn: `${expires}s`
-                    }
-                  )
+                  scope: entitlements(content.username),
+                  access_token: accessToken(content.username, expires)
                 };
 
                 if (
                   !content.username.toLowerCase().includes("no_refresh_token")
                 ) {
-                  const expires = 30;
-                  body.refresh_token_expires_in = expires;
-                  body.refresh_token = jsonwebtoken.sign(
-                    {},
-                    readFileSync("tests/app/demo.rsa"),
-                    {
-                      algorithm: "RS256",
-                      expiresIn: `${expires}s`
-                    }
-                  );
+                  body.refresh_token_expires_in = refreshExpires;
+                  body.refresh_token = refreshToken(refreshExpires)
                 }
 
                 await new Promise(resolve =>
