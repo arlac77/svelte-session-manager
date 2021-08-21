@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 import { Session } from "../src/session.mjs";
 
 globalThis.localStorage = {};
-globalThis.fetch = async function () { return { ok: false } };
+globalThis.fetch = async function () { return { ok: true, json: () => { return {}; } } };
 
 const EXPIRES = 3;
 
@@ -35,10 +35,11 @@ test("session initiial", t => {
 });
 
 test("session read/write store", t => {
-  const store = { username: "emil", access_token: t.context.access_token };
+  const store = { username: "emil", access_token: t.context.access_token, endpoint: "login" };
 
   const session = new Session(store);
 
+  t.is(session.endpoint, "login");
   t.true(session.isValid);
   t.is(session.username, "emil");
   t.truthy(session.access_token);
@@ -53,6 +54,11 @@ test("session read/write store", t => {
   t.is(store.access_token, t.context.access_token);
 });
 
+test("session invalid token", t => {
+  t.false(new Session({ access_token: "A" }).isValid);
+  //t.false(new Session({ access_token: "A.eyJpYXQiOjE2Mjk1NzMzMjksImV4cCI6MTYyOTU3NjkyOX0.C" }).isValid);
+});
+
 test("session invalidate", t => {
   const store = { username: "emil", access_token: t.context.access_token };
 
@@ -61,7 +67,6 @@ test("session invalidate", t => {
   session.invalidate();
 
   t.false(session.isValid);
-
   t.is(store.username, undefined);
   t.is(store.refresh_token, undefined);
   t.is(store.access_token, undefined);
@@ -85,7 +90,7 @@ test("session update", async t => {
   session.update(data);
 
   t.true(session.isValid);
-  t.true(session.authorizationHeader.Authorization.startsWith("Bearer "));
+  t.is(session.authorizationHeader.Authorization, "Bearer " + session.access_token);
   t.true(session.hasEntitlement('a'));
   t.is(store.access_token, data.access_token);
   t.is(store.username, "emil");
@@ -106,9 +111,7 @@ test("session subsription", t => {
   const session = new Session();
   let username;
 
-  const unsubscribe = session.subscribe(session => {
-    username = session.username;
-  });
+  const unsubscribe = session.subscribe(session => username = session.username);
 
   session.username = "hugo";
 
