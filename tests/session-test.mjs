@@ -5,10 +5,22 @@ import { Session } from "../src/session.mjs";
 
 const RT =
   "eyJhbGciOiJIUzUxMiJ9.ZjVhOThkYTMtNjkwZC00NTk4LWFmYzctODVkNzQ3NTFiYTI4.y0tlNveVhkHfI1KFgDJhW3PziuhnsWI14JBzEP6wyCCd0EAZRAr_7ndzxn46CyNA4yyLgNvvCPuAAfKmEhAttg";
-const AT =
-  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjEiLCJuYmYiOjE2MjkzMDEzMzgsInJvbGVzIjpbIlJPTEVfVVNFUiIsIlJPTEVfQURNSU4iXSwiaXNzIjoibW5hd2EiLCJleHAiOjE2MjkzMDQ5MzgsImlhdCI6MTYyOTMwMTMzOH0.e2fcSTusT6EmDJ1i3tImu0InS5G8ZWTjMoNvQWQ4463T4t12C2GwLhkk94KmJE94UPjL0G6qx_Ia4Iyy1a6WiA";
 
 globalThis.localStorage = {};
+globalThis.fetch = async function () { return { ok: false } };
+
+const EXPIRES = 3;
+
+test.before(async t => {
+  t.context.access_token = jsonwebtoken.sign(
+    { entitlements: "a,b,c" },
+    await readFile(new URL("app/demo.rsa", import.meta.url).pathname),
+    {
+      algorithm: "RS256",
+      expiresIn: `${EXPIRES}s`
+    }
+  );
+});
 
 test("session initiial", t => {
   const session = new Session();
@@ -16,7 +28,8 @@ test("session initiial", t => {
 });
 
 test("session read/write store", t => {
-  const store = { username: "emil", access_token: AT };
+
+  const store = { username: "emil", access_token: t.context.access_token };
 
   const session = new Session(store);
 
@@ -28,12 +41,12 @@ test("session read/write store", t => {
   session.refresh_token = "RT";
   t.is(store.refresh_token, "RT");
 
-  session.access_token = "AT";
-  t.is(store.access_token, "AT");
+  session.access_token = t.context.access_token;
+  t.is(store.access_token, t.context.access_token);
 });
 
 test("session invalidate", t => {
-  const store = { username: "emil", refresh_token: RT, access_token: AT };
+  const store = { username: "emil", refresh_token: RT, access_token: t.context.access_token };
 
   const session = new Session(store);
 
@@ -47,21 +60,12 @@ test("session invalidate", t => {
 test("session update", async t => {
   const store = {};
 
-  const expires = 3;
-
   const data = {
     username: "emil",
     token_type: "bearer",
-    expires_in: expires,
+    expires_in: EXPIRES,
     scope: "a,b,c",
-    access_token: jsonwebtoken.sign(
-      { entitlements: "a,b,c" },
-      await readFile(new URL("app/demo.rsa", import.meta.url).pathname),
-      {
-        algorithm: "RS256",
-        expiresIn: `${expires}s`
-      }
-    )
+    access_token: t.context.access_token
   };
 
   const session = new Session(store);
@@ -75,7 +79,7 @@ test("session update", async t => {
   t.true(session.hasEntitlement('a'));
   t.is(store.access_token, data.access_token);
   t.is(store.username, "emil");
-  
+
   let valid = 77;
 
   const unsubscribe = session.subscribe(session => {
