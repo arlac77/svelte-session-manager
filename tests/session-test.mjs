@@ -25,6 +25,7 @@ test.before(async t => {
 test("session initiial", t => {
   const session = new Session();
   t.false(session.isValid);
+  t.deepEqual(session.authorizationHeader, {});
 });
 
 test("session read/write store", t => {
