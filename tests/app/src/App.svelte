@@ -82,10 +82,6 @@
         <td id="session_refresh_token">{$session.refresh_token}</td>
       </tr>
       <tr>
-        <td>Refresh At</td>
-        <td id="session_refresh_time">{$session.refreshDate}</td>
-      </tr>
-      <tr>
         <td>Entitlements</td>
         <td id="session_entitlements">
           {[...$session.entitlements].join(',')}
