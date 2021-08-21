@@ -105,9 +105,12 @@ export class Session {
               this.invalidate();
             }
           }, expiresInMilliSeconds);
+
+          return;
         }
       }
     }
+    this.invalidate();
   }
 
   /**
