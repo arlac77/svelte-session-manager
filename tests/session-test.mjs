@@ -24,7 +24,7 @@ test.before(async t => {
 
 test("session initiial", t => {
   const session = new Session();
-  t.is(session.isValid, false);
+  t.false(session.isValid);
 });
 
 test("session read/write store", t => {
@@ -33,7 +33,9 @@ test("session read/write store", t => {
 
   const session = new Session(store);
 
+  t.true(session.isValid);
   t.is(session.username, "emil");
+  t.truthy(session.access_token);
 
   session.username = "hugo";
   t.is(store.username, "hugo");
@@ -51,6 +53,8 @@ test("session invalidate", t => {
   const session = new Session(store);
 
   session.invalidate();
+
+  t.false(session.isValid);
 
   t.is(store.username, undefined);
   t.is(store.refresh_token, undefined);
@@ -74,7 +78,7 @@ test("session update", async t => {
 
   session.update(data);
 
-  t.is(session.isValid, true);
+  t.true(session.isValid);
   t.true(session.authorizationHeader.Authorization.startsWith("Bearer "));
   t.true(session.hasEntitlement('a'));
   t.is(store.access_token, data.access_token);
