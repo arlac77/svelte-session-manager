@@ -41,7 +41,6 @@ export async function login(
         access_token: data[tokenmap.access_token],
         refresh_token: data[tokenmap.refresh_token]
       });
-      session.save();
     } else {
       session.update({ username });
       return handleFailedResponse(response);
