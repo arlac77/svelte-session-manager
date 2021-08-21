@@ -59,12 +59,14 @@ export class Session {
         {
           get: () => store[key],
           set: v => {
-            if (v === undefined) {
-              delete store[key];
-            } else {
-              store[key] = v;
+            if (v !== store[key]) {
+              if (v === undefined) {
+                delete store[key];
+              } else {
+                store[key] = v;
+              }
+              this.subscriptions.forEach(subscription => subscription(this));
             }
-            this.emit();
           }
         }
       ]))
@@ -175,10 +177,6 @@ export class Session {
    */
   hasEntitlement(name) {
     return this.entitlements.has(name);
-  }
-
-  emit() {
-    this.subscriptions.forEach(subscription => subscription(this));
   }
 
   /**
