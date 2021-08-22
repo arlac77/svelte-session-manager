@@ -84,7 +84,7 @@ export default {
 
             function refreshToken(expires = 3600) {
               return jsonwebtoken.sign(
-                {},
+                { sequence: 1 },
                 readFileSync("tests/app/demo.rsa"),
                 {
                   algorithm: "RS256",
