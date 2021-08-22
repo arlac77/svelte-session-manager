@@ -9,9 +9,12 @@ globalThis.fetch = async function () { return { ok: true, json: () => { return {
 const EXPIRES = 3;
 
 test.before(async t => {
+  const key = await readFile(new URL("app/demo.rsa", import.meta.url).pathname);
+
+  t.context.key = key;
+
   t.context.access_token = jsonwebtoken.sign(
-    { entitlements: "a,b,c" },
-    await readFile(new URL("app/demo.rsa", import.meta.url).pathname),
+    { entitlements: "a,b,c" }, key,
     {
       algorithm: "RS256",
       expiresIn: `${EXPIRES}s`
@@ -19,8 +22,7 @@ test.before(async t => {
   );
 
   t.context.refresh_token = jsonwebtoken.sign(
-    {},
-    await readFile(new URL("app/demo.rsa", import.meta.url).pathname),
+    { sequence: 1 }, key,
     {
       algorithm: "RS256",
       expiresIn: "3600s"
