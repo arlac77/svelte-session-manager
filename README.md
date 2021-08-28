@@ -93,6 +93,7 @@ curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/l
     *   [Parameters](#parameters-1)
 *   [SessionData](#sessiondata)
     *   [Properties](#properties)
+*   [msecsRequiredForRefresh](#msecsrequiredforrefresh)
 *   [Session](#session)
     *   [Parameters](#parameters-2)
     *   [Properties](#properties-1)
@@ -146,6 +147,12 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user name (id)
 *   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** JWT token
 *   `refresh_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** JWT token
+
+## msecsRequiredForRefresh
+
+Time required to execute a refresh
+
+Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)
 
 ## Session
 
