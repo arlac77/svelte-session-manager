@@ -9,6 +9,11 @@ import { JSONContentTypeHeader } from "./constants.mjs";
  */
 const storeKeys = ["username", "access_token", "refresh_token"];
 
+/**
+ * Time required to execute a refresh
+ */
+const msecsRequiredForRefresh = 2000;
+
 function copy(destination, source) {
   for (const key of storeKeys) {
     if (source == undefined || source[key] === undefined) {
@@ -106,7 +111,7 @@ export class Session {
             if (!(await this.refresh())) {
               this.invalidate();
             }
-          }, expiresInMilliSeconds);
+          }, expiresInMilliSeconds - msecsRequiredForRefresh);
 
           return;
         }
