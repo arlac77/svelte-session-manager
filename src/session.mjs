@@ -59,22 +59,24 @@ export class Session {
         get: () => expirationTimer,
         set: v => (expirationTimer = v)
       },
-      ...Object.fromEntries(storeKeys.map(key => [
-        key,
-        {
-          get: () => store[key],
-          set: v => {
-            if (v !== store[key]) {
-              if (v === undefined) {
-                delete store[key];
-              } else {
-                store[key] = v;
+      ...Object.fromEntries(
+        storeKeys.map(key => [
+          key,
+          {
+            get: () => store[key],
+            set: v => {
+              if (v !== store[key]) {
+                if (v === undefined) {
+                  delete store[key];
+                } else {
+                  store[key] = v;
+                }
+                this.subscriptions.forEach(subscription => subscription(this));
               }
-              this.subscriptions.forEach(subscription => subscription(this));
             }
           }
-        }
-      ]))
+        ])
+      )
     });
 
     this.update(store);
@@ -89,8 +91,6 @@ export class Session {
       if (data.endpoint) {
         this.endpoint = data.endpoint;
       }
-
-      copy(this, data);
 
       const decoded = decode(data.access_token);
 
@@ -113,6 +113,7 @@ export class Session {
             }
           }, expiresInMilliSeconds - msecsRequiredForRefresh);
 
+          copy(this, data);
           return;
         }
       }
