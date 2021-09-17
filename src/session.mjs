@@ -95,7 +95,11 @@ export class Session {
       const decoded = decode(data.access_token);
 
       if (decoded) {
-        this.expirationDate.setUTCSeconds(decoded.exp);
+        this.expirationDate.setTime(
+          data.expires_in
+            ? Date.now() + parseInt(data.expires_in) * 1000
+            : decoded.exp * 1000
+        );
 
         const expiresInMilliSeconds =
           this.expirationDate.valueOf() - Date.now();
