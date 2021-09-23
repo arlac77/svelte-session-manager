@@ -7,7 +7,7 @@ import { JSONContentTypeHeader } from "./constants.mjs";
  * @property {string} access_token JWT token
  * @property {string} refresh_token JWT token
  */
-const storeKeys = ["username", "access_token", "refresh_token"];
+const storeKeys = ["username", "refresh_token", "access_token"];
 
 /**
  * Time required to execute a refresh
@@ -71,7 +71,11 @@ export class Session {
                 } else {
                   store[key] = v;
                 }
-                this.subscriptions.forEach(subscription => subscription(this));
+                if (key === "access_token") {
+                  this.subscriptions.forEach(subscription =>
+                    subscription(this)
+                  );
+                }
               }
             }
           }

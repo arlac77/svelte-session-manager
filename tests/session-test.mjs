@@ -111,16 +111,16 @@ test("session update", async t => {
 
 test("session subsription", t => {
   const session = new Session();
-  let username;
+  let access_token;
 
-  const unsubscribe = session.subscribe(session => username = session.username);
+  const unsubscribe = session.subscribe(session => access_token = session.access_token);
 
-  session.username = "hugo";
+  session.access_token = "hugo";
 
-  t.is(username, "hugo");
+  t.is(access_token, "hugo");
 
   unsubscribe();
 
-  session.username = "emit";
-  t.is(username, "hugo");
+  session.access_token = "emit";
+  t.is(access_token, "hugo");
 });
