@@ -12,11 +12,13 @@
   let message;
 
   async function submit() {
-    if(active) { return; }
+    if (active) {
+      return;
+    }
     try {
       active = true;
       message = await login(session, endpoint, username, password);
-      if(!message && result !== undefined) {
+      if (!message && result !== undefined) {
         await result();
       }
     } catch (e) {
@@ -36,44 +38,52 @@
   {/if}
 
   <slot name="inputs">
-    <label for="username">
-      Username
-      <input
-        aria-label="username"
-        aria-required="true"
-        maxlength="75"
-        size="32"
-        autofocus
-        autocorrect="off"
-        autocapitalize="off"
-        autocomplete="username"
-        id="username"
-        type="text"
-        placeholder="Username"
-        required
-        disabled={active}
-        bind:value={username} />
-    </label>
-    <label for="password">
-      Password
-      <input
-        aria-label="password"
-        aria-required="true"
-        size="32"
-        autocorrect="off"
-        autocapitalize="off"
-        autocomplete="current-password"
-        id="password"
-        type="password"
-        placeholder="Password"
-        required
-        disabled={active}
-        bind:value={password} />
-    </label>
+    <fieldset>
+      <label for="username">
+        Username
+        <input
+          aria-label="username"
+          aria-required="true"
+          maxlength="75"
+          size="32"
+          autofocus
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="username"
+          id="username"
+          type="text"
+          placeholder="Username"
+          required
+          disabled={active}
+          bind:value={username}
+        />
+      </label>
+      <label for="password">
+        Password
+        <input
+          aria-label="password"
+          aria-required="true"
+          size="32"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="current-password"
+          id="password"
+          type="password"
+          placeholder="Password"
+          required
+          disabled={active}
+          bind:value={password}
+        />
+      </label>
+    </fieldset>
   </slot>
 
   <slot name="submit">
-    <button aria-keyshortcuts="Enter" type="submit" disabled={!username || !password}>
+    <button
+      aria-keyshortcuts="Enter"
+      type="submit"
+      disabled={!username || !password}
+    >
       Login
       {#if active}
         <div class="spinner" />
@@ -81,5 +91,5 @@
     </button>
   </slot>
 
-  <slot name="footer"/>
+  <slot name="footer" />
 </form>
