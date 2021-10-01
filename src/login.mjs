@@ -70,9 +70,13 @@ export async function handleFailedResponse(response) {
 
   let message = response.statusText;
 
-  const ct = response.headers.get("Content-Type").replace(/;.*/, "");
+  let ct = response.headers.get("Content-Type");
+  if (ct) {
+    ct = ct.replace(/;.*/, "");
+  }
 
   switch (ct) {
+    case undefined:
     case "text/plain":
       message += "\n" + (await response.text());
       break;
