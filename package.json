@@ -39,7 +39,7 @@
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "arlac77/mf-styling",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.6",
     "postcss-import": "^14.0.2",
     "rollup": "^2.66.1",
     "rollup-plugin-dev": "^2.0.0",
