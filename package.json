@@ -41,7 +41,7 @@
     "mf-styling": "arlac77/mf-styling",
     "postcss": "^8.4.6",
     "postcss-import": "^14.0.2",
-    "rollup": "^2.67.0",
+    "rollup": "^2.67.1",
     "rollup-plugin-dev": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-svelte": "^7.1.0",
