@@ -38,7 +38,6 @@
     "c8": "^7.11.0",
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
-    "mf-styling": "arlac77/mf-styling",
     "postcss": "^8.4.12",
     "postcss-import": "^14.1.0",
     "rollup": "^2.70.2",
@@ -71,5 +70,8 @@
       "arlac77/template-cloudflare",
       "arlac77/template-svelte-component"
     ]
+  },
+  "dependencies": {
+    "mf-styling": "^1.0.6"
   }
 }
