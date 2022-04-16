@@ -46,7 +46,8 @@
     "rollup-plugin-svelte": "^7.1.0",
     "semantic-release": "^19.0.2",
     "svelte": "^3.47.0",
-    "testcafe": "^1.18.5"
+    "testcafe": "^1.18.5",
+    "mf-styling": "^1.0.6"
   },
   "repository": {
     "type": "git",
@@ -70,8 +71,5 @@
       "arlac77/template-cloudflare",
       "arlac77/template-svelte-component"
     ]
-  },
-  "dependencies": {
-    "mf-styling": "^1.0.6"
   }
 }
