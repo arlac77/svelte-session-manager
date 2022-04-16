@@ -6,6 +6,7 @@ doc
 *.tmp
 .test
 .tmp
+.node-version
 .vscode
 .github
 netlify.toml
