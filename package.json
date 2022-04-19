@@ -38,7 +38,7 @@
     "c8": "^7.11.0",
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
-    "mf-styling": "^1.0.6",
+    "mf-styling": "^1.0.7",
     "postcss": "^8.4.12",
     "postcss-import": "^14.1.0",
     "rollup": "^2.70.2",
