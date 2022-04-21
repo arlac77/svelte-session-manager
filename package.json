@@ -35,7 +35,7 @@
     "@rollup/plugin-node-resolve": "^13.2.1",
     "@rollup/plugin-virtual": "^2.1.0",
     "ava": "^4.2.0",
-    "c8": "^7.11.0",
+    "c8": "^7.11.2",
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "^1.0.7",
