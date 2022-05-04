@@ -3,12 +3,12 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![minified size](https://badgen.net/bundlephobia/min/svelte-session-manager)](https://bundlephobia.com/result?p=svelte-session-manager)
 [![downloads](http://img.shields.io/npm/dm/svelte-session-manager.svg?style=flat-square)](https://npmjs.org/package/svelte-session-manager)
-[![GitHub Issues](https://img.shields.io/github/issues/svelte-session-manager/svelte-session-manager.svg?style=flat-square)](https://github.com/svelte-session-manager/svelte-session-manager/issues)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fsvelte-session-manager%2Fsvelte-session-manager%2Fbadge\&style=flat)](https://actions-badge.atrox.dev/svelte-session-manager/svelte-session-manager/goto)
+[![GitHub Issues](https://img.shields.io/github/issues/arlac77/svelte-session-manager.svg?style=flat-square)](https://github.com/arlac77/svelte-session-manager/issues)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fsvelte-session-manager%2Fbadge\&style=flat)](https://actions-badge.atrox.dev/arlac77/svelte-session-manager/goto)
 [![Styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![Known Vulnerabilities](https://snyk.io/test/github/svelte-session-manager/svelte-session-manager/badge.svg)](https://snyk.io/test/github/svelte-session-manager/svelte-session-manager)
-[![Coverage Status](https://coveralls.io/repos/svelte-session-manager/svelte-session-manager/badge.svg)](https://coveralls.io/github/svelte-session-manager/svelte-session-manager)
+[![Known Vulnerabilities](https://snyk.io/test/github/arlac77/svelte-session-manager/badge.svg)](https://snyk.io/test/github/arlac77/svelte-session-manager)
+[![Coverage Status](https://coveralls.io/repos/arlac77/svelte-session-manager/badge.svg)](https://coveralls.io/github/arlac77/svelte-session-manager)
 [![Tested with TestCafe](https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg)](https://github.com/DevExpress/testcafe)
 
 # svelte-session-manager
