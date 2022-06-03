@@ -39,7 +39,7 @@
     "c8": "^7.11.3",
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
-    "mf-styling": "^1.2.20",
+    "mf-styling": "^1.2.21",
     "postcss": "^8.4.14",
     "postcss-import": "^14.1.0",
     "reader-line-iterator": "^1.1.2",
