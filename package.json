@@ -28,7 +28,7 @@
     "test:ava": "ava --timeout 2m tests/*.mjs",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme --section=API ./src/**/*.mjs",
-    "lint": "documentation lint ./src/index.mjs && npm run lint:docs",
+    "lint": "npm run lint:docs",
     "lint:docs": "documentation lint ./src/**/*.mjs",
     "build": "rollup -c tests/app/rollup.config.mjs"
   },
