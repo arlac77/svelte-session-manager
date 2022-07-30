@@ -1,8 +1,9 @@
 import { Selector } from "testcafe";
 
-const base = "http://localhost:5000";
+const base =
+  "http://localhost:4173/examples/svelte-session-manager/";
 
-fixture`login`.page`${base}/index.html`;
+fixture`login`.page`${base}`;
 
 test("correct credentials", async t => {
   await t

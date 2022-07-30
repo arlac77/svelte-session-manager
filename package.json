@@ -26,18 +26,15 @@
     "prepare": "vite build",
     "start": "vite",
     "test": "npm run test:ava && npm run test:cafe",
-    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --page-request-timeout 3000 --app-init-delay 3000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
+    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --page-request-timeout 3000 --app-init-delay 3000 --app \"vite preview\"",
     "test:ava": "ava --timeout 2m tests/*.mjs",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme --section=API ./src/**/*.mjs",
     "lint": "npm run lint:docs",
     "lint:docs": "documentation lint ./src/**/*.mjs",
-    "build": "rollup -c tests/app/rollup.config.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-virtual": "^2.1.0",
     "@sveltejs/vite-plugin-svelte": "^1.0.1",
     "ava": "^4.3.1",
     "c8": "^7.12.0",
@@ -45,12 +42,14 @@
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "^1.2.44",
     "reader-line-iterator": "^1.1.2",
-    "rollup": "^2.77.2",
-    "rollup-plugin-dev": "^2.0.3",
+    "npm-pkgbuild": "^10.13.6",
     "semantic-release": "^19.0.3",
     "svelte": "^3.49.0",
     "testcafe": "^1.20.0",
     "vite": "^3.0.4"
+  },
+  "optionalDependencies": {
+    "mf-hosting": "^1.7.1"
   },
   "repository": {
     "type": "git",
@@ -61,20 +60,33 @@
   },
   "homepage": "https://github.com/arlac77/svelte-session-manager#readme",
   "pkgbuild": {
-    "groups": "examples"
+    "content": {
+      "${install.dir}": "build/",
+      "${nginx.sites.dir}${name}.conf": "pkg/nginx.conf"
+    },
+    "groups": "examples",
+    "description": "example showing ${name} features in action"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx npm-pkgbuild --available --continue --verbose"
+        }
+      ],
+      "@semantic-release/github"
+    ]
   },
   "template": {
-    "properties": {
-      "netlifly": {
-        "site": {
-          "uuid": "57021a61-08a4-441d-a216-31d0167fff02"
-        }
-      }
-    },
     "inheritFrom": [
       "arlac77/template-arlac77-github",
       "arlac77/template-ava-coverage",
       "arlac77/template-cloudflare",
+      "arlac77/template-pacman",
       "arlac77/template-svelte-component#next"
     ]
   }
