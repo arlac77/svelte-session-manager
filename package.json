@@ -90,7 +90,7 @@
       "arlac77/template-ava-coverage",
       "arlac77/template-cloudflare",
       "arlac77/template-pacman",
-      "arlac77/template-svelte-component#next"
+      "arlac77/template-svelte-component"
     ]
   }
 }
