@@ -1,6 +1,6 @@
+rollup.config.*
 build
 tests
-rollup.config.*
 doc
 *.log
 *.tmp
@@ -11,3 +11,4 @@ doc
 .github
 netlify.toml
 jsconfig.json
+vite.config.js
