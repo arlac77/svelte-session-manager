@@ -35,14 +35,17 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@sveltejs/vite-plugin-svelte": "^1.0.1",
     "ava": "^4.3.1",
     "c8": "^7.12.0",
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "^1.2.44",
-    "reader-line-iterator": "^1.1.2",
     "npm-pkgbuild": "^10.13.6",
+    "reader-line-iterator": "^1.1.2",
     "semantic-release": "^19.0.3",
     "svelte": "^3.49.0",
     "testcafe": "^1.20.0",
