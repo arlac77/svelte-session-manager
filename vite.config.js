@@ -50,10 +50,10 @@ const myServerPlugin = () => ({
   name: "configure-server",
   configureServer(server) {
     server.middlewares.use(async (req, res, next) => {
-      if (req.url.indexOf("/api/login") >= 0) {
+      if (req.method === "POST" && req.url.indexOf("/api/login") >= 0) {
         const buffers = [];
 
-        for await (const chunk of ctx.req) {
+        for await (const chunk of req) {
           buffers.push(chunk);
         }
 
@@ -125,7 +125,7 @@ const myServerPlugin = () => ({
             )
           );
 
-          ctx.body = body;
+          res.end(JSON.stringify(body));
         } else {
           function message(n) {
             const messages = {
@@ -145,7 +145,7 @@ const myServerPlugin = () => ({
             switch (m[3]) {
               case "json":
                 ctx.type = "application/json";
-                ctx.body = { key: "value" };
+                res.end(JSON.stringify({ key: "value" }));
                 break;
               case "html":
                 ctx.type = "text/html";
@@ -173,7 +173,6 @@ const myServerPlugin = () => ({
           ctx.status = status;
           return;
         }
-
         next();
       }
     });
