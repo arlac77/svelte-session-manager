@@ -177,7 +177,8 @@ const myServerPlugin = () => ({
           }
         }
 
-        res.status = status;
+        res.statusCode = status;
+
         if (!type) {
           type = typeof body === "string" ? "text" : "application/json";
         }
