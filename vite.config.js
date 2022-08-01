@@ -175,17 +175,17 @@ const myServerPlugin = () => ({
           } else {
             body = { message: message(status) };
           }
-
-          res.status = status;
-          if (!type) {
-            type = typeof body === "string" ? "text" : "application/json";
-          }
-
-          res.setHeader("Content-Type", type);
-          res.end(typeof body === "string" ? body : JSON.stringify(body));
-
-          return;
         }
+
+        res.status = status;
+        if (!type) {
+          type = typeof body === "string" ? "text" : "application/json";
+        }
+
+        res.setHeader("Content-Type", type);
+        res.end(typeof body === "string" ? body : JSON.stringify(body));
+
+        return;
       }
       next();
     });
