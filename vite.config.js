@@ -186,8 +186,8 @@ const myServerPlugin = () => ({
 
           return;
         }
-        next();
       }
+      next();
     });
   }
 });
