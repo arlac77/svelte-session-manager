@@ -94,9 +94,9 @@ const myServerPlugin = () => ({
           );
         }
 
-        let body;
+        let body,type;
         let status = 200;
-        
+
         if (content.grant_type === "refresh_token" && content.refresh_token) {
           body = {
             username: content.username,
@@ -106,7 +106,7 @@ const myServerPlugin = () => ({
             refresh_token: refreshToken(refreshExpires)
           };
         } else if (
-          content.username && 
+          content.username &&
           content.username.startsWith("user") &&
           content.password === "secret"
         ) {
@@ -141,17 +141,19 @@ const myServerPlugin = () => ({
 
           status = 401;
 
-          const m = content.username && content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
+          const m =
+            content.username &&
+            content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
           if (m) {
             status = parseInt(m[1]);
 
             switch (m[3]) {
               case "json":
-                ctx.type = "application/json";
+                type = "application/json";
                 body = { key: "value" };
                 break;
               case "html":
-                ctx.type = "text/html";
+                type = "text/html";
                 body = `<html><head><title>#HT ${message(
                   status
                 )}</title></head><body><center><h1>#H ${message(
@@ -159,9 +161,9 @@ const myServerPlugin = () => ({
                 )}</h1></center><center>nginx/1.17.4</center></body></html>`;
                 break;
               case "WWW-Authenticate":
-                ctx.set("WWW-Authenticate", 'Bearer realm="example"');
-                ctx.append("WWW-Authenticate", 'error="invalid_token"');
-                ctx.append(
+                res.setHeader("WWW-Authenticate", 'Bearer realm="example"');
+                res.append("WWW-Authenticate", 'error="invalid_token"');
+                res.append(
                   "WWW-Authenticate",
                   `error_description="#W ${message(status)}"`
                 );
@@ -175,7 +177,11 @@ const myServerPlugin = () => ({
           }
 
           res.status = status;
+          if (!type) {
+            type = typeof body === "string" ? "text" : "application/json";
+          }
 
+          res.setHeader("Content-Type", type);
           res.end(typeof body === "string" ? body : JSON.stringify(body));
 
           return;
