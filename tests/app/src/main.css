@@ -5,3 +5,12 @@
 @import "mf-styling/src/table.css";
 @import "mf-styling/src/button.css";
 @import "mf-styling/src/form.css";
+
+
+.key {
+	max-width: 16em;
+}
+
+.value {
+	max-width: 20em;
+}

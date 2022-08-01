@@ -57,11 +57,11 @@
   <table class="bordered">
     <tbody>
       <tr>
-        <td>Subscriptions</td>
+        <td class="key">Subscriptions</td>
         <td id="session_subscriptions">{$session.subscriptions.size}</td>
       </tr>
       <tr>
-        <td>Username</td>
+        <td class="value">Username</td>
         <td id="session_username">{$session.username}</td>
       </tr>
       <tr>
