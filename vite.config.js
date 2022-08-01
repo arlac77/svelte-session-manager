@@ -94,8 +94,11 @@ const myServerPlugin = () => ({
           );
         }
 
+        let body;
+        let status = 200;
+        
         if (content.grant_type === "refresh_token" && content.refresh_token) {
-          ctx.body = {
+          body = {
             username: content.username,
             token_type: "bearer",
             expires_in: expires,
@@ -103,10 +106,11 @@ const myServerPlugin = () => ({
             refresh_token: refreshToken(refreshExpires)
           };
         } else if (
+          content.username && 
           content.username.startsWith("user") &&
           content.password === "secret"
         ) {
-          const body = {
+          body = {
             token_type: "bearer",
             expires_in: expires,
             scope: entitlements(content.username),
@@ -124,8 +128,6 @@ const myServerPlugin = () => ({
               content.username.toLowerCase().includes("slow") ? 2000 : 500
             )
           );
-
-          res.end(JSON.stringify(body));
         } else {
           function message(n) {
             const messages = {
@@ -136,20 +138,21 @@ const myServerPlugin = () => ({
             };
             return messages[n] ? messages[n] : "Unknown";
           }
-          let status = 401;
 
-          const m = content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
+          status = 401;
+
+          const m = content.username && content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
           if (m) {
             status = parseInt(m[1]);
 
             switch (m[3]) {
               case "json":
                 ctx.type = "application/json";
-                res.end(JSON.stringify({ key: "value" }));
+                body = { key: "value" };
                 break;
               case "html":
                 ctx.type = "text/html";
-                ctx.body = `<html><head><title>#HT ${message(
+                body = `<html><head><title>#HT ${message(
                   status
                 )}</title></head><body><center><h1>#H ${message(
                   status
@@ -162,15 +165,19 @@ const myServerPlugin = () => ({
                   "WWW-Authenticate",
                   `error_description="#W ${message(status)}"`
                 );
-                ctx.body = "WWW-Authenticate " + message(status);
+                body = "WWW-Authenticate " + message(status);
                 break;
               default:
-                ctx.body = "#T " + message(status);
+                body = "#T " + message(status);
             }
           } else {
-            ctx.body = { message: message(status) };
+            body = { message: message(status) };
           }
-          ctx.status = status;
+
+          res.status = status;
+
+          res.end(typeof body === "string" ? body : JSON.stringify(body));
+
           return;
         }
         next();
