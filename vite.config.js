@@ -161,12 +161,8 @@ const myServerPlugin = () => ({
                 )}</h1></center><center>nginx/1.17.4</center></body></html>`;
                 break;
               case "WWW-Authenticate":
-                res.setHeader("WWW-Authenticate", 'Bearer realm="example"');
-                res.append("WWW-Authenticate", 'error="invalid_token"');
-                res.append(
-                  "WWW-Authenticate",
-                  `error_description="#W ${message(status)}"`
-                );
+                const values = ['Bearer realm="example"','error="invalid_token"',`error_description="#W ${message(status)}"`];
+                res.setHeader("WWW-Authenticate", values.join(' '));
                 body = "WWW-Authenticate " + message(status);
                 break;
               default:
