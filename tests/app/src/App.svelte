@@ -52,17 +52,21 @@
       Logoff
     </button>
   </form>
-  {resultCalled ? 'RESULT CALLED' : 'NOT CALLED'}
+  {resultCalled ? "RESULT CALLED" : "NOT CALLED"}
   <h3>Session Details</h3>
   <table class="bordered">
     <tbody>
       <tr>
         <td class="key">Subscriptions</td>
-        <td class="value" id="session_subscriptions">{$session.subscriptions.size}</td>
+        <td class="value" id="session_subscriptions"
+          >{$session.subscriptions.size}</td
+        >
       </tr>
       <tr>
         <td class="key">Username</td>
-        <td class="value" id="session_username">{$session.username ? $session.username : ""}</td>
+        <td class="value" id="session_username"
+          >{$session.username || ""}</td
+        >
       </tr>
       <tr>
         <td class="key">Expires</td>
@@ -70,20 +74,26 @@
       </tr>
       <tr>
         <td class="key">Validity</td>
-        <td class="value" id="session_validity">{$session.isValid ? 'valid' : 'invalid'}</td>
+        <td class="value" id="session_validity"
+          >{$session.isValid ? "valid" : "invalid"}</td
+        >
       </tr>
       <tr>
         <td class="key">Access Token</td>
-        <td class="value" id="session_acccess_token">{$session.access_token ? $session.access_token : ''}</td>
+        <td class="value" id="session_acccess_token"
+          >{$session.access_token || ""}</td
+        >
       </tr>
-      <tr class="key">
-        <td>Refresh Token</td>
-        <td class="value" id="session_refresh_token">{$session.refresh_token}</td>
+      <tr>
+        <td class="key">Refresh Token</td>
+        <td class="value" id="session_refresh_token"
+          >{$session.refresh_token || ""}</td
+        >
       </tr>
       <tr>
         <td class="key">Entitlements</td>
         <td class="value" id="session_entitlements">
-          {[...$session.entitlements].join(',')}
+          {[...$session.entitlements].join(",")}
         </td>
       </tr>
       <tr>
