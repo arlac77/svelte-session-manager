@@ -8,9 +8,10 @@
 
 
 .key {
-	max-width: 16em;
+	max-width: 4em;
+	text-align: right;
 }
 
 .value {
-	max-width: 20em;
+	max-width: 12em;
 }

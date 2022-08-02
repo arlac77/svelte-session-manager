@@ -58,37 +58,37 @@
     <tbody>
       <tr>
         <td class="key">Subscriptions</td>
-        <td id="session_subscriptions">{$session.subscriptions.size}</td>
+        <td class="value" id="session_subscriptions">{$session.subscriptions.size}</td>
       </tr>
       <tr>
-        <td class="value">Username</td>
-        <td id="session_username">{$session.username}</td>
+        <td class="key">Username</td>
+        <td class="value" id="session_username">{$session.username ? $session.username : ""}</td>
       </tr>
       <tr>
-        <td>Expires</td>
-        <td id="session_expires">{$session.expirationDate}</td>
+        <td class="key">Expires</td>
+        <td class="value" id="session_expires">{$session.expirationDate}</td>
       </tr>
       <tr>
-        <td>Validity</td>
-        <td id="session_validity">{$session.isValid ? 'valid' : 'invalid'}</td>
+        <td class="key">Validity</td>
+        <td class="value" id="session_validity">{$session.isValid ? 'valid' : 'invalid'}</td>
       </tr>
       <tr>
-        <td>Access Token</td>
-        <td id="session_acccess_token">{$session.access_token}</td>
+        <td class="key">Access Token</td>
+        <td class="value" id="session_acccess_token">{$session.access_token ? $session.access_token : ''}</td>
       </tr>
-      <tr>
+      <tr class="key">
         <td>Refresh Token</td>
-        <td id="session_refresh_token">{$session.refresh_token}</td>
+        <td class="value" id="session_refresh_token">{$session.refresh_token}</td>
       </tr>
       <tr>
-        <td>Entitlements</td>
-        <td id="session_entitlements">
+        <td class="key">Entitlements</td>
+        <td class="value" id="session_entitlements">
           {[...$session.entitlements].join(',')}
         </td>
       </tr>
       <tr>
-        <td>Authorization Header</td>
-        <td id="session_authorization_header">
+        <td class="key">Authorization Header</td>
+        <td class="value" id="session_authorization_header">
           {JSON.stringify($session.authorizationHeader)}
         </td>
       </tr>
