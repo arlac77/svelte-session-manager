@@ -42,19 +42,15 @@ function copy(destination, source) {
  * @property {string} refresh_token refresh token
  */
 export class Session {
+
+  subscriptions = new Set();
+  entitlements = new Set();
+  expirationDate = new Date(0);
+
   constructor(store = localStorage) {
     let expirationTimer;
 
     Object.defineProperties(this, {
-      subscriptions: {
-        value: new Set()
-      },
-      entitlements: {
-        value: new Set()
-      },
-      expirationDate: {
-        value: new Date(0)
-      },
       expirationTimer: {
         get: () => expirationTimer,
         set: v => (expirationTimer = v)
