@@ -48,7 +48,7 @@
     "reader-line-iterator": "^1.1.2",
     "semantic-release": "^19.0.3",
     "svelte": "^3.49.0",
-    "testcafe": "^1.20.0",
+    "testcafe": "^1.20.1",
     "vite": "^3.0.4"
   },
   "optionalDependencies": {
