@@ -1,12 +1,10 @@
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { defineConfig } from "vite";
+import { extractFromPackage } from "npm-pkgbuild";
 import { readFileSync } from "fs";
 import jsonwebtoken from "jsonwebtoken";
 
 export default defineConfig(async ({ command, mode }) => {
-  const { extractFromPackage } = await import(
-    new URL("node_modules/npm-pkgbuild/src/module.mjs", import.meta.url)
-  );
   const res = extractFromPackage({
     dir: new URL("./", import.meta.url).pathname
   });
