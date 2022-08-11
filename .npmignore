@@ -10,5 +10,5 @@ doc
 .github
 netlify.toml
 jsconfig.json
-vite.config.js
 pkg
+vite.config.mts
