@@ -44,7 +44,7 @@
     "documentation": "^13.2.5",
     "jsonwebtoken": "^8.5.1",
     "mf-styling": "^1.2.45",
-    "npm-pkgbuild": "^10.14.7",
+    "npm-pkgbuild": "^10.14.8",
     "reader-line-iterator": "^1.1.2",
     "semantic-release": "^19.0.3",
     "svelte": "^3.49.0",
