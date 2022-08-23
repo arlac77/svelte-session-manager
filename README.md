@@ -112,7 +112,7 @@ curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/l
 ## login
 
 Bring session into the valid state by calling the authorization endpoint
-and asking for a access_token.
+and asking for a access\_token.
 Executes a POST on the endpoint url expecting username, and password as json
 
 ### Parameters
@@ -131,9 +131,9 @@ Extract error description from response.
 
 ### Parameters
 
-*   `response` **FetchResponse** 
+*   `response` **FetchResponse**&#x20;
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ## SessionData
 
@@ -171,11 +171,11 @@ let session = new Session(sessionStorage);
 ### Parameters
 
 *   `store`   (optional, default `localStorage`)
-*   `data` **[SessionData](#sessiondata)** 
+*   `data` **[SessionData](#sessiondata)**&#x20;
 
 ### Properties
 
-*   `entitlements` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+*   `entitlements` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**&#x20;
 *   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** store subscriptions
 *   `expirationDate` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)** when the access token expires
 *   `access_token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** token itself
@@ -187,11 +187,11 @@ Consume data and reflect internal state.
 
 #### Parameters
 
-*   `data` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `data` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 ### refresh
 
-Refresh with refresh_token.
+Refresh with refresh\_token.
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if refresh was succcessfull false otherwise
 
@@ -229,7 +229,7 @@ Fired when the session changes.
 
 #### Parameters
 
-*   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+*   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)**&#x20;
 
 ## decode
 
@@ -237,7 +237,7 @@ Extract and decode the payload.
 
 ### Parameters
 
-*   `token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** payload object
 
