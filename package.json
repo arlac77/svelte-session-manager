@@ -43,7 +43,7 @@
     "c8": "^7.12.0",
     "documentation": "^14.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mf-styling": "^1.7.6",
+    "mf-styling": "^1.7.7",
     "npm-pkgbuild": "^10.14.8",
     "reader-line-iterator": "^1.1.5",
     "semantic-release": "^19.0.5",
