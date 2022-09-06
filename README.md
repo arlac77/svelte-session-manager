@@ -183,7 +183,7 @@ let session = new Session(sessionStorage);
 
 ### update
 
-Consume data and reflect internal state.
+Consume auth response data and reflect internal state.
 
 #### Parameters
 
