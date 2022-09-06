@@ -83,7 +83,7 @@ export class Session {
   }
 
   /**
-   * Consume data and reflect internal state.
+   * Consume auth response data and reflect internal state.
    * @param {object} data
    */
   update(data) {
