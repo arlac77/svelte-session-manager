@@ -81,7 +81,21 @@
           "publishCmd": "npx npm-pkgbuild --available --continue --verbose"
         }
       ],
-      "@semantic-release/github"
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "dist/*.deb",
+              "label": "Debian Package"
+            },
+            {
+              "path": "dist/*.pkg.*",
+              "label": "Arch Linux Package"
+            }
+          ]
+        }
+      ]
     ]
   },
   "template": {
