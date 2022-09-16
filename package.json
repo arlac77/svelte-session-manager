@@ -78,7 +78,7 @@
       [
         "@semantic-release/exec",
         {
-          "publishCmd": "npx npm-pkgbuild --available --continue --verbose"
+          "publishCmd": "npx npm-pkgbuild --available --continue"
         }
       ],
       [
