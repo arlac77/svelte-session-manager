@@ -48,8 +48,8 @@
     "reader-line-iterator": "^1.1.5",
     "semantic-release": "^19.0.5",
     "svelte": "^3.52.0",
-    "testcafe": "^2.0.1",
-    "vite": "^3.2.1"
+    "testcafe": "^2.0.2",
+    "vite": "^3.2.2"
   },
   "optionalDependencies": {
     "mf-hosting": "^1.7.5"
