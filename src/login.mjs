@@ -8,7 +8,7 @@ import { JSONContentTypeHeader } from "./constants.mjs";
  * @param {string} endpoint authorization url
  * @param {string} username id of the user
  * @param {string} password user credentials
- * @param {object} tokenmap token names in response to internal known values
+ * @param {Object} tokenmap token names in response to internal known values
  * @return {string} error message in case of failure or undefined on success
  */
 export async function login(

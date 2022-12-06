@@ -34,7 +34,7 @@ function copy(destination, source) {
  * ```js
  * let session = new Session(sessionStorage);
  * ```
- * @param {SessionData} data
+ * @param {SessionData} store
  * @property {Set<string>} entitlements
  * @property {Set<Object>} subscriptions store subscriptions
  * @property {Date} expirationDate when the access token expires
@@ -84,7 +84,7 @@ export class Session {
 
   /**
    * Consume auth response data and reflect internal state.
-   * @param {object} data
+   * @param {Object} data
    */
   update(data) {
     if (data !== undefined) {
@@ -203,7 +203,7 @@ export class Session {
 /**
  * Extract and decode the payload.
  * @param {string} token
- * @return {object} payload object
+ * @return {Object} payload object
  */
 function decode(token) {
   if (token === undefined) {
