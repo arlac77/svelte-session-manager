@@ -121,7 +121,7 @@ Executes a POST on the endpoint url expecting username, and password as json
 *   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** authorization url
 *   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id of the user
 *   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user credentials
-*   `tokenmap` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** token names in response to internal known values (optional, default `{access_token:"access_token",refresh_token:"refresh_token"}`)
+*   `tokenmap` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** token names in response to internal known values (optional, default `{access_token:"access_token",refresh_token:"refresh_token"}`)
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** error message in case of failure or undefined on success
 
@@ -170,8 +170,7 @@ let session = new Session(sessionStorage);
 
 ### Parameters
 
-*   `store`   (optional, default `localStorage`)
-*   `data` **[SessionData](#sessiondata)**&#x20;
+*   `store` **[SessionData](#sessiondata)**  (optional, default `localStorage`)
 
 ### Properties
 
@@ -187,7 +186,7 @@ Consume auth response data and reflect internal state.
 
 #### Parameters
 
-*   `data` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+*   `data` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 ### refresh
 
@@ -239,7 +238,7 @@ Extract and decode the payload.
 
 *   `token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
-Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** payload object
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** payload object
 
 # install
 
