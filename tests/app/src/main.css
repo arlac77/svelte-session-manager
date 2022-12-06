@@ -1,10 +1,10 @@
-@import "mf-styling/src/color-primary-fuchsia.css";
-@import "mf-styling/src/color.css";
-@import "mf-styling/src/global.css";
-@import "mf-styling/src/layout.css";
-@import "mf-styling/src/table.css";
-@import "mf-styling/src/button.css";
-@import "mf-styling/src/form.css";
+@import url("mf-styling/src/color-primary-fuchsia.css");
+@import url("mf-styling/src/color.css");
+@import url("mf-styling/src/global.css");
+@import url("mf-styling/src/layout.css");
+@import url("mf-styling/src/table.css");
+@import url("mf-styling/src/button.css");
+@import url("mf-styling/src/form.css");
 
 
 .key {
