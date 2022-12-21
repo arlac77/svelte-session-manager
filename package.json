@@ -42,7 +42,7 @@
     "ava": "^5.1.0",
     "c8": "^7.12.0",
     "documentation": "^14.0.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mf-styling": "^1.7.33",
     "npm-pkgbuild": "^10.15.23",
     "reader-line-iterator": "^1.1.5",
