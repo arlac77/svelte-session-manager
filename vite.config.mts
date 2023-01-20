@@ -6,8 +6,9 @@ import jsonwebtoken from "jsonwebtoken";
 
 export default defineConfig(async ({ command, mode }) => {
   const res = extractFromPackage({
-    dir: new URL("./", import.meta.url).pathname
-  });
+    dir: new URL("./", import.meta.url).pathname,
+    mode
+  }, process.env);
   const first = await res.next();
   const pkg = first.value;
   const properties = pkg.properties;
