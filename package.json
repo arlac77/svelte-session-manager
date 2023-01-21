@@ -65,10 +65,8 @@
   "homepage": "https://github.com/arlac77/svelte-session-manager#readme",
   "pkgbuild": {
     "content": {
-      "${install.dir}": "build/",
-      "${nginx.sites.dir}${name}.conf": "pkg/nginx.conf"
+      "${install.dir}": "build/"
     },
-    "description": "example showing ${name} features in action",
     "example": true,
     "frontend": true
   },
