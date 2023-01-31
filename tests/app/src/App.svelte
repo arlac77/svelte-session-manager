@@ -1,5 +1,8 @@
 <script>
   import { Login, Session } from "../../../src/index.svelte";
+  import { api } from "./constants.mjs";
+
+  let endpoint = api;
 
   export const session = new Session(localStorage);
 
@@ -13,9 +16,9 @@
 <div>
   <table>
     <colgroup>
-      <col id="user"/>
-      <col id="password"/>
-      <col id="result"/>
+      <col id="user" />
+      <col id="password" />
+      <col id="result" />
     </colgroup>
     <thead>
       <th>Username</th>
@@ -39,10 +42,26 @@
     </tr>
   </table>
 
+  <fieldset>
+    <label for="url">
+      Auth API
+      <input
+        type="url"
+        name="url"
+        id="url"
+        placeholder="https://example.com"
+        pattern="http?://.*"
+        size="60"
+        required
+        bind:value={endpoint}
+      />
+    </label>
+  </fieldset>
+
   {#if !$session.isValid}
     <div class="modal center">
       <div class="window">
-        <Login {session} endpoint="/api/login" {result}>
+        <Login {session} {endpoint} {result}>
           <div slot="footer">
             <a href="somewhere">create account</a>
             <a href="somewhere">lost password</a>
@@ -61,8 +80,8 @@
   <h3>Session Details</h3>
   <table class="bordered">
     <colgroup>
-      <col id="key"/>
-      <col id="value"/>
+      <col id="key" />
+      <col id="value" />
     </colgroup>
     <tbody>
       <tr>
@@ -73,9 +92,7 @@
       </tr>
       <tr>
         <td class="key">Username</td>
-        <td class="value" id="session_username"
-          >{$session.username || ""}</td
-        >
+        <td class="value" id="session_username">{$session.username || ""}</td>
       </tr>
       <tr>
         <td class="key">Expires</td>
