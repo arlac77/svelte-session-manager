@@ -7,7 +7,6 @@ globalThis.fetch = async function (url, options) {
   return {
     ok: true,
     json: () => {
-      console.log(options.body.length);
       return options.body.length > 20 ? { access_token: "aaaa" } : {};
     }
   };
