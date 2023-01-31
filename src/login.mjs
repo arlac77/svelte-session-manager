@@ -1,5 +1,9 @@
 import { JSONContentTypeHeader } from "./constants.mjs";
 
+const defaultTokenMap = Object.fromEntries(
+  ["access_token", "refresh_token"].map(k => [k, k])
+);
+
 /**
  * Bring session into the valid state by calling the authorization endpoint
  * and asking for a access_token.
@@ -16,10 +20,7 @@ export async function login(
   endpoint,
   username,
   password,
-  tokenmap = {
-    access_token: "access_token",
-    refresh_token: "refresh_token"
-  }
+  tokenmap = defaultTokenMap
 ) {
   try {
     const response = await fetch(endpoint, {
@@ -38,8 +39,9 @@ export async function login(
       session.update({
         endpoint,
         username,
-        access_token: data[tokenmap.access_token],
-        refresh_token: data[tokenmap.refresh_token]
+        ...Object.fromEntries(
+          Object.entries(tokenmap).map(([k1, k2]) => [k1, data[k2]])
+        )
       });
     } else {
       session.update({ username });
