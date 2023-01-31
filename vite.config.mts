@@ -5,16 +5,20 @@ import { readFileSync } from "fs";
 import jsonwebtoken from "jsonwebtoken";
 
 export default defineConfig(async ({ command, mode }) => {
-  const res = extractFromPackage({
-    dir: new URL("./", import.meta.url).pathname,
-    mode
-  }, process.env);
+  const res = extractFromPackage(
+    {
+      dir: new URL("./", import.meta.url).pathname,
+      mode
+    },
+    process.env
+  );
   const first = await res.next();
   const pkg = first.value;
   const properties = pkg.properties;
-  const base = properties["http.path"] + "/";
+  const base = properties["http.path"];
   const production = mode === "production";
 
+  console.log("BASE", base);
   process.env["VITE_NAME"] = properties.name;
   process.env["VITE_DESCRIPTION"] = properties.description;
   process.env["VITE_VERSION"] = properties.version;
@@ -93,7 +97,7 @@ const myServerPlugin = () => ({
           );
         }
 
-        let body,type;
+        let body, type;
         let status = 200;
 
         if (content.grant_type === "refresh_token" && content.refresh_token) {
@@ -139,8 +143,7 @@ const myServerPlugin = () => ({
 
           status = 401;
 
-          const m =
-            content.username?.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
+          const m = content.username?.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
           if (m) {
             status = parseInt(m[1]);
 
@@ -158,8 +161,12 @@ const myServerPlugin = () => ({
                 )}</h1></center><center>nginx/1.17.4</center></body></html>`;
                 break;
               case "WWW-Authenticate":
-                const values = ['Bearer realm="example"','error="invalid_token"',`error_description="#W ${message(status)}"`];
-                res.setHeader("WWW-Authenticate", values.join(' '));
+                const values = [
+                  'Bearer realm="example"',
+                  'error="invalid_token"',
+                  `error_description="#W ${message(status)}"`
+                ];
+                res.setHeader("WWW-Authenticate", values.join(" "));
                 body = "WWW-Authenticate " + message(status);
                 break;
               default:
