@@ -12,6 +12,11 @@
 
 <div>
   <table>
+    <colgroup>
+      <col id="user"/>
+      <col id="password"/>
+      <col id="result"/>
+    </colgroup>
     <thead>
       <th>Username</th>
       <th>Password</th>
@@ -55,6 +60,10 @@
   {resultCalled ? "RESULT CALLED" : "NOT CALLED"}
   <h3>Session Details</h3>
   <table class="bordered">
+    <colgroup>
+      <col id="key"/>
+      <col id="value"/>
+    </colgroup>
     <tbody>
       <tr>
         <td class="key">Subscriptions</td>
