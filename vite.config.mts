@@ -105,8 +105,7 @@ const myServerPlugin = () => ({
             refresh_token: refreshToken(refreshExpires)
           };
         } else if (
-          content.username &&
-          content.username.startsWith("user") &&
+          content.username?.startsWith("user") &&
           content.password === "secret"
         ) {
           body = {
@@ -135,14 +134,13 @@ const myServerPlugin = () => ({
               500: "Internal Server Error",
               502: "Bad Gateway"
             };
-            return messages[n] ? messages[n] : "Unknown";
+            return messages[n] || "Unknown";
           }
 
           status = 401;
 
           const m =
-            content.username &&
-            content.username.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
+            content.username?.match(/^error\s*(\d+)(\s+([\w\-]+))?/);
           if (m) {
             status = parseInt(m[1]);
 
