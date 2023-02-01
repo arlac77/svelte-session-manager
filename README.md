@@ -121,7 +121,7 @@ Executes a POST on the endpoint url expecting username, and password as json
 *   `endpoint` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** authorization url
 *   `username` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id of the user
 *   `password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user credentials
-*   `tokenmap` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** token names in response to internal known values (optional, default `{access_token:"access_token",refresh_token:"refresh_token"}`)
+*   `tokenmap` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** token names in response to internal known values (optional, default `defaultTokenMap`)
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** error message in case of failure or undefined on success
 
