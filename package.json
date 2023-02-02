@@ -67,7 +67,7 @@
     "content": {
       "${install.dir}": "build/"
     },
-    "api": "/api/login",
+    "api": "api/login",
     "example": true,
     "frontend": true
   },
