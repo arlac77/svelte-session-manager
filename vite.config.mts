@@ -50,7 +50,7 @@ const myServerPlugin = () => ({
   name: "configure-server",
   configureServer(server) {
     server.middlewares.use(async (req, res, next) => {
-      if (req.method === "POST" && req.url.indexOf("/api/login") >= 0) {
+      if (req.method === "POST" && req.url.indexOf("api/login") >= 0) {
         const buffers = [];
 
         for await (const chunk of req) {
