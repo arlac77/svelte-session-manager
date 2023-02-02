@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 
 const base =
-  "http://localhost:4173/examples/svelte-session-manager/";
+  "http://localhost:5173/";
 
 fixture`login`.page`${base}`;
 
