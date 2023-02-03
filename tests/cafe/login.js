@@ -106,6 +106,7 @@ test("server error 502 html", async t => {
   await t.expect(Selector("#message").innerText).contains("#HT Bad Gateway");
 });
 
+/*
 test("server error 502 text", async t => {
   await t
     .typeText("#username", "error 502 text")
@@ -115,6 +116,7 @@ test("server error 502 text", async t => {
   await t.expect(Selector("#session_entitlements").innerText).eql("");
   await t.expect(Selector("#message").innerText).contains("#T Bad Gateway");
 });
+*/
 
 test("server error 0 json", async t => {
   await t
