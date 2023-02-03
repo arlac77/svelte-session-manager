@@ -16,9 +16,9 @@
 <div>
   <table>
     <colgroup>
-      <col id="user" />
-      <col id="password" />
-      <col id="result" />
+      <col id="col_user" />
+      <col id="col_password" />
+      <col id="col_result" />
     </colgroup>
     <thead>
       <th>Username</th>

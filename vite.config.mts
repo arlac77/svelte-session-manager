@@ -18,7 +18,6 @@ export default defineConfig(async ({ command, mode }) => {
   const base = properties["http.path"];
   const production = mode === "production";
 
-  console.log("BASE", base);
   process.env["VITE_NAME"] = properties.name;
   process.env["VITE_DESCRIPTION"] = properties.description;
   process.env["VITE_VERSION"] = properties.version;
