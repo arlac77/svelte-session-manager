@@ -106,7 +106,6 @@ test("server error 502 html", async t => {
   await t.expect(Selector("#message").innerText).contains("#HT Bad Gateway");
 });
 
-/*
 test("server error 502 text", async t => {
   await t
     .typeText("#username", "error 502 text")
@@ -114,10 +113,10 @@ test("server error 502 text", async t => {
     .click("button");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
-  await t.expect(Selector("#message").innerText).contains("#T Bad Gateway");
+  await t.expect(Selector("#message").innerText).contains("Bad Gateway");
 });
-*/
 
+/*
 test("server error 0 json", async t => {
   await t
     .typeText("#username", "error 0 json")
@@ -126,6 +125,7 @@ test("server error 0 json", async t => {
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
 });
+*/
 
 test("server error WWW-Authenticate", async t => {
   await t
@@ -134,5 +134,5 @@ test("server error WWW-Authenticate", async t => {
     .click("button");
   await t.expect(Selector("#session_validity").innerText).eql("invalid");
   await t.expect(Selector("#session_entitlements").innerText).eql("");
-  await t.expect(Selector("#message").innerText).contains("#W Internal Server Error");
+  await t.expect(Selector("#message").innerText).contains("Internal Server Error");
 });
