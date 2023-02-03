@@ -16,9 +16,9 @@
 <div>
   <table>
     <colgroup>
-      <col id="col_user" />
-      <col id="col_password" />
-      <col id="col_result" />
+      <col class="user" />
+      <col class="password" />
+      <col class="result" />
     </colgroup>
     <thead>
       <th>Username</th>
@@ -80,51 +80,43 @@
   <h3>Session Details</h3>
   <table class="bordered">
     <colgroup>
-      <col id="key" />
-      <col id="value" />
+      <col class="key" />
+      <col class="value" />
     </colgroup>
     <tbody>
       <tr>
-        <td class="key">Subscriptions</td>
-        <td class="value" id="session_subscriptions"
-          >{$session.subscriptions.size}</td
-        >
+        <td>Subscriptions</td>
+        <td id="session_subscriptions">{$session.subscriptions.size}</td>
       </tr>
       <tr>
-        <td class="key">Username</td>
-        <td class="value" id="session_username">{$session.username || ""}</td>
+        <td>Username</td>
+        <td id="session_username">{$session.username || ""}</td>
       </tr>
       <tr>
-        <td class="key">Expires</td>
-        <td class="value" id="session_expires">{$session.expirationDate}</td>
+        <td>Expires</td>
+        <td id="session_expires">{$session.expirationDate.toISOString()}</td>
       </tr>
       <tr>
-        <td class="key">Validity</td>
-        <td class="value" id="session_validity"
-          >{$session.isValid ? "valid" : "invalid"}</td
-        >
+        <td>Validity</td>
+        <td id="session_validity">{$session.isValid ? "valid" : "invalid"}</td>
       </tr>
       <tr>
-        <td class="key">Access Token</td>
-        <td class="value" id="session_acccess_token"
-          >{$session.access_token || ""}</td
-        >
+        <td>Access Token</td>
+        <td id="session_acccess_token">{$session.access_token || ""}</td>
       </tr>
       <tr>
-        <td class="key">Refresh Token</td>
-        <td class="value" id="session_refresh_token"
-          >{$session.refresh_token || ""}</td
-        >
+        <td>Refresh Token</td>
+        <td id="session_refresh_token">{$session.refresh_token || ""}</td>
       </tr>
       <tr>
-        <td class="key">Entitlements</td>
-        <td class="value" id="session_entitlements">
+        <td>Entitlements</td>
+        <td id="session_entitlements">
           {[...$session.entitlements].join(",")}
         </td>
       </tr>
       <tr>
-        <td class="key">Authorization Header</td>
-        <td class="value" id="session_authorization_header">
+        <td>Authorization Header</td>
+        <td id="session_authorization_header">
           {JSON.stringify($session.authorizationHeader)}
         </td>
       </tr>

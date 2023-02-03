@@ -7,10 +7,22 @@
 @import url("mf-styling/src/form.css");
 
 .key {
-	max-width: 4em;
-	text-align: right;
+  max-width: 4em;
+  text-align: right;
 }
 
 .value {
-	max-width: 12em;
+  max-width: 12em;
+}
+
+.user {
+  max-width: 12em;
+}
+
+.password {
+  max-width: 12em;
+}
+
+.result {
+  max-width: 30em;
 }
