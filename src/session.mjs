@@ -16,7 +16,7 @@ const msecsRequiredForRefresh = 2000;
 
 function copy(destination, source) {
   for (const key of storeKeys) {
-    if (source == undefined || source[key] === undefined) {
+    if (source === undefined || source[key] === undefined) {
       destination[key] = undefined;
     } else {
       destination[key] = source[key];
@@ -212,5 +212,5 @@ function decode(token) {
 
   const payload = token.split(".")[1];
 
-  return payload === undefined ? undefined : JSON.parse(atob(payload));
+  return payload && JSON.parse(atob(payload));
 }
