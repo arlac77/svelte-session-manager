@@ -2,7 +2,11 @@
   import { Login, Session } from "../../../src/index.svelte";
   import { api } from "./constants.mjs";
 
-  let endpoint = api;
+  if (!localStorage.endpoint) {
+    localStorage.endpoint = api;
+  }
+
+  let endpoint = localStorage.endpoint;
 
   export const session = new Session(localStorage);
 
