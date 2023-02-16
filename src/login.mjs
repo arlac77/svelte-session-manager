@@ -1,7 +1,7 @@
 import { JSONContentTypeHeader } from "./constants.mjs";
 
 const defaultTokenMap = Object.fromEntries(
-  ["access_token", "refresh_token", "error"].map((k) => [k, k])
+  ["access_token", "refresh_token"].map(k => [k, k])
 );
 
 /**
@@ -28,30 +28,26 @@ export async function login(
       headers: JSONContentTypeHeader,
       body: JSON.stringify({
         username,
-        password,
-      }),
+        password
+      })
     });
     if (response.ok) {
       const data = await response.json();
       if (!data[tokenmap.access_token]) {
-        if (data[tokenmap.error]) {
-          return data[tokenmap.error];
-        }
-        return "missing access_token";
+        return data.error || "missing access_token";
       }
       session.update({
         endpoint,
         username,
         ...Object.fromEntries(
           Object.entries(tokenmap).map(([k1, k2]) => [k1, data[k2]])
-        ),
+        )
       });
     } else {
       session.update({ username });
       return handleFailedResponse(response);
     }
   } catch (e) {
-    console.log("catched error", e);
     session.update({ username });
     throw e;
   }
@@ -67,7 +63,7 @@ export async function handleFailedResponse(response) {
 
   if (wa) {
     const o = Object.fromEntries(
-      wa.split(/\s*,\s*/).map((entry) => entry.split(/=/))
+      wa.split(/\s*,\s*/).map(entry => entry.split(/=/))
     );
     if (o.error_description) {
       return o.error_description;
