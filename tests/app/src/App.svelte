@@ -66,9 +66,9 @@
     <div class="modal center">
       <div class="window">
         <Login {session} {endpoint} {result}>
-          <div slot="footer">
-            <button>Create Account</button>
-            <button>Lost Password</button>
+          <div slot="footer" class="button-group">
+            <button id="create" aria-keyshortcuts="shift+Enter">Create Account</button>
+            <button id="lost-passwrod">Lost Password</button>
           </div>
         </Login>
       </div>
