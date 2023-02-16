@@ -67,8 +67,8 @@
       <div class="window">
         <Login {session} {endpoint} {result}>
           <div slot="footer">
-            <a href="somewhere">create account</a>
-            <a href="somewhere">lost password</a>
+            <button>Create Account</button>
+            <button>Lost Password</button>
           </div>
         </Login>
       </div>
