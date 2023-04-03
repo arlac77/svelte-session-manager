@@ -46,7 +46,7 @@
     "mf-styling": "^1.7.50",
     "npm-pkgbuild": "^11.7.5",
     "reader-line-iterator": "^1.1.5",
-    "semantic-release": "^21.0.0",
+    "semantic-release": "^21.0.1",
     "svelte": "^3.58.0",
     "testcafe": "^2.4.0",
     "vite": "^4.2.1"
