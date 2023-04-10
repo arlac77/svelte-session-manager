@@ -44,7 +44,7 @@
     "documentation": "^14.0.1",
     "jsonwebtoken": "^9.0.0",
     "mf-styling": "^1.7.52",
-    "npm-pkgbuild": "^11.7.9",
+    "npm-pkgbuild": "^11.7.10",
     "reader-line-iterator": "^1.1.5",
     "semantic-release": "^21.0.1",
     "svelte": "^3.58.0",
@@ -53,7 +53,7 @@
   },
   "optionalDependencies": {
     "mf-hosting-cloudflare": "^1.0.5",
-    "mf-hosting-frontend": "^1.7.2"
+    "mf-hosting-frontend": "^1.7.3"
   },
   "repository": {
     "type": "git",
