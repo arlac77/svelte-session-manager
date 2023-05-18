@@ -127,7 +127,7 @@ export class Session {
 
   /**
    * Refresh with refresh_token.
-   * @return {boolean} true if refresh was succcessfull false otherwise
+   * @return {Promise<boolean>} true if refresh was succcessfull false otherwise
    */
   async refresh() {
     if (this.refresh_token) {
