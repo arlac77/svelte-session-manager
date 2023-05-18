@@ -13,7 +13,7 @@ const defaultTokenMap = Object.fromEntries(
  * @param {string} username id of the user
  * @param {string} password user credentials
  * @param {Object} tokenmap token names in response to internal known values
- * @return {string} error message in case of failure or undefined on success
+ * @return {Promise<string>} error message in case of failure or undefined on success
  */
 export async function login(
   session,
@@ -56,7 +56,7 @@ export async function login(
 /**
  * Extract error description from response.
  * @param {FetchResponse} response
- * @return {string}
+ * @return {Promise<string>}
  */
 export async function handleFailedResponse(response) {
   const wa = response.headers.get("WWW-Authenticate");
