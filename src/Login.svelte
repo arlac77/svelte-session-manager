@@ -39,7 +39,7 @@
 
   <slot name="inputs">
     <fieldset>
-      <label for="username">
+      <label>
         Username
         <input
           aria-label="username"
@@ -58,7 +58,7 @@
           bind:value={username}
         />
       </label>
-      <label for="password">
+      <label>
         Password
         <input
           aria-label="password"
