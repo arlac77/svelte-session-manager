@@ -15,7 +15,7 @@ export default defineConfig(async ({ command, mode }) => {
   const first = await res.next();
   const pkg = first.value;
   const properties = pkg.properties;
-  const base = properties["http.path"];
+  const base = ""; //properties["http.path"];
   const production = mode === "production";
 
   process.env["VITE_NAME"] = properties.name;
@@ -37,7 +37,6 @@ export default defineConfig(async ({ command, mode }) => {
     server: { host: true },
     build: {
       outDir: "../../../build",
-      target: "esnext",
       emptyOutDir: true,
       minify: production,
       sourcemap: true
