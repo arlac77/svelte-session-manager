@@ -40,7 +40,7 @@
     "@semantic-release/release-notes-generator": "^11.0.3",
     "@sveltejs/vite-plugin-svelte": "^2.4.1",
     "ava": "^5.3.0",
-    "c8": "^7.14.0",
+    "c8": "^8.0.0",
     "documentation": "^14.0.2",
     "jsonwebtoken": "^9.0.0",
     "mf-styling": "^1.7.57",
