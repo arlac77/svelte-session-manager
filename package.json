@@ -4,7 +4,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "svelte": "./src/index.svelte",
+  "exports": {
+    ".": {
+      "svelte": "./src/index.svelte"
+    }
+  },
   "description": "Session store for svelte (currently only for JWT)",
   "keywords": [
     "JWT",
