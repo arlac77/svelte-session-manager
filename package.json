@@ -50,7 +50,7 @@
     "mf-styling": "^3.0.2",
     "npm-pkgbuild": "^11.10.1",
     "semantic-release": "^21.0.7",
-    "svelte": "^4.0.5",
+    "svelte": "^4.1.0",
     "testcafe": "^3.0.1",
     "vite": "^4.4.4"
   },
