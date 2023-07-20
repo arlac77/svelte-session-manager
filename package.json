@@ -52,7 +52,7 @@
     "semantic-release": "^21.0.7",
     "svelte": "^4.1.0",
     "testcafe": "^3.0.1",
-    "vite": "^4.4.4"
+    "vite": "^4.4.5"
   },
   "optionalDependencies": {
     "mf-hosting-cloudflare": "^1.0.5",
