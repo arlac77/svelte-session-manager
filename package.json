@@ -39,7 +39,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vite-plugin-compression2": "^0.10.4"
+    "@vite-plugin-compression2": "^0.10.5"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^11.0.0",
