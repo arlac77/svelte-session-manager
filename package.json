@@ -50,7 +50,7 @@
     "c8": "^8.0.1",
     "documentation": "^14.0.2",
     "jsonwebtoken": "^9.0.2",
-    "mf-styling": "^3.0.6",
+    "mf-styling": "^3.1.0",
     "npm-pkgbuild": "^12.3.1",
     "semantic-release": "^22.0.6",
     "svelte": "^4.2.2",
