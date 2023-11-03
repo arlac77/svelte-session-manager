@@ -52,7 +52,7 @@
     "jsonwebtoken": "^9.0.2",
     "mf-styling": "^3.1.0",
     "npm-pkgbuild": "^13.0.1",
-    "semantic-release": "^22.0.6",
+    "semantic-release": "^22.0.7",
     "svelte": "^4.2.2",
     "testcafe": "^3.3.0",
     "vite": "^4.5.0"
