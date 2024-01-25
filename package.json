@@ -51,7 +51,7 @@
     "documentation": "^14.0.2",
     "jsonwebtoken": "^9.0.2",
     "mf-styling": "^3.1.2",
-    "npm-pkgbuild": "^13.0.17",
+    "npm-pkgbuild": "^13.0.18",
     "semantic-release": "^23.0.0",
     "svelte": "^4.2.9",
     "testcafe": "^3.5.0",
