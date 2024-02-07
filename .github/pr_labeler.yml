@@ -21,7 +21,6 @@ dependencies:
 git:
   - .gitignore
 rollup:
-  - rollup.config.js
   - rollup.config.mjs
 github:
   - .github/**/*
