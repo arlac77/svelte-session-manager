@@ -2,7 +2,7 @@ test:
   - tests/**/*
 documentation:
   - docs/**/*
-  - '**/*.md'
+  - "**/*.md"
 ci:
   - .github/workflows/*
   - .travis.yml
@@ -29,4 +29,4 @@ vscode:
 openapi:
   - openapi/*
 styling:
-  - '**/*.css'
+  - "**/*.css"
