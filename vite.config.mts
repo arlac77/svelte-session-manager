@@ -100,11 +100,12 @@ const myServerPlugin = () => ({
 
         let body, type;
         let status = 200;
+        const token_type = "bearer";
 
         if (content.grant_type === "refresh_token" && content.refresh_token) {
           body = {
             username: content.username,
-            token_type: "bearer",
+            token_type,
             expires_in: expires,
             access_token: accessToken(content.username, expires),
             refresh_token: refreshToken(refreshExpires)
@@ -114,7 +115,7 @@ const myServerPlugin = () => ({
           content.password === "secret"
         ) {
           body = {
-            token_type: "bearer",
+            token_type,
             expires_in: expires,
             scope: entitlements(content.username),
             access_token: accessToken(content.username, expires)
