@@ -47,6 +47,9 @@ export class Session {
   entitlements = new Set();
   expirationDate = new Date(0);
 
+  access_token;
+  refresh_token;
+
   constructor(store = localStorage) {
     let expirationTimer;
 
