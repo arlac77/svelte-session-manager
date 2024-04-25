@@ -4,7 +4,14 @@ import { readFile } from "fs/promises";
 import { Session } from "../src/session.mjs";
 
 globalThis.localStorage = {};
-globalThis.fetch = async function () { return { ok: true, json: () => { return {}; } } };
+globalThis.fetch = async function () {
+  return {
+    ok: true,
+    json: () => {
+      return {};
+    }
+  };
+};
 
 const EXPIRES = 3;
 
@@ -13,21 +20,15 @@ test.before(async t => {
 
   t.context.key = key;
 
-  t.context.access_token = jsonwebtoken.sign(
-    { entitlements: "a,b,c" }, key,
-    {
-      algorithm: "RS256",
-      expiresIn: `${EXPIRES}s`
-    }
-  );
+  t.context.access_token = jsonwebtoken.sign({ entitlements: "a,b,c" }, key, {
+    algorithm: "RS256",
+    expiresIn: `${EXPIRES}s`
+  });
 
-  t.context.refresh_token = jsonwebtoken.sign(
-    { sequence: 1 }, key,
-    {
-      algorithm: "RS256",
-      expiresIn: "3600s"
-    }
-  );
+  t.context.refresh_token = jsonwebtoken.sign({ sequence: 1 }, key, {
+    algorithm: "RS256",
+    expiresIn: "3600s"
+  });
 });
 
 test("session initiial", t => {
@@ -37,7 +38,12 @@ test("session initiial", t => {
 });
 
 test("session read/write store", t => {
-  const store = { username: "emil", access_token: t.context.access_token, endpoint: "login" };
+  const store = {
+    username: "emil",
+    token_type: "bearer",
+    access_token: t.context.access_token,
+    endpoint: "login"
+  };
 
   const session = new Session(store);
 
@@ -92,8 +98,11 @@ test("session update", async t => {
   session.update(data);
 
   t.true(session.isValid);
-  t.is(session.authorizationHeader.Authorization, "Bearer " + session.access_token);
-  t.true(session.hasEntitlement('a'));
+  t.is(
+    session.authorizationHeader.Authorization,
+    "Bearer " + session.access_token
+  );
+  t.true(session.hasEntitlement("a"));
   t.is(store.access_token, data.access_token);
   t.is(store.username, "emil");
 
@@ -113,7 +122,9 @@ test("session subsription", t => {
   const session = new Session();
   let access_token;
 
-  const unsubscribe = session.subscribe(session => access_token = session.access_token);
+  const unsubscribe = session.subscribe(
+    session => (access_token = session.access_token)
+  );
 
   session.access_token = "hugo";
 
