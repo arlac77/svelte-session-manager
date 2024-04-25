@@ -93,6 +93,7 @@ curl -X POST -d '{"username":"user","password":"wrong"}' 'http://[::]:5000/api/l
 *   [SessionData](#sessiondata)
     *   [Properties](#properties)
 *   [msecsRequiredForRefresh](#msecsrequiredforrefresh)
+*   [supportedTokenTypes](#supportedtokentypes)
 *   [Session](#session)
     *   [Parameters](#parameters-2)
     *   [Properties](#properties-1)
@@ -152,6 +153,8 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 Time required to execute a refresh
 
 Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)
+
+## supportedTokenTypes
 
 ## Session
 
