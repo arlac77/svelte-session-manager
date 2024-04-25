@@ -2,7 +2,7 @@ import { JSONContentTypeHeader } from "./constants.mjs";
 import { Session } from "./session.mjs";
 
 const defaultTokenMap = Object.fromEntries(
-  ["access_token", "refresh_token"].map(k => [k, k])
+  ["access_token", "refresh_token", "token_type"].map(k => [k, k])
 );
 
 /**

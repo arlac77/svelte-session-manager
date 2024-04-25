@@ -8,7 +8,7 @@ globalThis.fetch = async function (url, options) {
     ok: true,
     json: () => {
       return options.body.length > 30
-        ? { access_token: "aaa", refresh_token: "bbb" }
+        ? { access_token: "aaa", refresh_token: "bbb", token_type: "bearer" }
         : {};
     }
   };
@@ -38,6 +38,7 @@ test("login data present", async t => {
     access_token: "aaa",
     refresh_token: "bbb",
     username: "user",
-    endpoint: "api"
+    endpoint: "api",
+    token_type: 'bearer'
   });
 });
