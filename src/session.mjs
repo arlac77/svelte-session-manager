@@ -25,6 +25,13 @@ function copy(destination, source) {
 }
 
 /**
+ *
+ */
+const supportedTokenTypes = {
+  bearer: {}
+};
+
+/**
  * User session.
  * To create as session backed by browser local storage.
  * ```js
@@ -42,7 +49,6 @@ function copy(destination, source) {
  * @property {string} refresh_token refresh token
  */
 export class Session {
-
   subscriptions = new Set();
   entitlements = new Set();
   expirationDate = new Date(0);
@@ -95,33 +101,35 @@ export class Session {
         this.endpoint = data.endpoint;
       }
 
-      const decoded = decode(data.access_token);
+      if (supportedTokenTypes[data.token_type]) {
+        const decoded = decode(data.access_token);
 
-      if (decoded) {
-        this.expirationDate.setTime(
-          data.expires_in
-            ? Date.now() + parseInt(data.expires_in) * 1000
-            : decoded.exp * 1000
-        );
+        if (decoded) {
+          this.expirationDate.setTime(
+            data.expires_in
+              ? Date.now() + parseInt(data.expires_in) * 1000
+              : decoded.exp * 1000
+          );
 
-        const expiresInMilliSeconds =
-          this.expirationDate.valueOf() - Date.now();
+          const expiresInMilliSeconds =
+            this.expirationDate.valueOf() - Date.now();
 
-        if (expiresInMilliSeconds > 0) {
-          if (decoded.entitlements) {
-            decoded.entitlements
-              .split(/,/)
-              .forEach(e => this.entitlements.add(e));
-          }
-
-          this.expirationTimer = setTimeout(async () => {
-            if (!(await this.refresh())) {
-              this.invalidate();
+          if (expiresInMilliSeconds > 0) {
+            if (decoded.entitlements) {
+              decoded.entitlements
+                .split(/,/)
+                .forEach(e => this.entitlements.add(e));
             }
-          }, expiresInMilliSeconds - msecsRequiredForRefresh);
 
-          copy(this, data);
-          return;
+            this.expirationTimer = setTimeout(async () => {
+              if (!(await this.refresh())) {
+                this.invalidate();
+              }
+            }, expiresInMilliSeconds - msecsRequiredForRefresh);
+
+            copy(this, data);
+            return;
+          }
         }
       }
     }
