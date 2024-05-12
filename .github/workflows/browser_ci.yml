@@ -21,7 +21,7 @@ jobs:
           - chrome
           - firefox
         node-version:
-          - 20.12.2
+          - 20.13.1
           - 20.13.0
           - 20.13.1
         firefox:
