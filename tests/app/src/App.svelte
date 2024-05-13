@@ -25,25 +25,29 @@
       <col class="result" />
     </colgroup>
     <thead>
-      <th>Username</th>
-      <th>Password</th>
-      <th>Result</th>
+      <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Result</th>
+      </tr>
     </thead>
-    <tr>
-      <td>user</td>
-      <td>secret</td>
-      <td>valid</td>
-    </tr>
-    <tr>
-      <td>userSlowLogin</td>
-      <td>secret</td>
-      <td>valid but takes some time</td>
-    </tr>
-    <tr>
-      <td>error 502 html</td>
-      <td>any</td>
-      <td>502 reported as html</td>
-    </tr>
+    <tbody>
+      <tr>
+        <td>user</td>
+        <td>secret</td>
+        <td>valid</td>
+      </tr>
+      <tr>
+        <td>userSlowLogin</td>
+        <td>secret</td>
+        <td>valid but takes some time</td>
+      </tr>
+      <tr>
+        <td>error 502 html</td>
+        <td>any</td>
+        <td>502 reported as html</td>
+      </tr>
+    </tbody>
   </table>
 
   <fieldset>
@@ -67,7 +71,9 @@
       <div class="window">
         <Login {session} {endpoint} {result}>
           <div slot="footer" class="button-group">
-            <button id="create" aria-keyshortcuts="shift+Enter">Create Account</button>
+            <button id="create" aria-keyshortcuts="shift+Enter"
+              >Create Account</button
+            >
             <button id="lost-passwrod">Lost Password</button>
           </div>
         </Login>
