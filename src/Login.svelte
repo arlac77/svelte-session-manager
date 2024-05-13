@@ -88,7 +88,7 @@
     >
       Login
       {#if active}
-        <div class="spinner" />
+        <div class="spinner"></div>
       {/if}
     </button>
   </slot>
