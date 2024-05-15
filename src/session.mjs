@@ -101,7 +101,7 @@ export class Session {
         this.endpoint = data.endpoint;
       }
 
-      if (supportedTokenTypes[data.token_type]) {
+      if (supportedTokenTypes[data.token_type?.toLowerCase()]) {
         const decoded = decode(data.access_token);
 
         if (decoded) {
