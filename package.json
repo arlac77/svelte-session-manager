@@ -55,12 +55,12 @@
     "mf-styling": "^3.1.6",
     "npm-pkgbuild": "^15.3.10",
     "semantic-release": "^23.1.1",
-    "svelte": "^4.2.17",
+    "svelte": "^5.0.0-next.133",
     "testcafe": "^3.6.0",
     "vite": "^5.2.11"
   },
   "peerDependencies": {
-    "svelte": "^4.0.0|^5.0.0"
+    "svelte": "^4.0.0||^5.0.0"
   },
   "optionalDependencies": {
     "mf-hosting-cloudflare": "^1.0.6",
