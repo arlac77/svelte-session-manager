@@ -61,9 +61,9 @@
     "mf-styling": "^3.1.6",
     "npm-pkgbuild": "^15.3.21",
     "semantic-release": "^24.0.0",
-    "svelte": "^5.0.0-next.151",
+    "svelte": "^5.0.0-next.153",
     "svelte-common": "^6.10.19",
-    "testcafe": "^3.6.0",
+    "testcafe": "^3.6.1",
     "vite": "^5.2.13",
     "vite-plugin-compression2": "^1.1.1"
   },
