@@ -30,3 +30,5 @@ openapi:
   - openapi/*
 styling:
   - "**/*.css"
+lint:
+  - .stylelintrc.json
