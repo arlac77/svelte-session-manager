@@ -32,3 +32,8 @@ styling:
   - "**/*.css"
 lint:
   - .stylelintrc.json
+systemd:
+  - "**/*.service"
+  - "**/*.path"
+  - "**/*.socket"
+  - "**/*.timer"
