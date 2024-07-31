@@ -1,17 +1,15 @@
 <script>
   import { login } from "./login.mjs";
 
-  export let endpoint;
-  export let session;
-  export let result;
+  let { endpoint, session, result } = $props();
 
-  let username = "";
-  let password = "";
+  let username = $state("");
+  let password = $state("");
+  let active = $state(false);
+  let message = $state();
 
-  let active = false;
-  let message;
-
-  async function submit() {
+  async function onsubmit(event) {
+    event.preventDefault();
     if (active) {
       return;
     }
@@ -30,7 +28,7 @@
   }
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form {onsubmit}>
   {#if message}
     <slot name="message">
       <div class="error" id="message">{message}</div>
