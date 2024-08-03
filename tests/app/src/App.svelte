@@ -6,11 +6,11 @@
     localStorage.endpoint = api;
   }
 
-  let endpoint = localStorage.endpoint;
+  let endpoint = $state(localStorage.endpoint);
 
   export const session = new Session(localStorage);
 
-  let resultCalled = false;
+  let resultCalled = $state(false);
 
   function result() {
     resultCalled = true;
