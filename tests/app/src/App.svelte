@@ -15,6 +15,12 @@
   function result() {
     resultCalled = true;
   }
+
+  function logoff(event) {
+    event.preventDefault();
+    session.invalidate();
+  }
+
 </script>
 
 <div>
@@ -66,6 +72,7 @@
     </label>
   </fieldset>
 
+  
   {#if !$session.isValid}
     <div class="modal center">
       <div class="window">
@@ -81,7 +88,7 @@
     </div>
   {/if}
 
-  <form on:submit|preventDefault={() => session.invalidate()}>
+  <form onsubmit={logoff}>
     <button id="logoff" type="submit" disabled={!$session.isValid}>
       Logoff
     </button>
