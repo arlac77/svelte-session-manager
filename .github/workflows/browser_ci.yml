@@ -34,7 +34,7 @@ jobs:
         run: npm cit
         env:
           BROWSER: ${{ matrix.browser }}
-      - name: upload artiface
+      - name: upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: screenshots-${{ matrix.browser }}

@@ -72,17 +72,20 @@
     </label>
   </fieldset>
 
-  
+
+  {#snippet footerComponent(username,password,active)}
+  <div class="button-group">
+    <button id="create" aria-keyshortcuts="shift+Enter"
+      >Create Account</button
+    >
+    <button id="lost-passwrod">Lost Password</button>
+  </div>
+  {/snippet}
+
   {#if !$session.isValid}
     <div class="modal center">
       <div class="window">
-        <Login {session} {endpoint} {result}>
-          <div slot="footer" class="button-group">
-            <button id="create" aria-keyshortcuts="shift+Enter"
-              >Create Account</button
-            >
-            <button id="lost-passwrod">Lost Password</button>
-          </div>
+        <Login {session} {endpoint} {result} {footerComponent}>
         </Login>
       </div>
     </div>
