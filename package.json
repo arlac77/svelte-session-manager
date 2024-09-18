@@ -46,26 +46,26 @@
   "dependencies": {
     "multi-path-matcher": "^4.1.1",
     "svelte-dnd-action": "^0.9.49",
-    "vite-plugin-compression2": "^1.2.0"
+    "vite-plugin-compression2": "^1.3.0"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/github": "^10.1.7",
+    "@semantic-release/github": "^10.3.4",
     "@semantic-release/release-notes-generator": "^14.0.1",
-    "@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0-next.7",
     "ava": "^6.1.3",
     "c8": "^10.1.2",
     "documentation": "^14.0.3",
     "jsonwebtoken": "^9.0.2",
-    "mf-styling": "^3.1.8",
-    "npm-pkgbuild": "^15.3.29",
-    "semantic-release": "^24.1.0",
-    "svelte": "^5.0.0-next.239",
-    "svelte-common": "^6.15.3",
+    "mf-styling": "^3.1.9",
+    "npm-pkgbuild": "^15.3.33",
+    "semantic-release": "^24.1.1",
+    "svelte": "^5.0.0-next.250",
+    "svelte-common": "^6.15.6",
     "testcafe": "^3.6.2",
-    "vite": "^5.4.2",
-    "vite-plugin-compression2": "^1.2.0"
+    "vite": "^5.4.6",
+    "vite-plugin-compression2": "^1.3.0"
   },
   "peerDependencies": {
     "svelte": "^5.0.0-next.0"
