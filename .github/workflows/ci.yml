@@ -10,14 +10,14 @@ on:
       - next
 permissions:
   contents: read
+  id-token: write
 jobs:
   test-node:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version:
-          - 22.17.1
-          - 24.5.0
+          - 24.11.1
     steps:
       - name: checkout
         uses: actions/checkout@v6.0.1
@@ -25,8 +25,6 @@ jobs:
         uses: actions/setup-node@v6.1.0
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
-          cache-dependency-path: package-lock.json
       - name: install
         run: npm ci
       - name: test and coverage
@@ -53,17 +51,28 @@ jobs:
       - name: prepare node
         uses: actions/setup-node@v6.1.0
         with:
-          node-version: 22.17.1
-          cache: npm
-          cache-dependency-path: package-lock.json
+          node-version:
+            - 22.17.1
+            - 24.11.1
       - name: install
         run: npm ci
+      - name: install dependencies
+        run: |
+          if [ ! -f /usr/bin/pacman ]
+          then
+          sudo apt-get update
+          sudo apt-get install ksh curl
+          wget https://github.com/ThePoorPilot/pacman-utils/releases/download/5.2.2-3_2.31-0/pacman-utils_5.2.2-3_amd64.deb
+          sudo apt-get install -f ./pacman-utils_5.2.2-3_amd64.deb
+          fi
       - name: release
         run: npx semantic-release
         env:
           CI: "true"
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PKGBUILD_PUBLISH: ${{ secrets.PKGBUILD_PUBLISH }}
+          PKGEXT: .pkg.tar.xz
   finish:
     needs:
       - test-node
