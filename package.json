@@ -32,8 +32,7 @@
     "prepare": "node --run prepare:vite",
     "prepare:vite": "vite build",
     "start": "vite",
-    "test": "node --run test:ava && node --run test:cafe",
-    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*-cafe.mjs --esm -s build/test --page-request-timeout 5000 --app-init-delay 8000 --app vite",
+    "test": "node --run test:ava",
     "test:ava": "ava --timeout 4m tests/*-ava.mjs tests/*-ava-node.mjs",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 4m tests/*-ava.mjs tests/*-ava-node.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme --section=API ./src**/*.mjs",
@@ -56,7 +55,6 @@
     "semantic-release": "^25.0.2",
     "svelte": "^5.45.6",
     "svelte-common": "^6.19.34",
-    "testcafe": "^3.7.2",
     "vite": "^7.2.7",
     "vite-plugin-compression2": "^2.4.0"
   },

@@ -14,8 +14,11 @@ permissions:
 jobs:
   test-node:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     strategy:
       matrix:
+        os:
+          - ubuntu-latest
         node-version:
           - 24.11.1
     steps:
@@ -27,8 +30,19 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install
         run: npm ci
+      - name: install playwright
+        run: npx playwright install --with-deps
+      - name: install npm
+        run: npm cit
       - name: test and coverage
         run: npm run cover --if-present
+      - name: upload test report
+        uses: actions/upload-artifact@v5
+        with:
+          name: test-report
+          path: ${{ github.workspace }}/playwright-report/**/*
+          retention-days: 30
+        if: ${{ !cancelled() }}
       - name: coveralls
         uses: coverallsapp/github-action@v2
         with:
@@ -40,6 +54,7 @@ jobs:
   release:
     needs:
       - test-node
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       issues: write
@@ -51,9 +66,7 @@ jobs:
       - name: prepare node
         uses: actions/setup-node@v6.1.0
         with:
-          node-version:
-            - 22.17.1
-            - 24.11.1
+          node-version: 24.11.1
       - name: install
         run: npm ci
       - name: install dependencies
@@ -69,18 +82,6 @@ jobs:
         run: npx semantic-release
         env:
           CI: "true"
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PKGBUILD_PUBLISH: ${{ secrets.PKGBUILD_PUBLISH }}
           PKGEXT: .pkg.tar.xz
-  finish:
-    needs:
-      - test-node
-    runs-on: ubuntu-latest
-    steps:
-      - name: finish coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: build/coverage/lcov.info
-          parallel-finished: true
