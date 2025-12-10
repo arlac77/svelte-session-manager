@@ -85,3 +85,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PKGBUILD_PUBLISH: ${{ secrets.PKGBUILD_PUBLISH }}
           PKGEXT: .pkg.tar.xz
+      - name: makepkg
+        uses: arenekosreal/makepkg-action@main
+        with:
+          builddir: build
+      - name: artifacts
+        run: ls -lR build
