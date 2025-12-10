@@ -76,7 +76,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install ksh curl
           wget https://github.com/ThePoorPilot/pacman-utils/releases/download/6.0.1-2_2.31-0/pacman-utils_6.0.1-2_amd64.deb
-          sudo apt-get install -f ./pacman-utils_6.0.1-2_amd64.deb
+          sudo apt-get install --force-yes -f ./pacman-utils_6.0.1-2_amd64.deb
           fi
       - name: release
         run: npx semantic-release
