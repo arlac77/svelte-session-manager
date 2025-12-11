@@ -92,12 +92,6 @@
       [
         "@semantic-release/exec",
         {
-          "publishCmd": "npx npm-pkgbuild --publish dist --dry --staging build"
-        }
-      ],
-      [
-        "@semantic-release/exec",
-        {
           "publishCmd": "npx npm-pkgbuild --publish dist"
         }
       ],
