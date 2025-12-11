@@ -20,7 +20,7 @@ jobs:
         os:
           - ubuntu-latest
         node-version:
-          - 24.11.1
+          - 24.12.0
     steps:
       - name: checkout
         uses: actions/checkout@v6.0.1
@@ -66,7 +66,9 @@ jobs:
       - name: prepare node
         uses: actions/setup-node@v6.1.0
         with:
-          node-version: 24.11.1
+          node-version:
+            - 24.11.1
+            - 24.12.0
       - name: install
         run: npm ci
       - name: install dependencies
@@ -85,9 +87,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PKGBUILD_PUBLISH: ${{ secrets.PKGBUILD_PUBLISH }}
           PKGEXT: .pkg.tar.xz
+      - name: artifacts
+        run: ls -lR build
       - name: makepkg
         uses: arenekosreal/makepkg-action@main
         with:
           builddir: build
-      - name: artifacts
-        run: ls -lR build
