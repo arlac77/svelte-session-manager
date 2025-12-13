@@ -214,14 +214,12 @@ export class Session {
 /**
  * Extract and decode the payload.
  * @param {string} token
- * @return {Object} payload object
+ * @return {Object|undefined} payload object
  */
 function decode(token) {
-  if (token === undefined) {
-    return undefined;
+  if (token !== undefined) {
+    const payload = token.split(".")[1];
+
+    return payload && JSON.parse(atob(payload));
   }
-
-  const payload = token.split(".")[1];
-
-  return payload && JSON.parse(atob(payload));
 }

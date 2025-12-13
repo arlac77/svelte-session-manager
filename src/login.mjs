@@ -14,6 +14,7 @@ const defaultTokenMap = Object.fromEntries(
  * @param {string} username id of the user
  * @param {string} password user credentials
  * @param {Object} tokenmap token names in response to internal known values
+ * @param {string} tokenmap.access_token
  * @return {Promise<string|undefined>} error message in case of failure or undefined on success
  */
 export async function login(
