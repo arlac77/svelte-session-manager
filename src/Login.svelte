@@ -1,10 +1,14 @@
 <script>
   import { login } from "./login.mjs";
 
-  let { endpoint, session, result,
-    submitComponent=defaultSubmitComponent,
-    footerComponent=defaultFooterComponent,
-    messageComponent=defaultMessageComponent } = $props();
+  let {
+    endpoint,
+    session,
+    result,
+    submitComponent = defaultSubmitComponent,
+    footerComponent = defaultFooterComponent,
+    messageComponent = defaultMessageComponent
+  } = $props();
 
   let username = $state("");
   let password = $state("");
@@ -31,32 +35,29 @@
   }
 </script>
 
-{#snippet defaultFooterComponent(username,password,active)}
+{#snippet defaultFooterComponent(username, password, active)}
   <div></div>
 {/snippet}
 
 {#snippet defaultMessageComponent(mesage)}
-{#if message}
-  <div class="error" id="message">{message}</div>
-{/if}
+  {#if message}
+    <div class="error" id="message">{message}</div>
+  {/if}
 {/snippet}
 
-{#snippet defaultSubmitComponent(username,password,active,enabled)}
-<button
-aria-keyshortcuts="Enter"
-type="submit"
-disabled={!enabled}
->
-Login
-{#if active}
-  <div class="spinner"></div>
-{/if}
-</button>
+{#snippet defaultSubmitComponent(username, password, active, enabled)}
+  <button aria-keyshortcuts="Enter" type="submit" disabled={!enabled}>
+    Login
+    {#if active}
+      <div class="spinner"></div>
+    {/if}
+  </button>
 {/snippet}
 
 <form {onsubmit}>
   {@render messageComponent(message)}
   <fieldset>
+    <legend>Credentials</legend>
     <label>
       Username
       <input
@@ -96,7 +97,7 @@ Login
       />
     </label>
   </fieldset>
-  
-  {@render submitComponent(username,password,active,enabled)}
-  {@render footerComponent(username,password,active)}
+
+  {@render submitComponent(username, password, active, enabled)}
+  {@render footerComponent(username, password, active)}
 </form>
