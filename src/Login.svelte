@@ -101,3 +101,10 @@
   {@render submitComponent(username, password, active, enabled)}
   {@render footerComponent(username, password, active)}
 </form>
+
+<style>
+  #username,
+  #password {
+    display: block;
+  }
+</style>
