@@ -16,11 +16,7 @@ const msecsRequiredForRefresh = 2000;
 
 function copy(destination, source) {
   for (const key of storeKeys) {
-    if (source === undefined || source[key] === undefined) {
-      destination[key] = undefined;
-    } else {
-      destination[key] = source[key];
-    }
+    destination[key] = source?.[key] ? source[key] : undefined;
   }
 }
 
@@ -94,6 +90,10 @@ export class Session {
   /**
    * Consume auth response data and reflect internal state.
    * @param {Object} data
+   * @param {string} [data.entitlements]
+   * @param {string} [data.token_type]
+   * @param {number} [data.expires_in]
+   * @param {string} [data.access_token]
    */
   update(data) {
     if (data !== undefined) {
