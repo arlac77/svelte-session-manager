@@ -59,7 +59,7 @@
   <fieldset>
     <legend>Credentials</legend>
     <label>
-      Username
+      <span>Username</span>
       <input
         aria-label="username"
         aria-required="true"
@@ -78,7 +78,7 @@
       />
     </label>
     <label>
-      Password
+      <span>Password</span>
       <input
         aria-label="password"
         aria-required="true"
