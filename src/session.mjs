@@ -161,8 +161,7 @@ export class Session {
 
   /**
    * Http header suitable for fetch.
-   * @return {Object} header The http header.
-   * @return {string} header.Authorization The Bearer access token.
+   * @return {{Authorization: string}} The Bearer access token.
    */
   get authorizationHeader() {
     return this.isValid ? { Authorization: "Bearer " + this.access_token } : {};
