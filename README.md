@@ -207,7 +207,7 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 Http header suitable for fetch.
 
-Returns **{Authorization: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}** The Bearer access token.
+Returns **({Authorization: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)} | {})** The Bearer access token.
 
 ### isValid
 
