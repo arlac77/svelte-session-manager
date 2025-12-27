@@ -76,7 +76,7 @@ const myServerPlugin = () => ({
 
         const content = JSON.parse(Buffer.concat(buffers).toString("utf8"));
 
-        const expires = 10;
+        const expires = 10; // seconds
         const refreshExpires = 3600;
 
         function entitlements(username) {
