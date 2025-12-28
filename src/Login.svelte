@@ -10,9 +10,17 @@
     messageComponent = defaultMessageComponent
   } = $props();
 
+  let usernameInput;
+  let passwordInput;
   let username = $state("");
   let password = $state("");
-  let enabled = $derived(username.length !== 0 && password.length !== 0);
+  let enabled = $derived.by(
+    () =>
+      username.length &&
+      password.length &&
+      passwordInput?.checkValidity() &&
+      usernameInput?.checkValidity()
+  );
   let active = $state(false);
   let message = $state();
 
@@ -35,8 +43,7 @@
   }
 </script>
 
-{#snippet defaultFooterComponent(username, password, active)}
-{/snippet}
+{#snippet defaultFooterComponent(username, password, active)}{/snippet}
 
 {#snippet defaultMessageComponent(mesage)}
   {#if message}
@@ -53,53 +60,55 @@
   </button>
 {/snippet}
 
-  <form {onsubmit}>
-    {@render messageComponent(message)}
-    <fieldset>
-      <legend>Credentials</legend>
-      <label>
-        <span>Username</span>
-        <input
-          aria-label="username"
-          aria-required="true"
-          minlength="1"
-          maxlength="75"
-          size="32"
-          autocorrect="off"
-          autocapitalize="off"
-          autocomplete="username"
-          id="username"
-          type="text"
-          placeholder="Username"
-          required
-          disabled={active}
-          bind:value={username}
-        />
-      </label>
-      <label>
-        <span>Password</span>
-        <input
-          aria-label="password"
-          aria-required="true"
-          minlength="4"
-          maxlength="50"
-          size="32"
-          autocorrect="off"
-          autocapitalize="off"
-          autocomplete="current-password"
-          id="password"
-          type="password"
-          placeholder="Password"
-          required
-          disabled={active}
-          bind:value={password}
-        />
-      </label>
-    </fieldset>
+<form {onsubmit}>
+  {@render messageComponent(message)}
+  <fieldset>
+    <legend>Credentials</legend>
+    <label>
+      <span>Username</span>
+      <input
+        aria-label="username"
+        aria-required="true"
+        minlength="1"
+        maxlength="75"
+        size="32"
+        autocorrect="off"
+        autocapitalize="off"
+        autocomplete="username"
+        id="username"
+        type="text"
+        placeholder="Username"
+        required
+        disabled={active}
+        bind:this={usernameInput}
+        bind:value={username}
+      />
+    </label>
+    <label>
+      <span>Password</span>
+      <input
+        aria-label="password"
+        aria-required="true"
+        minlength="4"
+        maxlength="50"
+        size="32"
+        autocorrect="off"
+        autocapitalize="off"
+        autocomplete="current-password"
+        id="password"
+        type="password"
+        placeholder="Password"
+        required
+        disabled={active}
+        bind:this={passwordInput}
+        bind:value={password}
+      />
+    </label>
+  </fieldset>
 
-    {@render submitComponent(username, password, active, enabled)}
-    {@render footerComponent(username, password, active)}
-  </form>
+  {@render submitComponent(username, password, active, enabled)}
+  {@render footerComponent(username, password, active)}
+</form>
 
 <style>
   #username,
