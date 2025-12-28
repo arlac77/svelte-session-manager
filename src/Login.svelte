@@ -36,7 +36,6 @@
 </script>
 
 {#snippet defaultFooterComponent(username, password, active)}
-  <div></div>
 {/snippet}
 
 {#snippet defaultMessageComponent(mesage)}
@@ -54,53 +53,53 @@
   </button>
 {/snippet}
 
-<form {onsubmit}>
-  {@render messageComponent(message)}
-  <fieldset>
-    <legend>Credentials</legend>
-    <label>
-      <span>Username</span>
-      <input
-        aria-label="username"
-        aria-required="true"
-        minlength="1"
-        maxlength="75"
-        size="32"
-        autocorrect="off"
-        autocapitalize="off"
-        autocomplete="username"
-        id="username"
-        type="text"
-        placeholder="Username"
-        required
-        disabled={active}
-        bind:value={username}
-      />
-    </label>
-    <label>
-      <span>Password</span>
-      <input
-        aria-label="password"
-        aria-required="true"
-        minlength="4"
-        maxlength="50"
-        size="32"
-        autocorrect="off"
-        autocapitalize="off"
-        autocomplete="current-password"
-        id="password"
-        type="password"
-        placeholder="Password"
-        required
-        disabled={active}
-        bind:value={password}
-      />
-    </label>
-  </fieldset>
+  <form {onsubmit}>
+    {@render messageComponent(message)}
+    <fieldset>
+      <legend>Credentials</legend>
+      <label>
+        <span>Username</span>
+        <input
+          aria-label="username"
+          aria-required="true"
+          minlength="1"
+          maxlength="75"
+          size="32"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="username"
+          id="username"
+          type="text"
+          placeholder="Username"
+          required
+          disabled={active}
+          bind:value={username}
+        />
+      </label>
+      <label>
+        <span>Password</span>
+        <input
+          aria-label="password"
+          aria-required="true"
+          minlength="4"
+          maxlength="50"
+          size="32"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="current-password"
+          id="password"
+          type="password"
+          placeholder="Password"
+          required
+          disabled={active}
+          bind:value={password}
+        />
+      </label>
+    </fieldset>
 
-  {@render submitComponent(username, password, active, enabled)}
-  {@render footerComponent(username, password, active)}
-</form>
+    {@render submitComponent(username, password, active, enabled)}
+    {@render footerComponent(username, password, active)}
+  </form>
 
 <style>
   #username,
