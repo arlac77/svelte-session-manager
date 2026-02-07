@@ -78,7 +78,7 @@
   "homepage": "https://github.com/arlac77/svelte-session-manager#readme",
   "pkgbuild": {
     "content": {
-      "${install.dir}": "build/"
+      "${install_dir}": "build/"
     },
     "api": "api/login",
     "example": true,
