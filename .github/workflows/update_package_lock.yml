@@ -14,7 +14,7 @@ jobs:
       - name: prepare node
         uses: actions/setup-node@v7.0.0
         with:
-          node-version: 26.7.0
+          node-version: 26.8.1
       - name: remove lock
         run: rm package-lock.json
       - name: install playwright
