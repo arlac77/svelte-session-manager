@@ -98,7 +98,10 @@ export class Session {
   update(data) {
     if (data !== undefined) {
       if (data.endpoint) {
-        this.endpoint = data.endpoint;
+        const url = new URL(data.endpoint, window.location.origin);
+        if (url.origin === window.location.origin) {
+          this.endpoint = url.href;
+        }
       }
 
       if (supportedTokenTypes[data.token_type?.toLowerCase()]) {
