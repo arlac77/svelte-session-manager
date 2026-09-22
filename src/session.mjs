@@ -220,7 +220,20 @@ export class Session {
  */
 function decode(token) {
   if (token !== undefined) {
-    const payload = token.split(".")[1];
+    const parts = token.split(".");
+
+    // Reject malformed tokens and the classic "alg: none" forgery,
+    // where an attacker omits/blank the signature segment.
+    if (parts.length !== 3 || !parts[2]) {
+      return undefined;
+    }
+
+    const header = JSON.parse(atob(parts[0]));
+    if (!header.alg || header.alg.toLowerCase() === "none") {
+      return undefined;
+    }
+
+    const payload = parts[1];
 
     return payload && JSON.parse(atob(payload));
   }
